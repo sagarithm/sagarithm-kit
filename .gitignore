@@ -23,3 +23,5 @@ dist/
 build/
 *.pyc
 __pycache__/
+.sagarithm/
+

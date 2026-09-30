@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Phase 8: Validation & Audit Engine (v1.0.0)
+- Established the canonical Validation and Audit subsystem:
+  - `validation/SPECIFICATION.md`: Full specification for the empirical multi-vector verification gate and verification state machine (`ASSUMED`, `IMPLEMENTED`, `TESTED`, `VERIFIED`, `FAILED`).
+  - `validation/schema/validation-report.schema.json`: Standard JSON schema for verification and audit report artifacts.
+  - Canonical validation rules:
+    - `validation/rules/secret-patterns.json`: Pattern and entropy rules for known credential tokens and injection flaws.
+    - `validation/rules/architecture-fitness.json`: Prohibited directory patterns and acyclic dependency constraints.
+    - `validation/rules/verification-vectors.json`: Five canonical verification vectors (Static, Security, Architecture, Behavioral, Documentation).
+- Built native validation engine modules in `@sagarithm/cli`:
+  - `cli/src/validation/secrets.ts`: Algorithmic Shannon entropy token scanner ($H \ge 4.5$) and regex rules for Stripe, GitHub, Google, OpenAI, AWS, PEM keys, and SQL injection flaws.
+  - `cli/src/validation/fitness.ts`: Automated directory anti-pattern detector (`utils`, `helpers`, `misc`, `common`) and graph cycle detection engine (`checkGraphAcyclicity`).
+  - `cli/src/validation/engine.ts`: Multi-vector execution pipeline enforcing Zero Assumed Success, capturing empirical evidence, and generating `.sagarithm/audit-report.json`.
+- Enhanced CLI commands:
+  - `sagarithm audit`: Added `--deep` (full workspace scan), `--strict` (zero-warning mode), and `--json` (automation report output).
+  - `sagarithm verify`: Added multi-vector test harness, `--strict`, `--suite`, and `--json` output.
+- Automated validation test suite in `cli/tests/validation.test.ts` (10/10 tests passing).
+- Added workspace root `package.json` for centralized test and verification script execution.
+
 ### Added - Phase 7: Project Intelligence & Topology Graph (v1.0.0)
 - Established Layer 5 Project Context and Intelligence subsystem:
   - `context/schema/project-manifest.schema.json`: Standard schema for repository topology, modules, APIs, database models, and test harnesses.

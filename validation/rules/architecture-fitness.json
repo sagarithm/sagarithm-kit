@@ -1,0 +1,33 @@
+{
+  "version": "1.0.0",
+  "rules": [
+    {
+      "id": "arch-001",
+      "name": "Prohibited Generic Directory Anti-Pattern",
+      "description": "Prevents creation of generic dumping ground directories that violate single responsibility and bounded context architecture.",
+      "severity": "error",
+      "prohibitedDirectoryPatterns": [
+        "**/utils",
+        "**/helpers",
+        "**/misc",
+        "**/common",
+        "**/shared/utils"
+      ],
+      "remediation": "Colocate utilities with their domain module, or create a domain-named capability directory (e.g., parsing/, cryptography/, formatting/)."
+    },
+    {
+      "id": "arch-002",
+      "name": "Acyclic Dependency Graph",
+      "description": "Workspace modules and packages must form a strict Directed Acyclic Graph (DAG).",
+      "severity": "error",
+      "remediation": "Break circular dependency cycles using dependency inversion, event-driven decoupled callbacks, or extracting shared interfaces."
+    },
+    {
+      "id": "arch-003",
+      "name": "Layer Boundary Isolation",
+      "description": "Domain entities and core logic must never import from outer infrastructure or presentation layers.",
+      "severity": "warn",
+      "remediation": "Invert the dependency: declare an interface in the domain layer and implement it in the infrastructure layer."
+    }
+  ]
+}

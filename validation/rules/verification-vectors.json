@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "vectors": [
+    {
+      "id": "static",
+      "name": "Static Analysis & Type Verification",
+      "required": true,
+      "checks": ["typecheck", "lint"],
+      "defaultScripts": {
+        "typecheck": ["typecheck", "tsc", "check-types"],
+        "lint": ["lint"]
+      }
+    },
+    {
+      "id": "security",
+      "name": "Secret & Injection Hygiene",
+      "required": true,
+      "checks": ["secret-scan", "sql-injection-scan", "entropy-scan"]
+    },
+    {
+      "id": "architecture",
+      "name": "Architectural Fitness & Graph Acyclicity",
+      "required": true,
+      "checks": ["directory-hygiene", "acyclic-graph", "manifest-conformance"]
+    },
+    {
+      "id": "behavioral",
+      "name": "Empirical Behavioral Test Execution",
+      "required": true,
+      "checks": ["unit-tests", "integration-tests"],
+      "defaultScripts": {
+        "test": ["test", "test:unit", "test:ci"]
+      }
+    },
+    {
+      "id": "documentation",
+      "name": "Documentation & Decision Synchronization",
+      "required": false,
+      "checks": ["adr-freshness", "changelog-entry"]
+    }
+  ]
+}

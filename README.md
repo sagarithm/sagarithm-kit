@@ -1,4 +1,4 @@
-﻿# Sagarithm Kit
+# Sagarithm Kit
 
 > **Cross-Agent Software Engineering Framework for AI Coding Agents**
 
@@ -104,6 +104,20 @@ Topological repository graph and discovery engine in [context/README.md](context
 
 ---
 
+## Validation & Audit Engine
+
+Empirical multi-vector verification gate enforcing the constitutional **Zero Assumed Success** principle:
+- **[Validation Specification](validation/SPECIFICATION.md)**: Verification state machine (`ASSUMED` -> `IMPLEMENTED` -> `TESTED` -> `VERIFIED`).
+- **Canonical Rules**:
+  - [Secret Hygiene Patterns](validation/rules/secret-patterns.json) (Shannon entropy scanner + token regex).
+  - [Architectural Fitness Rules](validation/rules/architecture-fitness.json) (anti-pattern directory blocker, graph cycle detector).
+  - [Verification Vectors](validation/rules/verification-vectors.json) (Static, Security, Architecture, Behavioral, Documentation).
+- **Execution Harness**:
+  - `sagarithm audit --deep`: Full repository secret and architectural fitness audit.
+  - `sagarithm verify --strict`: Multi-vector execution gate with empirical evidence collection and `.sagarithm/audit-report.json` generation.
+
+---
+
 ## Agent Adapters & CLI
 
 - **Adapters**: Target platform compilation definitions in [adapters/README.md](adapters/README.md).
@@ -112,8 +126,8 @@ Topological repository graph and discovery engine in [context/README.md](context
   - `sagarithm sync`: Multi-agent compiler
   - `sagarithm context`: Project graph generator and topology query engine
   - `sagarithm doctor`: Structural sprawl and repository health check
-  - `sagarithm audit`: Pre-commit policy and secrets scanner
-  - `sagarithm verify`: Zero-Assumed-Success execution verification gate
+  - `sagarithm audit`: Pre-commit policy, secret, and architectural fitness scanner (`--deep`, `--strict`, `--json`)
+  - `sagarithm verify`: Zero-Assumed-Success multi-vector execution verification gate (`--strict`, `--suite`, `--json`)
 
 ---
 
@@ -137,7 +151,7 @@ Sagarithm Kit is developed under a disciplined 10-phase roadmap:
 - **[x] Phase 5 - Agent Adapters**: Native compilers for Antigravity, Cursor, Claude Code, Copilot, Windsurf, Codex.
 - **[x] Phase 6 - CLI**: `sagarithm init`, `sync`, `doctor`, `audit`, `verify`.
 - **[x] Phase 7 - Project Intelligence**: Repository graph and context extraction engine.
-- **[ ] Phase 8 - Validation & Audit Engine**: Automated verification of implementation states.
+- **[x] Phase 8 - Validation & Audit Engine**: Multi-vector verification gate, secret/entropy scanner, architectural fitness engine.
 - **[ ] Phase 9 - Registry & Ecosystem**: Distributed skill registries and enterprise presets.
 
 ---

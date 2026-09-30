@@ -46,6 +46,7 @@ export interface AuditIssue {
   ruleId: string;
   severity: 'error' | 'warn' | 'advisory';
   file?: string;
+  line?: number;
   message: string;
   remediation: string;
 }
@@ -55,4 +56,34 @@ export interface VerificationCheck {
   command: string;
   passed: boolean;
   output: string;
+  durationMs?: number;
 }
+
+export type VerificationState = 'ASSUMED' | 'IMPLEMENTED' | 'TESTED' | 'VERIFIED' | 'FAILED';
+
+export interface VectorResult {
+  status: 'passed' | 'failed' | 'skipped' | 'warn';
+  durationMs?: number;
+  details?: string;
+}
+
+export interface ValidationReport {
+  version: string;
+  timestamp: string;
+  state: VerificationState;
+  summary: {
+    totalChecks: number;
+    passed: number;
+    warnings: number;
+    errors: number;
+  };
+  vectors: {
+    static?: VectorResult;
+    security?: VectorResult;
+    architecture?: VectorResult;
+    behavioral?: VectorResult;
+    documentation?: VectorResult;
+  };
+  issues: AuditIssue[];
+}
+

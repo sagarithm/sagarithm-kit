@@ -1,0 +1,20 @@
+{
+  "name": "sagarithm-kit",
+  "version": "1.0.0",
+  "description": "Universal Cross-Agent Engineering Framework for AI Coding Agents",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "npm --prefix cli test",
+    "lint": "node --experimental-strip-types ./cli/src/index.ts audit",
+    "verify": "node --experimental-strip-types ./cli/src/index.ts verify"
+  },
+  "keywords": [
+    "sagarithm",
+    "ai-agents",
+    "cross-agent",
+    "engineering-framework"
+  ],
+  "author": "Sagarithm",
+  "license": "Apache-2.0"
+}

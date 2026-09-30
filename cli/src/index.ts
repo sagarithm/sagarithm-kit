@@ -24,13 +24,17 @@ Commands:
   sync      Compile canonical specifications into native agent configurations
   context   Generate and query repository intelligence graph (find, blast-radius, suggest-location)
   doctor    Diagnose repository structure, .gitignore hygiene, and policy conformance
-  audit     Audit active git changes against security and engineering policies
+  audit     Audit workspace against security, secrets, and architecture policies
   verify    Run execution verification gate (Zero Assumed Success)
   help      Display this help menu
 
 Options:
   --target <agent>   Filter sync to a specific target (antigravity, cursor, claude-code, copilot, windsurf, codex)
   --force            Force overwrite existing configurations during init
+  --deep             Execute deep workspace scan instead of git diff in audit
+  --strict           Enforce zero warnings mode (treat warnings as errors)
+  --suite <name>     Target specific test suite in verify
+  --json             Emit structured JSON report for automation and CI/CD
 `);
 }
 
@@ -50,10 +54,10 @@ switch (command) {
     runDoctor(rootDir);
     break;
   case 'audit':
-    runAudit(rootDir);
+    runAudit(rootDir, args.slice(1));
     break;
   case 'verify':
-    runVerify(rootDir);
+    runVerify(rootDir, args.slice(1));
     break;
   case 'help':
   case '--help':
