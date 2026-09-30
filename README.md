@@ -118,11 +118,30 @@ Empirical multi-vector verification gate enforcing the constitutional **Zero Ass
 
 ---
 
+## Registry & Ecosystem
+
+Decentralized distribution and turn-key engineering profiles for AI coding agents:
+- **[Registry Specification](registry/SPECIFICATION.md)**: Architecture, package anatomy, and SHA-256 integrity governance.
+- **[Registry Documentation](registry/README.md)**: Presets, search, and packaging workflows.
+- **Curated Presets**:
+  - `fullstack-web`: Next.js, React, Node, Web APIs, Tailwind, Client/Server state.
+  - `api-backend`: Resilient REST, GraphQL, Outbox pattern, Pact contract testing.
+  - `systems-core`: High-integrity systems, low-latency, zero-alloc, exhaustive typing.
+  - `ai-agentic`: Multi-agent orchestration, prompt isolation, blast-radius containment.
+- **Canonical Schemas**:
+  - [Package Schema](registry/schema/package.schema.json)
+  - [Preset Schema](registry/schema/preset.schema.json)
+  - [Catalog Index Schema](registry/schema/index.schema.json)
+
+---
+
 ## Agent Adapters & CLI
 
 - **Adapters**: Target platform compilation definitions in [adapters/README.md](adapters/README.md).
 - **CLI Engine**: Operational compiler, linter, and audit tool in [cli/README.md](cli/README.md):
   - `sagarithm init`: Workspace manifest generation
+  - `sagarithm preset`: List, inspect, and apply curated engineering presets (`list`, `show`, `apply`)
+  - `sagarithm registry`: Search canonical catalog and package artifacts with SHA-256 integrity (`search`, `pack`)
   - `sagarithm sync`: Multi-agent compiler
   - `sagarithm context`: Project graph generator and topology query engine
   - `sagarithm doctor`: Structural sprawl and repository health check
@@ -142,7 +161,7 @@ Empirical multi-vector verification gate enforcing the constitutional **Zero Ass
 
 ## Project Status: Phased Roadmap
 
-Sagarithm Kit is developed under a disciplined 10-phase roadmap:
+Sagarithm Kit has completed its foundational 10-phase master roadmap:
 - **[x] Phase 0 - Foundation**: Architecture, terminology, meta-specification, governance standards.
 - **[x] Phase 1 - Engineering Constitution**: Encoding core engineering, architectural, coding, security, and testing principles.
 - **[x] Phase 2 - Core Skills**: Architecture, Coding Standards, Testing, Security, Documentation.
@@ -152,7 +171,7 @@ Sagarithm Kit is developed under a disciplined 10-phase roadmap:
 - **[x] Phase 6 - CLI**: `sagarithm init`, `sync`, `doctor`, `audit`, `verify`.
 - **[x] Phase 7 - Project Intelligence**: Repository graph and context extraction engine.
 - **[x] Phase 8 - Validation & Audit Engine**: Multi-vector verification gate, secret/entropy scanner, architectural fitness engine.
-- **[ ] Phase 9 - Registry & Ecosystem**: Distributed skill registries and enterprise presets.
+- **[x] Phase 9 - Registry & Ecosystem**: Decentralized skill registries, curated presets, and SHA-256 packaging.
 
 ---
 

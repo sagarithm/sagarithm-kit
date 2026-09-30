@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SagarithmRegistryIndex",
+  "description": "JSON schema for Sagarithm federated registry catalog index",
+  "type": "object",
+  "required": ["version", "name", "updatedAt", "presets", "packages"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "presets": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "preset.schema.json"
+      }
+    },
+    "packages": {
+      "type": "array",
+      "items": {
+        "$ref": "package.schema.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "api-backend",
+  "name": "Resilient API & Microservices Backend Preset",
+  "version": "1.0.0",
+  "description": "Engineered for high-availability REST, GraphQL, event-driven message brokers, and zero-trust service layers.",
+  "riskThreshold": "high",
+  "enabledDomains": [
+    "architecture",
+    "quality",
+    "testing",
+    "security",
+    "documentation",
+    "backend",
+    "database"
+  ],
+  "skills": [
+    "skills/architecture/system-design",
+    "skills/quality/coding-standards",
+    "skills/testing/test-driven-verification",
+    "skills/security/secure-development",
+    "skills/documentation/architectural-decision-records"
+  ],
+  "policies": [
+    "policies/directory-creation-policy.md",
+    "policies/file-creation-policy.md",
+    "policies/dependency-management-policy.md",
+    "policies/change-scope-policy.md",
+    "policies/testing-enforcement-policy.md",
+    "policies/security-boundary-policy.md",
+    "policies/documentation-synchronization-policy.md"
+  ],
+  "workflows": [
+    "workflows/feature-development-workflow.md",
+    "workflows/bug-fix-workflow.md",
+    "workflows/refactoring-workflow.md",
+    "workflows/release-workflow.md"
+  ],
+  "recommendedTargets": ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "fullstack-web",
+  "name": "Fullstack Web & Cloud Engineering Preset",
+  "version": "1.0.0",
+  "description": "Production-grade preset for Next.js, React, Node, Web APIs, and client-server state architectures.",
+  "riskThreshold": "medium",
+  "enabledDomains": [
+    "architecture",
+    "quality",
+    "testing",
+    "security",
+    "documentation",
+    "frontend",
+    "backend"
+  ],
+  "skills": [
+    "skills/architecture/system-design",
+    "skills/quality/coding-standards",
+    "skills/testing/test-driven-verification",
+    "skills/security/secure-development",
+    "skills/documentation/architectural-decision-records"
+  ],
+  "policies": [
+    "policies/directory-creation-policy.md",
+    "policies/file-creation-policy.md",
+    "policies/dependency-management-policy.md",
+    "policies/change-scope-policy.md",
+    "policies/testing-enforcement-policy.md",
+    "policies/security-boundary-policy.md",
+    "policies/documentation-synchronization-policy.md"
+  ],
+  "workflows": [
+    "workflows/feature-development-workflow.md",
+    "workflows/bug-fix-workflow.md",
+    "workflows/refactoring-workflow.md",
+    "workflows/release-workflow.md"
+  ],
+  "recommendedTargets": ["antigravity", "cursor", "claude-code", "copilot", "windsurf"]
+}

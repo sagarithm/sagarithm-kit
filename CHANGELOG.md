@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Phase 9: Registry & Ecosystem (v1.0.0)
+- Established the canonical Registry and Ecosystem subsystem:
+  - `registry/SPECIFICATION.md`: Decentralized distribution model, package anatomy, deterministic composition, and supply-chain governance.
+  - `registry/README.md`: User documentation for preset management, catalog discovery, and skill bundling.
+  - JSON Schemas:
+    - `registry/schema/package.schema.json`: Schema for published skill/policy package manifests.
+    - `registry/schema/preset.schema.json`: Schema for composite engineering presets.
+    - `registry/schema/index.schema.json`: Schema for federated registry catalog indexes.
+  - Curated Presets:
+    - `registry/presets/fullstack-web.json`: Next.js, React, Node, Web APIs, Tailwind, client/server state preset.
+    - `registry/presets/api-backend.json`: Resilient microservices, REST, GraphQL, Outbox pattern, Pact contracts preset.
+    - `registry/presets/systems-core.json`: High-integrity systems, low-latency runtimes, zero-alloc, exhaustive types preset.
+    - `registry/presets/ai-agentic.json`: Multi-agent orchestration, prompt isolation, blast-radius containment, Zero Assumed Success preset.
+  - Canonical Catalog:
+    - `registry/index.json`: Static index catalog of standard presets and core packages.
+- CLI Registry & Preset Subsystem in `@sagarithm/cli`:
+  - `cli/src/registry/loader.ts`: Index loader, preset retriever, catalog search engine, and cryptographic SHA-256 packager.
+  - `sagarithm preset`: Commands for listing presets (`list`), inspecting details (`show <id>`), and configuring workspaces (`apply <id>`).
+  - `sagarithm registry`: Commands for catalog search (`search <query>`) and integrity-verified artifact packaging (`pack <path>`).
+- Automated testing suite in `cli/tests/registry.test.ts` (15/15 tests passing).
+
 ### Added - Phase 8: Validation & Audit Engine (v1.0.0)
 - Established the canonical Validation and Audit subsystem:
   - `validation/SPECIFICATION.md`: Full specification for the empirical multi-vector verification gate and verification state machine (`ASSUMED`, `IMPLEMENTED`, `TESTED`, `VERIFIED`, `FAILED`).

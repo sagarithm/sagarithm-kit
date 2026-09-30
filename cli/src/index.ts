@@ -6,6 +6,8 @@ import { runDoctor } from './commands/doctor.ts';
 import { runAudit } from './commands/audit.ts';
 import { runVerify } from './commands/verify.ts';
 import { runContext } from './commands/context.ts';
+import { runPreset } from './commands/preset.ts';
+import { runRegistry } from './commands/registry.ts';
 
 const args = process.argv.slice(2);
 const command = args[0] || 'help';
@@ -21,6 +23,8 @@ Usage:
 
 Commands:
   init      Initialize Sagarithm Kit workspace configuration (sagarithm.config.json)
+  preset    List, inspect, and apply curated engineering presets (fullstack-web, api-backend, etc.)
+  registry  Search canonical catalog and package artifacts with SHA-256 integrity
   sync      Compile canonical specifications into native agent configurations
   context   Generate and query repository intelligence graph (find, blast-radius, suggest-location)
   doctor    Diagnose repository structure, .gitignore hygiene, and policy conformance
@@ -41,6 +45,12 @@ Options:
 switch (command) {
   case 'init':
     runInit(rootDir, args.slice(1));
+    break;
+  case 'preset':
+    runPreset(rootDir, args.slice(1));
+    break;
+  case 'registry':
+    runRegistry(rootDir, args.slice(1));
     break;
   case 'sync':
   case 'compile':

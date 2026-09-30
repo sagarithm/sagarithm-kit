@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SagarithmPresetSchema",
+  "description": "JSON schema for Sagarithm engineering environment presets",
+  "type": "object",
+  "required": ["id", "name", "version", "description", "riskThreshold", "enabledDomains", "skills", "policies", "workflows"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "description": {
+      "type": "string"
+    },
+    "riskThreshold": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"]
+    },
+    "enabledDomains": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "skills": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "policies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "workflows": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "recommendedTargets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"]
+      }
+    }
+  }
+}

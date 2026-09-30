@@ -1,0 +1,184 @@
+{
+  "version": "1.0.0",
+  "name": "sagarithm-canonical",
+  "url": "https://registry.sagarithm.org",
+  "updatedAt": "2026-09-30T16:30:00.000Z",
+  "presets": {
+    "fullstack-web": {
+      "id": "fullstack-web",
+      "name": "Fullstack Web & Cloud Engineering Preset",
+      "version": "1.0.0",
+      "description": "Production-grade preset for Next.js, React, Node, Web APIs, and client-server state architectures.",
+      "riskThreshold": "medium",
+      "enabledDomains": ["architecture", "quality", "testing", "security", "documentation", "frontend", "backend"],
+      "skills": [
+        "skills/architecture/system-design",
+        "skills/quality/coding-standards",
+        "skills/testing/test-driven-verification",
+        "skills/security/secure-development",
+        "skills/documentation/architectural-decision-records"
+      ],
+      "policies": [
+        "policies/directory-creation-policy.md",
+        "policies/file-creation-policy.md",
+        "policies/dependency-management-policy.md",
+        "policies/change-scope-policy.md",
+        "policies/testing-enforcement-policy.md",
+        "policies/security-boundary-policy.md",
+        "policies/documentation-synchronization-policy.md"
+      ],
+      "workflows": [
+        "workflows/feature-development-workflow.md",
+        "workflows/bug-fix-workflow.md",
+        "workflows/refactoring-workflow.md",
+        "workflows/release-workflow.md"
+      ],
+      "recommendedTargets": ["antigravity", "cursor", "claude-code", "copilot", "windsurf"]
+    },
+    "api-backend": {
+      "id": "api-backend",
+      "name": "Resilient API & Microservices Backend Preset",
+      "version": "1.0.0",
+      "description": "Engineered for high-availability REST, GraphQL, event-driven message brokers, and zero-trust service layers.",
+      "riskThreshold": "high",
+      "enabledDomains": ["architecture", "quality", "testing", "security", "documentation", "backend", "database"],
+      "skills": [
+        "skills/architecture/system-design",
+        "skills/quality/coding-standards",
+        "skills/testing/test-driven-verification",
+        "skills/security/secure-development",
+        "skills/documentation/architectural-decision-records"
+      ],
+      "policies": [
+        "policies/directory-creation-policy.md",
+        "policies/file-creation-policy.md",
+        "policies/dependency-management-policy.md",
+        "policies/change-scope-policy.md",
+        "policies/testing-enforcement-policy.md",
+        "policies/security-boundary-policy.md",
+        "policies/documentation-synchronization-policy.md"
+      ],
+      "workflows": [
+        "workflows/feature-development-workflow.md",
+        "workflows/bug-fix-workflow.md",
+        "workflows/refactoring-workflow.md",
+        "workflows/release-workflow.md"
+      ],
+      "recommendedTargets": ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"]
+    },
+    "systems-core": {
+      "id": "systems-core",
+      "name": "High-Integrity Systems & Core Runtime Preset",
+      "version": "1.0.0",
+      "description": "Engineered for low-latency runtimes, deterministic resource utilization, strict typing, and zero-allocation idioms.",
+      "riskThreshold": "critical",
+      "enabledDomains": ["architecture", "quality", "testing", "security", "documentation"],
+      "skills": [
+        "skills/architecture/system-design",
+        "skills/quality/coding-standards",
+        "skills/testing/test-driven-verification",
+        "skills/security/secure-development",
+        "skills/documentation/architectural-decision-records"
+      ],
+      "policies": [
+        "policies/directory-creation-policy.md",
+        "policies/file-creation-policy.md",
+        "policies/dependency-management-policy.md",
+        "policies/change-scope-policy.md",
+        "policies/testing-enforcement-policy.md",
+        "policies/security-boundary-policy.md",
+        "policies/documentation-synchronization-policy.md"
+      ],
+      "workflows": [
+        "workflows/feature-development-workflow.md",
+        "workflows/bug-fix-workflow.md",
+        "workflows/refactoring-workflow.md",
+        "workflows/release-workflow.md"
+      ],
+      "recommendedTargets": ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"]
+    },
+    "ai-agentic": {
+      "id": "ai-agentic",
+      "name": "Autonomous AI Agent & Tool Orchestration Preset",
+      "version": "1.0.0",
+      "description": "Tailored for AI agent developers; enforces non-destructive demarcation, prompt isolation, blast-radius limits, and zero assumed success.",
+      "riskThreshold": "critical",
+      "enabledDomains": ["architecture", "quality", "testing", "security", "documentation"],
+      "skills": [
+        "skills/architecture/system-design",
+        "skills/quality/coding-standards",
+        "skills/testing/test-driven-verification",
+        "skills/security/secure-development",
+        "skills/documentation/architectural-decision-records"
+      ],
+      "policies": [
+        "policies/directory-creation-policy.md",
+        "policies/file-creation-policy.md",
+        "policies/dependency-management-policy.md",
+        "policies/change-scope-policy.md",
+        "policies/testing-enforcement-policy.md",
+        "policies/security-boundary-policy.md",
+        "policies/documentation-synchronization-policy.md"
+      ],
+      "workflows": [
+        "workflows/feature-development-workflow.md",
+        "workflows/bug-fix-workflow.md",
+        "workflows/refactoring-workflow.md",
+        "workflows/release-workflow.md"
+      ],
+      "recommendedTargets": ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"]
+    }
+  },
+  "packages": [
+    {
+      "name": "@sagarithm/skill-architecture-system-design",
+      "version": "1.0.0",
+      "type": "skill",
+      "domain": "architecture",
+      "description": "Architectural principles, bounded contexts, outbox pattern, and fitness functions",
+      "author": "Sagarithm",
+      "license": "Apache-2.0",
+      "entrypoint": "skills/architecture/system-design/SKILL.md"
+    },
+    {
+      "name": "@sagarithm/skill-quality-coding-standards",
+      "version": "1.0.0",
+      "type": "skill",
+      "domain": "quality",
+      "description": "Strict typing, branded types, discriminated unions, and Result monads",
+      "author": "Sagarithm",
+      "license": "Apache-2.0",
+      "entrypoint": "skills/quality/coding-standards/SKILL.md"
+    },
+    {
+      "name": "@sagarithm/skill-testing-test-driven-verification",
+      "version": "1.0.0",
+      "type": "skill",
+      "domain": "testing",
+      "description": "Property-based testing, fast-check, mutation testing, and Pact contract testing",
+      "author": "Sagarithm",
+      "license": "Apache-2.0",
+      "entrypoint": "skills/testing/test-driven-verification/SKILL.md"
+    },
+    {
+      "name": "@sagarithm/skill-security-secure-development",
+      "version": "1.0.0",
+      "type": "skill",
+      "domain": "security",
+      "description": "STRIDE threat modeling, timing attack defenses, and SSRF prevention",
+      "author": "Sagarithm",
+      "license": "Apache-2.0",
+      "entrypoint": "skills/security/secure-development/SKILL.md"
+    },
+    {
+      "name": "@sagarithm/skill-documentation-architectural-decision-records",
+      "version": "1.0.0",
+      "type": "skill",
+      "domain": "documentation",
+      "description": "MADR 3.0 standard, quantitative decision matrices, and superseding workflows",
+      "author": "Sagarithm",
+      "license": "Apache-2.0",
+      "entrypoint": "skills/documentation/architectural-decision-records/SKILL.md"
+    }
+  ]
+}
