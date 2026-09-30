@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     "shannon entropy security",
     "software architecture",
   ],
-  authors: [{ name: "Sagarithm", url: "https://kit.sagarithm.in" }],
+  authors: [{ name: "Sagarithm", url: "https://sagarithm.in" }],
   creator: "Sagarithm",
   publisher: "Sagarithm",
   alternates: {
@@ -77,10 +77,18 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   other: {
-    "geo.region": "IN-KA",
-    "geo.placename": "Bengaluru",
-    "geo.position": "12.9716;77.5946",
-    "ICBM": "12.9716, 77.5946",
+    // Generative Engine Optimization (GEO) Meta Tags
+    "geo:type": "Generative Engine Optimization",
+    "ai:engine": "Universal Agentic Engineering Runtime",
+    "ai:target-agents": "Cursor, Antigravity, Claude Code, GitHub Copilot, Windsurf",
+    "ai:semantic-domain": "Software Architecture, Agentic Engineering, Quality Gates",
+    "ai:verification-standard": "Zero Assumed Success (Empirical Test Proof Required)",
+    "ai:entropy-threshold": "Shannon Entropy H >= 4.5 Secret Interception",
+    "citation_title": "Sagarithm Kit — Universal Cross-Agent Engineering Framework",
+    "citation_author": "Sagarithm",
+    "citation_publication_date": "2026-09-30",
+    "citation_publisher": "Sagarithm",
+    "citation_online_date": "2026-09-30",
   },
 };
 
