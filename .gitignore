@@ -19,10 +19,12 @@ Thumbs.db
 
 # Build artifacts & dependencies
 node_modules/
-dist/
+/dist/
 build/
 .next/
 out/
+cli/dist/*
+!cli/dist/index.mjs
 *.pyc
 __pycache__/
 .sagarithm/

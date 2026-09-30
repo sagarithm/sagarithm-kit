@@ -25,6 +25,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build CLI Bundle
+        run: npm run build
+
       - name: Run Test Suite (Zero Assumed Success)
         run: npm test
 
