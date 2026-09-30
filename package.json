@@ -2,19 +2,55 @@
   "name": "sagarithm-kit",
   "version": "1.0.0",
   "description": "Universal Cross-Agent Engineering Framework for AI Coding Agents",
-  "private": true,
   "type": "module",
+  "bin": {
+    "sagarithm": "./cli/bin/sagarithm.mjs",
+    "sagarithm-kit": "./cli/bin/sagarithm.mjs"
+  },
+  "main": "./cli/src/index.ts",
+  "files": [
+    "cli",
+    "constitution",
+    "skills",
+    "policies",
+    "workflows",
+    "adapters",
+    "registry",
+    "context",
+    "validation",
+    "specification",
+    "sagarithm.manifest.json",
+    "README.md",
+    "LICENSE",
+    "ARCHITECTURE.md"
+  ],
   "scripts": {
+    "start": "node ./cli/bin/sagarithm.mjs",
     "test": "npm --prefix cli test",
     "lint": "node --experimental-strip-types ./cli/src/index.ts audit",
     "verify": "node --experimental-strip-types ./cli/src/index.ts verify"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagarithm/sagarithm-kit.git"
+  },
   "keywords": [
     "sagarithm",
+    "sagarithm-kit",
     "ai-agents",
+    "coding-agents",
     "cross-agent",
+    "cursor",
+    "antigravity",
+    "claude-code",
+    "copilot",
+    "windsurf",
     "engineering-framework"
   ],
   "author": "Sagarithm",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/sagarithm/sagarithm-kit/issues"
+  },
+  "homepage": "https://github.com/sagarithm/sagarithm-kit#readme"
 }

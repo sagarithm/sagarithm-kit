@@ -19,6 +19,33 @@ AI coding agents should not enter a codebase with only a user prompt. They shoul
 
 ---
 
+## Installation & Quickstart
+
+Run directly without installation via `npx`:
+
+```bash
+# Initialize a new or existing workspace
+npx sagarithm-kit init
+
+# Apply a curated engineering preset (fullstack-web, api-backend, systems-core, ai-agentic)
+npx sagarithm-kit preset apply fullstack-web
+
+# Compile canonical specifications into native agent configurations
+npx sagarithm-kit sync
+
+# Run the Zero Assumed Success verification gate
+npx sagarithm-kit verify
+```
+
+Or install globally:
+
+```bash
+npm install -g sagarithm-kit
+sagarithm --help
+```
+
+---
+
 ## Development Environment vs. Target Platform
 
 > **Google Antigravity is the development environment, NOT the target platform.**

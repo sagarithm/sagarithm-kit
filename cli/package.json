@@ -4,7 +4,8 @@
   "description": "CLI compiler, linter, and verification engine for Sagarithm Kit",
   "type": "module",
   "bin": {
-    "sagarithm": "./bin/sagarithm.mjs"
+    "sagarithm": "./bin/sagarithm.mjs",
+    "sagarithm-kit": "./bin/sagarithm.mjs"
   },
   "scripts": {
     "start": "node --experimental-strip-types ./src/index.ts",
