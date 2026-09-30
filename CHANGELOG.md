@@ -5,7 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.0] - 2026-09-30
+
+### Initial Production Release - Sagarithm Kit v1.0.0
+- **Universal Cross-Agent Compatibility**: Single source of truth compiled to Cursor (`.cursorrules`), Antigravity (`GEMINI.md`), Claude Code (`CLAUDE.md`), GitHub Copilot (`.github/copilot-instructions.md`), and Windsurf (`.windsurfrules`).
+- **Autonomous Next-Gen CLI Engine**: Workflow orchestration (`sagarithm run`), structural complexity & instability graph analysis (`sagarithm context stats`), orphan abstraction detection (`sagarithm context orphans`), and auto-remediation (`sagarithm audit --fix`).
+- **Enterprise-Grade Validation & Audit**: 5-vector verification gate (Static, Security, Architecture, Behavioral, Documentation) enforcing Zero Assumed Success with algorithmic Shannon entropy token scanning ($H \ge 4.5$).
+- **Multi-OS Production CI/CD Matrix**: Automated multi-platform workflows testing Ubuntu, Windows, and macOS on Node.js 22 and 24.
+- **Global npm Package Distribution**: Dual binary distribution (`sagarithm`, `sagarithm-kit`) live on npm registry (`https://www.npmjs.com/package/sagarithm-kit`).
+- **Open-Source Community Infrastructure**: Standard issue templates, pull request template, CODEOWNERS, Code of Conduct, and comprehensive contribution guidelines.
 
 ### Added - Phase 9: Registry & Ecosystem (v1.0.0)
 - Established the canonical Registry and Ecosystem subsystem:
