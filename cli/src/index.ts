@@ -8,6 +8,7 @@ import { runVerify } from './commands/verify.ts';
 import { runContext } from './commands/context.ts';
 import { runPreset } from './commands/preset.ts';
 import { runRegistry } from './commands/registry.ts';
+import { runWorkflow } from './commands/run.ts';
 
 const args = process.argv.slice(2);
 const command = args[0] || 'help';
@@ -26,15 +27,17 @@ Commands:
   preset    List, inspect, and apply curated engineering presets (fullstack-web, api-backend, etc.)
   registry  Search canonical catalog and package artifacts with SHA-256 integrity
   sync      Compile canonical specifications into native agent configurations
+  run       Orchestrate autonomous canonical workflow (feature-development, bug-fix, release)
   context   Generate and query repository intelligence graph (find, blast-radius, suggest-location)
   doctor    Diagnose repository structure, .gitignore hygiene, and policy conformance
-  audit     Audit workspace against security, secrets, and architecture policies
+  audit     Audit workspace against security, secrets, and architecture policies (--fix to remediate)
   verify    Run execution verification gate (Zero Assumed Success)
   help      Display this help menu
 
 Options:
   --target <agent>   Filter sync to a specific target (antigravity, cursor, claude-code, copilot, windsurf, codex)
   --force            Force overwrite existing configurations during init
+  --fix              Automatically remediate safe policy violations in audit
   --deep             Execute deep workspace scan instead of git diff in audit
   --strict           Enforce zero warnings mode (treat warnings as errors)
   --suite <name>     Target specific test suite in verify
@@ -51,6 +54,9 @@ switch (command) {
     break;
   case 'registry':
     runRegistry(rootDir, args.slice(1));
+    break;
+  case 'run':
+    runWorkflow(rootDir, args.slice(1));
     break;
   case 'sync':
   case 'compile':

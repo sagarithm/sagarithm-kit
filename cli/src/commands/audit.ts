@@ -1,8 +1,9 @@
-import { readdirSync, statSync } from 'node:fs';
+import { readdirSync, statSync, existsSync, writeFileSync } from 'node:fs';
 import { resolve, relative } from 'node:path';
 import type { AuditIssue } from '../types.ts';
 import { scanGitDiffForSecrets, scanFilesForSecrets } from '../validation/secrets.ts';
 import { evaluateArchitecturalFitness } from '../validation/fitness.ts';
+import { buildProjectGraph } from '../graph/indexer.ts';
 
 function findWorkspaceFiles(dir: string, rootDir: string): string[] {
   const IGNORE = new Set(['node_modules', '.git', '.sagarithm', 'dist', 'build', '.gemini']);
@@ -39,6 +40,30 @@ export function runAudit(rootDir: string, args: string[] = []): void {
   const isDeep = args.includes('--deep');
   const isStrict = args.includes('--strict');
   const isJson = args.includes('--json');
+  const isFix = args.includes('--fix');
+
+  if (isFix) {
+    console.log('🔧 Auto-remediating safe policy issues...');
+    const manifestPath = resolve(rootDir, 'sagarithm.manifest.json');
+    if (!existsSync(manifestPath)) {
+      const graph = buildProjectGraph(rootDir);
+      const manifestData = {
+        version: '1.0.0',
+        name: graph.name,
+        totalFiles: graph.allFiles.length,
+        modules: graph.modules.map(m => ({
+          name: m.name,
+          path: m.path,
+          fileCount: m.files.length,
+          exports: m.exports,
+          tests: m.tests
+        })),
+        dependencies: graph.dependencies
+      };
+      writeFileSync(manifestPath, JSON.stringify(manifestData, null, 2) + '\n', 'utf8');
+      console.log('  ✔ Regenerated missing sagarithm.manifest.json.');
+    }
+  }
 
   if (!isJson) {
     console.log(`🔍 Auditing workspace against active Sagarithm policies (${isDeep ? 'Deep Scan' : 'Git Diff Scan'})...`);

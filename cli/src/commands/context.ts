@@ -1,7 +1,7 @@
 import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { buildProjectGraph } from '../graph/indexer.ts';
-import { calculateBlastRadius, findExistingAbstractions, suggestModuleLocation } from '../graph/query.ts';
+import { calculateBlastRadius, findExistingAbstractions, suggestModuleLocation, calculateSystemComplexity, detectOrphanAbstractions } from '../graph/query.ts';
 
 export function runContext(rootDir: string, args: string[]): void {
   const subCommand = args[0] || 'generate';
@@ -28,6 +28,39 @@ export function runContext(rootDir: string, args: string[]): void {
       writeFileSync(manifestPath, JSON.stringify(manifestData, null, 2) + '\n', 'utf8');
       console.log(`✅ Project graph generated: Indexed ${graph.modules.length} modules, ${graph.allFiles.length} files.`);
       console.log(`📄 Saved topology manifest to sagarithm.manifest.json`);
+      break;
+    }
+
+    case 'stats': {
+      const metrics = calculateSystemComplexity(graph);
+      console.log('📊 Architectural System Complexity & Coupling Metrics:');
+      console.log(`  - Total Modules: ${metrics.totalModules}`);
+      console.log(`  - Total Files:   ${metrics.totalFiles}`);
+      console.log(`  - Total Exports: ${metrics.totalExports}`);
+      console.log(`  - Average Architectural Instability: ${metrics.averageInstability} (0.0 = maximal stability, 1.0 = maximal instability)\n`);
+      console.log('  Module Breakdown:');
+      for (const [mod, inst] of Object.entries(metrics.instability)) {
+        const ca = metrics.afferentCoupling[mod] || 0;
+        const ce = metrics.efferentCoupling[mod] || 0;
+        console.log(`    ↳ [${mod}] Ca: ${ca} (inbound) | Ce: ${ce} (outbound) | Instability: ${inst}`);
+      }
+      break;
+    }
+
+    case 'orphans': {
+      console.log('🔍 Scanning workspace for unused / unimported exports...');
+      const orphans = detectOrphanAbstractions(graph);
+      if (orphans.length === 0) {
+        console.log('✅ Clean! No unimported public abstractions detected.');
+      } else {
+        console.log(`⚠️  Found ${orphans.length} unreferenced exported symbol(s):`);
+        for (const o of orphans.slice(0, 10)) {
+          console.log(`  - [${o.module}] ${o.symbol}`);
+        }
+        if (orphans.length > 10) {
+          console.log(`  ... and ${orphans.length - 10} more.`);
+        }
+      }
       break;
     }
 
@@ -80,7 +113,7 @@ export function runContext(rootDir: string, args: string[]): void {
     }
 
     default:
-      console.log(`Unknown context action '${subCommand}'. Supported: generate, find, blast-radius, suggest-location.`);
+      console.log(`Unknown context action '${subCommand}'. Supported: generate, stats, orphans, find, blast-radius, suggest-location.`);
       break;
   }
 }

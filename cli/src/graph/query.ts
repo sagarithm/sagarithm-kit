@@ -65,3 +65,81 @@ export function suggestModuleLocation(graph: ProjectGraph, domainHint?: string):
 
   return 'src';
 }
+
+export interface SystemComplexityMetrics {
+  totalModules: number;
+  totalFiles: number;
+  totalExports: number;
+  afferentCoupling: Record<string, number>; // Ca (incoming dependents)
+  efferentCoupling: Record<string, number>; // Ce (outgoing dependencies)
+  instability: Record<string, number>; // I = Ce / (Ca + Ce)
+  averageInstability: number;
+}
+
+export function calculateSystemComplexity(graph: ProjectGraph): SystemComplexityMetrics {
+  const Ca: Record<string, number> = {};
+  const Ce: Record<string, number> = {};
+  const instability: Record<string, number> = {};
+
+  for (const mod of graph.modules) {
+    Ca[mod.name] = 0;
+    Ce[mod.name] = 0;
+  }
+
+  for (const mod of graph.modules) {
+    for (const other of graph.modules) {
+      if (mod.name === other.name) continue;
+      const dependsOnOther = mod.imports.some((imp) => imp.includes(other.name) || other.files.some((f) => imp.endsWith(f)));
+      if (dependsOnOther) {
+        Ce[mod.name] = (Ce[mod.name] || 0) + 1;
+        Ca[other.name] = (Ca[other.name] || 0) + 1;
+      }
+    }
+  }
+
+  let totalInstability = 0;
+  let evaluatedModules = 0;
+
+  for (const mod of graph.modules) {
+    const ca = Ca[mod.name] || 0;
+    const ce = Ce[mod.name] || 0;
+    const denom = ca + ce;
+    const inst = denom === 0 ? 0 : Number((ce / denom).toFixed(2));
+    instability[mod.name] = inst;
+    totalInstability += inst;
+    evaluatedModules++;
+  }
+
+  const totalExports = graph.modules.reduce((acc, m) => acc + m.exports.length, 0);
+
+  return {
+    totalModules: graph.modules.length,
+    totalFiles: graph.allFiles.length,
+    totalExports,
+    afferentCoupling: Ca,
+    efferentCoupling: Ce,
+    instability,
+    averageInstability: evaluatedModules === 0 ? 0 : Number((totalInstability / evaluatedModules).toFixed(2))
+  };
+}
+
+export function detectOrphanAbstractions(graph: ProjectGraph): Array<{ symbol: string; module: string }> {
+  const orphans: Array<{ symbol: string; module: string }> = [];
+
+  const allImportStatements = graph.modules.flatMap((m) => m.imports);
+
+  for (const mod of graph.modules) {
+    for (const exp of mod.exports) {
+      const isReferencedInImports = allImportStatements.some((imp) => imp.includes(exp));
+      if (!isReferencedInImports) {
+        orphans.push({
+          symbol: exp,
+          module: mod.name
+        });
+      }
+    }
+  }
+
+  return orphans;
+}
+

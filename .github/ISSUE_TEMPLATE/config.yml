@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Sagarithm Community Discussions
+    url: https://github.com/sagarithm/sagarithm-kit/discussions
+    about: Ask questions, share ideas, and connect with other agent engineers.
+  - name: Security Vulnerability Reporting
+    url: https://github.com/sagarithm/sagarithm-kit/security/policy
+    about: Privately report a security vulnerability according to SECURITY.md.

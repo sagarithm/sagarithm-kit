@@ -1,0 +1,41 @@
+name: Bug Report
+description: Create a report to help us improve Sagarithm Kit
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug. Please ensure you have tested with the latest version of Sagarithm Kit.
+  - type: input
+    id: version
+    attributes:
+      label: Sagarithm Kit Version
+      description: What version of Sagarithm Kit are you using?
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior (e.g. `sagarithm verify`).
+      placeholder: |
+        1. Run '...'
+        2. Execute '...'
+        3. See error
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Terminal Output & Logs
+      description: Please copy and paste any relevant terminal output.
+      render: shell

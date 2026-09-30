@@ -1,0 +1,17 @@
+# Sagarithm Kit Code Ownership
+
+# Global maintainers
+* @sagarithm
+
+# Core architecture and specification
+/ARCHITECTURE.md @sagarithm
+/specification/ @sagarithm
+/constitution/ @sagarithm
+
+# Agent adapters and compiler
+/adapters/ @sagarithm
+/cli/ @sagarithm
+
+# Validation & Registry
+/validation/ @sagarithm
+/registry/ @sagarithm

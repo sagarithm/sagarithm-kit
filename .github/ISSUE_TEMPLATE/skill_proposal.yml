@@ -1,0 +1,30 @@
+name: Community Skill Proposal
+description: Propose a new canonical skill for the Sagarithm Registry
+title: "[Skill Proposal]: "
+labels: ["skill", "community"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose a new canonical skill meeting the Sagarithm Meta-Specification (`SKILL.md`, `references/`, `examples/`, `checklists/`).
+  - type: input
+    id: skill-id
+    attributes:
+      label: Skill ID & Domain
+      placeholder: "domain/skill-name (e.g., database/distributed-locking)"
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Skill Scope & Purpose
+      description: What discipline or problem does this skill teach the AI coding agent to execute?
+    validations:
+      required: true
+  - type: textarea
+    id: key-patterns
+    attributes:
+      label: Core Architectural Patterns
+      description: What patterns, fitness functions, and anti-patterns will be encoded?
+    validations:
+      required: true

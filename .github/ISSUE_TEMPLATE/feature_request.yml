@@ -1,0 +1,28 @@
+name: Feature Request / RFC
+description: Suggest an idea, architectural enhancement, or capability
+title: "[RFC]: "
+labels: ["enhancement", "rfc"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose a new feature, adapter, policy, or architectural capability for Sagarithm Kit.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: Is your feature request related to a problem? Please describe clearly.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution & Architecture
+      description: Describe the solution, layer, and how AI coding agents will benefit.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any alternative solutions or features you've considered.

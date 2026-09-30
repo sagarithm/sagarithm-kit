@@ -1,0 +1,27 @@
+name: Security & Architecture Audit Gate
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  audit:
+    name: Deep Security & Architecture Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      - name: Run Deep Workspace Audit
+        run: node --experimental-strip-types ./cli/src/index.ts audit --deep --strict
+
+      - name: Run Architecture Graph Complexity Check
+        run: node --experimental-strip-types ./cli/src/index.ts context stats

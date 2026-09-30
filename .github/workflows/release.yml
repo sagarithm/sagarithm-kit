@@ -1,0 +1,44 @@
+name: Production Release Pipeline
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  release:
+    name: Verify & Publish Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Run Full Verification Gate
+        run: |
+          npm test
+          npm run lint
+          npm run verify
+
+      - name: Generate Topology Manifest
+        run: node --experimental-strip-types ./cli/src/index.ts context generate
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            sagarithm.manifest.json
+            registry/index.json
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
