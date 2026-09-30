@@ -1,8 +1,18 @@
 # Sagarithm Kit
 
-> **Cross-Agent Software Engineering Framework for AI Coding Agents**
+> **Universal Cross-Agent Engineering Framework for AI Coding Agents**
+
+[![npm version](https://img.shields.io/npm/v/sagarithm-kit.svg?color=fa5d19&style=flat-square)](https://www.npmjs.com/package/sagarithm-kit)
+[![Website](https://img.shields.io/badge/website-kit.sagarithm.in-fa5d19?style=flat-square)](https://kit.sagarithm.in)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](LICENSE)
+[![CI Matrix](https://img.shields.io/github/actions/workflow/status/sagarithm/sagarithm-kit/ci.yml?branch=main&label=CI&style=flat-square)](https://github.com/sagarithm/sagarithm-kit/actions)
 
 Sagarithm Kit encodes the collective wisdom, disciplined practices, and architectural rigor of experienced software architects and engineers into an agent-agnostic framework. It equips AI coding agents with the engineering environment required to produce production-grade software.
+
+- 🌐 **Official Website & Live Studio:** [kit.sagarithm.in](https://kit.sagarithm.in)
+- 📦 **npm Registry:** [npmjs.com/package/sagarithm-kit](https://www.npmjs.com/package/sagarithm-kit)
+- 📦 **GitHub Packages:** [@sagarithm/sagarithm-kit](https://github.com/sagarithm/sagarithm-kit/pkgs/npm/sagarithm-kit)
+- ☕ **Support:** [paypal.me/thesagarithm](https://paypal.me/thesagarithm)
 
 ---
 
@@ -183,22 +193,6 @@ Decentralized distribution and turn-key engineering profiles for AI coding agent
 - [Canonical Meta-Specification](specification/SPECIFICATION.md)
 - [Contribution Guidelines](CONTRIBUTING.md)
 - [Security Policy](SECURITY.md)
-
----
-
-## Project Status: Phased Roadmap
-
-Sagarithm Kit has completed its foundational 10-phase master roadmap:
-- **[x] Phase 0 - Foundation**: Architecture, terminology, meta-specification, governance standards.
-- **[x] Phase 1 - Engineering Constitution**: Encoding core engineering, architectural, coding, security, and testing principles.
-- **[x] Phase 2 - Core Skills**: Architecture, Coding Standards, Testing, Security, Documentation.
-- **[x] Phase 3 - Policies**: File/directory creation, dependency limits, change containment.
-- **[x] Phase 4 - Workflows**: Feature, Bug Fix, Refactor, Release lifecycles.
-- **[x] Phase 5 - Agent Adapters**: Native compilers for Antigravity, Cursor, Claude Code, Copilot, Windsurf, Codex.
-- **[x] Phase 6 - CLI**: `sagarithm init`, `sync`, `doctor`, `audit`, `verify`.
-- **[x] Phase 7 - Project Intelligence**: Repository graph and context extraction engine.
-- **[x] Phase 8 - Validation & Audit Engine**: Multi-vector verification gate, secret/entropy scanner, architectural fitness engine.
-- **[x] Phase 9 - Registry & Ecosystem**: Decentralized skill registries, curated presets, and SHA-256 packaging.
 
 ---
 
