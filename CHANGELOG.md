@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Phase 3: Foundational Policies (v1.0.0)
+- Established canonical policy enforcement framework in `policies/`:
+  - `policy.directory-creation`: Blocks arbitrary creation of generic utility folders (`utils`, `helpers`) and structural sprawl.
+  - `policy.file-creation`: Mandates pre-creation search and reuse before duplicating files or abstractions.
+  - `policy.dependency-management`: Restricts third-party package additions; requires native checks, license review, and lockfile preservation.
+  - `policy.change-scope`: Limits blast radius; prohibits speculative refactoring and unrelated formatting cascades.
+  - `policy.testing-enforcement`: Blocks assumed success; requires terminal test execution and regression tests for bug fixes.
+  - `policy.security-boundary`: Forbids committing credentials, raw SQL interpolation, and shell injections.
+  - `policy.documentation-synchronization`: Mandates living documentation and ADR synchronization on interface modifications.
+- Created [policies/README.md](policies/README.md) cataloging the foundational policies and severity hierarchy.
+
 ### Enhanced - Phase 2: Advanced Engineering Skills (v1.0.0)
 - Elevated all 5 core skills with production-grade engineering references and patterns:
   - `architecture.system-design`: Added Bounded Contexts, Transactional Outbox pattern, Anti-Corruption Layer (ACL), and Architectural Fitness Functions.

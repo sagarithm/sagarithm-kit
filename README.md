@@ -63,12 +63,25 @@ The foundational laws governing all agent interactions are codified in the [Engi
 
 ## Core Skills
 
-The initial suite of validated canonical skills is cataloged in [skills/README.md](skills/README.md):
+The suite of validated canonical skills is cataloged in [skills/README.md](skills/README.md):
 - **Architecture**: [System Design & Modularity](skills/architecture/system-design/SKILL.md)
 - **Quality**: [Clean Code & Quality Standards](skills/quality/coding-standards/SKILL.md)
 - **Testing**: [Test-Driven Verification](skills/testing/test-driven-verification/SKILL.md)
 - **Security**: [Secure Development](skills/security/secure-development/SKILL.md)
 - **Documentation**: [Architectural Decision Records](skills/documentation/architectural-decision-records/SKILL.md)
+
+---
+
+## Behavioral Policies
+
+The project-wide boundary policies are cataloged in [policies/README.md](policies/README.md):
+- [Directory Creation Policy](policies/directory-creation-policy.md)
+- [File Creation Policy](policies/file-creation-policy.md)
+- [Dependency Management Policy](policies/dependency-management-policy.md)
+- [Change Scope Policy](policies/change-scope-policy.md)
+- [Testing Enforcement Policy](policies/testing-enforcement-policy.md)
+- [Security Boundary Policy](policies/security-boundary-policy.md)
+- [Documentation Synchronization Policy](policies/documentation-synchronization-policy.md)
 
 ---
 
@@ -87,7 +100,7 @@ Sagarithm Kit is developed under a disciplined 10-phase roadmap:
 - **[x] Phase 0 - Foundation**: Architecture, terminology, meta-specification, governance standards.
 - **[x] Phase 1 - Engineering Constitution**: Encoding core engineering, architectural, coding, security, and testing principles.
 - **[x] Phase 2 - Core Skills**: Architecture, Coding Standards, Testing, Security, Documentation.
-- **[ ] Phase 3 - Policies**: File/directory creation, dependency limits, change containment.
+- **[x] Phase 3 - Policies**: File/directory creation, dependency limits, change containment.
 - **[ ] Phase 4 - Workflows**: Feature, Bug Fix, Refactor, Release lifecycles.
 - **[ ] Phase 5 - Agent Adapters**: Native compilers for Antigravity, Cursor, Claude Code, Copilot, Windsurf, Codex.
 - **[ ] Phase 6 - CLI**: `sagarithm init`, `sync`, `doctor`, `audit`, `verify`.
