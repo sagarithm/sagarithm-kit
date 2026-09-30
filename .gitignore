@@ -1,0 +1,20 @@
+# Operating System Files
+Thumbs.db
+.DS_Store
+
+# Editor & Development Environment Specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Antigravity development environment local runtime artifacts
+.gemini/
+.agents/scratch/
+
+# Build artifacts & dependencies
+node_modules/
+dist/
+build/
+*.pyc
+__pycache__/
