@@ -85,6 +85,16 @@ The project-wide boundary policies are cataloged in [policies/README.md](policie
 
 ---
 
+## Canonical Workflows
+
+The phase-gated task lifecycles are cataloged in [workflows/README.md](workflows/README.md):
+- [Feature Development Workflow](workflows/feature-development-workflow.md)
+- [Bug Fix Workflow](workflows/bug-fix-workflow.md)
+- [Refactoring Workflow](workflows/refactoring-workflow.md)
+- [Release Workflow](workflows/release-workflow.md)
+
+---
+
 ## Documentation & Specifications
 
 - [Canonical Terminology & Taxonomy](specification/TERMINOLOGY.md)
@@ -101,7 +111,7 @@ Sagarithm Kit is developed under a disciplined 10-phase roadmap:
 - **[x] Phase 1 - Engineering Constitution**: Encoding core engineering, architectural, coding, security, and testing principles.
 - **[x] Phase 2 - Core Skills**: Architecture, Coding Standards, Testing, Security, Documentation.
 - **[x] Phase 3 - Policies**: File/directory creation, dependency limits, change containment.
-- **[ ] Phase 4 - Workflows**: Feature, Bug Fix, Refactor, Release lifecycles.
+- **[x] Phase 4 - Workflows**: Feature, Bug Fix, Refactor, Release lifecycles.
 - **[ ] Phase 5 - Agent Adapters**: Native compilers for Antigravity, Cursor, Claude Code, Copilot, Windsurf, Codex.
 - **[ ] Phase 6 - CLI**: `sagarithm init`, `sync`, `doctor`, `audit`, `verify`.
 - **[ ] Phase 7 - Project Intelligence**: Repository graph and context extraction engine.

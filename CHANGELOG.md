@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Phase 4: Canonical Engineering Workflows (v1.0.0)
+- Established phase-gated execution lifecycles in `workflows/`:
+  - `workflow.feature-development`: Phased lifecycle for introducing new features with policy checks and verification gates.
+  - `workflow.bug-fix`: Defect resolution lifecycle requiring reproducing regression tests (Red phase) before applying minimal patches (Green phase).
+  - `workflow.refactoring`: Behavioral preservation lifecycle requiring green baselines, incremental transformation, and parity verification.
+  - `workflow.release`: Release governance covering SemVer evaluation, Expand/Contract migration safety, sanity builds, and rollback plans.
+- Created [workflows/README.md](workflows/README.md) cataloging the universal 5-phase engineering lifecycle.
+
 ### Added - Phase 3: Foundational Policies (v1.0.0)
 - Established canonical policy enforcement framework in `policies/`:
   - `policy.directory-creation`: Blocks arbitrary creation of generic utility folders (`utils`, `helpers`) and structural sprawl.
