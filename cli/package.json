@@ -1,0 +1,22 @@
+{
+  "name": "@sagarithm/cli",
+  "version": "1.0.0",
+  "description": "CLI compiler, linter, and verification engine for Sagarithm Kit",
+  "type": "module",
+  "bin": {
+    "sagarithm": "./bin/sagarithm.mjs"
+  },
+  "scripts": {
+    "start": "node --experimental-strip-types ./src/index.ts",
+    "test": "node --test --experimental-strip-types ./tests/*.test.ts"
+  },
+  "keywords": [
+    "sagarithm",
+    "ai-agents",
+    "coding-agents",
+    "cross-agent",
+    "engineering-framework"
+  ],
+  "author": "Sagarithm",
+  "license": "Apache-2.0"
+}

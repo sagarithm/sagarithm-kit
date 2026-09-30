@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Phase 6: Sagarithm Kit CLI (v1.0.0)
+- Implemented `@sagarithm/cli` operational tool under `cli/`:
+  - `sagarithm init`: Workspace initialization and target agent autodetection.
+  - `sagarithm sync`: Multi-agent compiler translating canonical layers through adapter templates to native target files with safe non-destructive demarcation injection.
+  - `sagarithm doctor`: Structural sprawl detector, `.gitignore` validator, and lockfile auditor.
+  - `sagarithm audit`: Pre-commit/CI policy checker scanning `git diff` for hardcoded secrets and unparameterized SQL concatenation.
+  - `sagarithm verify`: Execution verification gate enforcing Zero Assumed Success.
+- Automated testing suite verifying frontmatter parsing and non-destructive injection (`cli/tests/parser.test.ts`).
+- Created [cli/README.md](cli/README.md) documenting command specifications and execution examples.
+
 ### Added - Phase 5: Agent Adapters (v1.0.0)
 - Established the target platform adaptation layer across 6 major AI coding environments:
   - `adapters/antigravity/`: Target compilation to `.agents/rules/` and `.agents/skills/`.

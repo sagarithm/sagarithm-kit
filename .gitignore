@@ -2,6 +2,11 @@
 Thumbs.db
 .DS_Store
 
+# Environment & Secret Files (policy.security-boundary)
+.env
+.env.*
+!.env.example
+
 # Editor & Development Environment Specific
 .idea/
 .vscode/
