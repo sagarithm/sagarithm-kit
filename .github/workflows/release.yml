@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -42,3 +43,17 @@ jobs:
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node for GitHub Packages
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@sagarithm'
+
+      - name: Publish to GitHub Packages
+        run: |
+          node -e 'const fs=require("fs"); const pkg = JSON.parse(fs.readFileSync("package.json", "utf8")); pkg.name = "@sagarithm/sagarithm-kit"; pkg.publishConfig = { registry: "https://npm.pkg.github.com", access: "public" }; fs.writeFileSync("package.json", JSON.stringify(pkg, null, 2));'
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
