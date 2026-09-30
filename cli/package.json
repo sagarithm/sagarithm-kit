@@ -1,6 +1,6 @@
 {
   "name": "@sagarithm/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI compiler, linter, and verification engine for Sagarithm Kit",
   "type": "module",
   "bin": {

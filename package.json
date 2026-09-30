@@ -1,16 +1,17 @@
 {
   "name": "sagarithm-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Universal Cross-Agent Engineering Framework for AI Coding Agents",
   "type": "module",
   "bin": {
     "sagarithm": "./bin/sagarithm.mjs",
     "sagarithm-kit": "./bin/sagarithm.mjs"
   },
-  "main": "./cli/src/index.ts",
+  "main": "./cli/dist/index.mjs",
   "files": [
     "bin",
-    "cli",
+    "cli/dist",
+    "cli/package.json",
     "constitution",
     "skills",
     "policies",
@@ -26,12 +27,18 @@
     "ARCHITECTURE.md"
   ],
   "scripts": {
-    "start": "node ./cli/bin/sagarithm.mjs",
+    "build": "esbuild cli/src/index.ts --bundle --platform=node --format=esm --target=node20 --outfile=cli/dist/index.mjs",
+    "prepack": "npm run build",
+    "prepare": "npm run build",
+    "start": "node ./bin/sagarithm.mjs",
     "test": "npm --prefix cli test",
-    "lint": "node --experimental-strip-types ./cli/src/index.ts audit",
-    "verify": "node --experimental-strip-types ./cli/src/index.ts verify",
+    "lint": "node ./cli/dist/index.mjs audit",
+    "verify": "node ./cli/dist/index.mjs verify",
     "web:dev": "npm --prefix apps/web run dev",
     "web:build": "npm --prefix apps/web run build"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.12"
   },
   "repository": {
     "type": "git",
