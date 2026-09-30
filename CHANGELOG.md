@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Phase 5: Agent Adapters (v1.0.0)
+- Established the target platform adaptation layer across 6 major AI coding environments:
+  - `adapters/antigravity/`: Target compilation to `.agents/rules/` and `.agents/skills/`.
+  - `adapters/cursor/`: Target compilation to `.cursorrules` and `.cursor/rules/*.mdc`.
+  - `adapters/claude-code/`: Target compilation to `CLAUDE.md` and project guidelines.
+  - `adapters/copilot/`: Target compilation to `.github/copilot-instructions.md`.
+  - `adapters/windsurf/`: Target compilation to `.windsurfrules` and Cascade directives.
+  - `adapters/codex/`: Target compilation to structured system prompt templates.
+- Created [adapters/README.md](adapters/README.md) cataloging the adapter contracts, compilation lifecycle, and mapping matrix.
+
 ### Added - Phase 4: Canonical Engineering Workflows (v1.0.0)
 - Established phase-gated execution lifecycles in `workflows/`:
   - `workflow.feature-development`: Phased lifecycle for introducing new features with policy checks and verification gates.

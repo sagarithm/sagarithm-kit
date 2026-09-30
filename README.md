@@ -95,6 +95,18 @@ The phase-gated task lifecycles are cataloged in [workflows/README.md](workflows
 
 ---
 
+## Agent Adapters
+
+The target platform compilation adapters are cataloged in [adapters/README.md](adapters/README.md):
+- [Google Antigravity](adapters/antigravity/README.md)
+- [Cursor](adapters/cursor/README.md)
+- [Claude Code](adapters/claude-code/README.md)
+- [VS Code / GitHub Copilot](adapters/copilot/README.md)
+- [Windsurf](adapters/windsurf/README.md)
+- [OpenAI Codex](adapters/codex/README.md)
+
+---
+
 ## Documentation & Specifications
 
 - [Canonical Terminology & Taxonomy](specification/TERMINOLOGY.md)
@@ -112,7 +124,7 @@ Sagarithm Kit is developed under a disciplined 10-phase roadmap:
 - **[x] Phase 2 - Core Skills**: Architecture, Coding Standards, Testing, Security, Documentation.
 - **[x] Phase 3 - Policies**: File/directory creation, dependency limits, change containment.
 - **[x] Phase 4 - Workflows**: Feature, Bug Fix, Refactor, Release lifecycles.
-- **[ ] Phase 5 - Agent Adapters**: Native compilers for Antigravity, Cursor, Claude Code, Copilot, Windsurf, Codex.
+- **[x] Phase 5 - Agent Adapters**: Native compilers for Antigravity, Cursor, Claude Code, Copilot, Windsurf, Codex.
 - **[ ] Phase 6 - CLI**: `sagarithm init`, `sync`, `doctor`, `audit`, `verify`.
 - **[ ] Phase 7 - Project Intelligence**: Repository graph and context extraction engine.
 - **[ ] Phase 8 - Validation & Audit Engine**: Automated verification of implementation states.
