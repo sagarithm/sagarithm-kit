@@ -1,0 +1,24 @@
+# robots.txt for https://kit.sagarithm.in
+User-agent: *
+Allow: /
+
+# LLM & AI Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+Sitemap: https://kit.sagarithm.in/sitemap.xml

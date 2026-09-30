@@ -29,7 +29,9 @@
     "start": "node ./cli/bin/sagarithm.mjs",
     "test": "npm --prefix cli test",
     "lint": "node --experimental-strip-types ./cli/src/index.ts audit",
-    "verify": "node --experimental-strip-types ./cli/src/index.ts verify"
+    "verify": "node --experimental-strip-types ./cli/src/index.ts verify",
+    "web:dev": "npm --prefix apps/web run dev",
+    "web:build": "npm --prefix apps/web run build"
   },
   "repository": {
     "type": "git",

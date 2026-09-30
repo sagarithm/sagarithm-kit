@@ -21,6 +21,8 @@ Thumbs.db
 node_modules/
 dist/
 build/
+.next/
+out/
 *.pyc
 __pycache__/
 .sagarithm/
