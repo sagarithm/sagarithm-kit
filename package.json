@@ -4,11 +4,12 @@
   "description": "Universal Cross-Agent Engineering Framework for AI Coding Agents",
   "type": "module",
   "bin": {
-    "sagarithm": "./cli/bin/sagarithm.mjs",
-    "sagarithm-kit": "./cli/bin/sagarithm.mjs"
+    "sagarithm": "./bin/sagarithm.mjs",
+    "sagarithm-kit": "./bin/sagarithm.mjs"
   },
   "main": "./cli/src/index.ts",
   "files": [
+    "bin",
     "cli",
     "constitution",
     "skills",
