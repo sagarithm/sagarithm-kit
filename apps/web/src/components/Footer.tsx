@@ -18,7 +18,7 @@ export function Footer() {
                 />
                 <span className="font-mono text-sm font-semibold tracking-tight text-ink">sagarithm-kit</span>
                 <span className="rounded border border-edge bg-canvas-surface px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-ink-48">
-                  v1.0.0
+                  v1.0.1
                 </span>
               </div>
               <p className="mt-3 max-w-sm text-xs text-ink-64 leading-relaxed">

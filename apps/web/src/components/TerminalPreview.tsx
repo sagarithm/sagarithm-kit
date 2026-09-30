@@ -32,7 +32,7 @@ export function TerminalPreview() {
           </div>
           <div className="flex items-center gap-2 whitespace-nowrap shrink-0">
             <span className="text-white/90 font-medium text-xs">sagarithm-cli</span>
-            <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] text-white/40 font-mono">v1.0.0</span>
+            <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] text-white/40 font-mono">v1.0.1</span>
           </div>
         </div>
 

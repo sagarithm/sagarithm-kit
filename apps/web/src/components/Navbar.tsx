@@ -17,7 +17,7 @@ export function Navbar() {
             />
             <span className="font-mono text-sm font-semibold tracking-tight text-ink">sagarithm-kit</span>
             <span className="rounded border border-edge bg-canvas-surface px-1.5 py-0.5 font-mono text-[10px] font-medium uppercase tracking-wider text-ink-48">
-              v1.0.0
+              v1.0.1
             </span>
           </Link>
         </div>
@@ -47,7 +47,7 @@ export function Navbar() {
             rel="noopener noreferrer"
             className="hidden sm:inline-flex h-9 items-center gap-1.5 rounded-lg border border-edge bg-canvas-surface px-3 font-mono text-xs font-medium text-ink-64 transition-all hover:border-ink-32 hover:text-ink"
           >
-            <span>npm v1.0.0</span>
+            <span>npm v1.0.1</span>
             <ExternalLink className="h-3 w-3 opacity-60" />
           </a>
           <a
