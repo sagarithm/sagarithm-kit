@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Phase 2: Core Skills
+- Validated canonical skill architecture (`SKILL.md`, `references/`, `examples/`, `checklists/`) across 5 core engineering domains:
+  - `skills/architecture/system-design/`: System modularity, boundary definition, and decoupling.
+  - `skills/quality/coding-standards/`: Expressiveness, strict typing, error handling, and low cognitive complexity.
+  - `skills/testing/test-driven-verification/`: Deterministic testing, hermetic isolation, and zero assumed success.
+  - `skills/security/secure-development/`: Defense in depth, perimeter schema validation, and secrets hygiene.
+  - `skills/documentation/architectural-decision-records/`: Structuring and maintaining living ADRs.
+- Created [skills/README.md](skills/README.md) cataloging the initial core skill model.
+
 ### Added - Phase 1: Engineering Constitution
 - Codified the supreme law of engineering for AI coding agents in `constitution/`:
   - `01-engineering-principles.md`: 10 core philosophies and behavioral governors.

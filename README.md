@@ -61,6 +61,17 @@ The foundational laws governing all agent interactions are codified in the [Engi
 
 ---
 
+## Core Skills
+
+The initial suite of validated canonical skills is cataloged in [skills/README.md](skills/README.md):
+- **Architecture**: [System Design & Modularity](skills/architecture/system-design/SKILL.md)
+- **Quality**: [Clean Code & Quality Standards](skills/quality/coding-standards/SKILL.md)
+- **Testing**: [Test-Driven Verification](skills/testing/test-driven-verification/SKILL.md)
+- **Security**: [Secure Development](skills/security/secure-development/SKILL.md)
+- **Documentation**: [Architectural Decision Records](skills/documentation/architectural-decision-records/SKILL.md)
+
+---
+
 ## Documentation & Specifications
 
 - [Canonical Terminology & Taxonomy](specification/TERMINOLOGY.md)
@@ -75,7 +86,7 @@ The foundational laws governing all agent interactions are codified in the [Engi
 Sagarithm Kit is developed under a disciplined 10-phase roadmap:
 - **[x] Phase 0 - Foundation**: Architecture, terminology, meta-specification, governance standards.
 - **[x] Phase 1 - Engineering Constitution**: Encoding core engineering, architectural, coding, security, and testing principles.
-- **[ ] Phase 2 - Core Skills**: Architecture, Coding Standards, Testing, Security, Documentation.
+- **[x] Phase 2 - Core Skills**: Architecture, Coding Standards, Testing, Security, Documentation.
 - **[ ] Phase 3 - Policies**: File/directory creation, dependency limits, change containment.
 - **[ ] Phase 4 - Workflows**: Feature, Bug Fix, Refactor, Release lifecycles.
 - **[ ] Phase 5 - Agent Adapters**: Native compilers for Antigravity, Cursor, Claude Code, Copilot, Windsurf, Codex.
