@@ -3,11 +3,12 @@ id: "testing.test-driven-verification"
 name: "Test-Driven Verification"
 version: "1.0.0"
 domain: "testing"
-description: "Design and implement deterministic, hermetic automated test suites validating edge cases and preventing assumed success."
+description: "Design and implement deterministic, hermetic automated test suites, property-based invariants, and mutation verification."
 triggers:
   - "Writing unit, integration, or contract tests"
   - "Verifying bug fixes through regression tests"
   - "Validating complex business workflows and boundary states"
+  - "Testing mathematical invariants or serialization round-trips"
 prerequisites:
   - "quality.coding-standards"
 risk_profile: "high"
@@ -23,8 +24,12 @@ This skill guides AI agents and engineers in constructing reliable, isolated tes
 2. **Arrange-Act-Assert (AAA)**: Structure every test case into three distinct phases for unambiguous readability.
 3. **Hermetic Isolation**: Tests must run independently in any order without relying on shared mutable state or network side-effects.
 4. **Mock Only at Boundaries**: Never mock domain entities or business logic; mock only external system boundaries (network I/O, clock, payment gateways).
+5. **Verify Invariants with Property-Based Tests**: For parsers, mathematical algorithms, and state transitions, assert invariants across generative random fuzzing.
+6. **Guard Against Vanity Coverage**: Use mutation testing principles to ensure assertions are meaningful and capable of catching real regressions.
 
 ## Detailed Guidance
-- Read [Testing Pyramid & Isolation Principles](references/testing-pyramid-and-isolation.md).
-- Examine [Arrange-Act-Assert Patterns](examples/arrange-act-assert-patterns.md).
-- Execute the [Test Verification Checklist](checklists/test-verification-checklist.md).
+- [Testing Pyramid & Isolation Principles](references/testing-pyramid-and-isolation.md)
+- [Property-Based, Mutation & Contract Testing](references/property-based-and-mutation-testing.md)
+- [Arrange-Act-Assert Patterns](examples/arrange-act-assert-patterns.md)
+- [Property-Based Testing Patterns](examples/property-based-testing-patterns.md)
+- [Test Verification Checklist](checklists/test-verification-checklist.md)

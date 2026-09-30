@@ -7,13 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Enhanced - Phase 2: Advanced Engineering Skills (v1.0.0)
+- Elevated all 5 core skills with production-grade engineering references and patterns:
+  - `architecture.system-design`: Added Bounded Contexts, Transactional Outbox pattern, Anti-Corruption Layer (ACL), and Architectural Fitness Functions.
+  - `quality.coding-standards`: Added branded nominal types, discriminated union exhaustiveness (`assertNever`), Result monad patterns, and async cancellation (`AbortSignal`).
+  - `testing.test-driven-verification`: Added property-based invariant testing with `fast-check`, mutation testing benchmarks, and consumer-driven contract testing (Pact).
+  - `security.secure-development`: Added STRIDE threat modeling matrix, timing-attack-resistant constant-time comparisons, and SSRF DNS/CIDR validation defenses.
+  - `documentation.architectural-decision-records`: Added MADR 3.0 standard, quantitative weighted decision matrices, and superseding workflows.
+
 ### Added - Phase 2: Core Skills
 - Validated canonical skill architecture (`SKILL.md`, `references/`, `examples/`, `checklists/`) across 5 core engineering domains:
-  - `skills/architecture/system-design/`: System modularity, boundary definition, and decoupling.
-  - `skills/quality/coding-standards/`: Expressiveness, strict typing, error handling, and low cognitive complexity.
-  - `skills/testing/test-driven-verification/`: Deterministic testing, hermetic isolation, and zero assumed success.
-  - `skills/security/secure-development/`: Defense in depth, perimeter schema validation, and secrets hygiene.
-  - `skills/documentation/architectural-decision-records/`: Structuring and maintaining living ADRs.
+  - `skills/architecture/system-design/`
+  - `skills/quality/coding-standards/`
+  - `skills/testing/test-driven-verification/`
+  - `skills/security/secure-development/`
+  - `skills/documentation/architectural-decision-records/`
 - Created [skills/README.md](skills/README.md) cataloging the initial core skill model.
 
 ### Added - Phase 1: Engineering Constitution

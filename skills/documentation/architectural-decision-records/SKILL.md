@@ -3,11 +3,12 @@ id: "documentation.architectural-decision-records"
 name: "Architectural Decision Records (ADRs)"
 version: "1.0.0"
 domain: "documentation"
-description: "Author, update, and manage Architectural Decision Records (ADRs) to record significant engineering choices, context, and trade-offs."
+description: "Author, update, and manage Architectural Decision Records (ADRs) using MADR 3.0 and quantitative decision matrices to record trade-offs."
 triggers:
   - "Introducing a major technology or framework"
   - "Establishing a new architectural pattern or structural boundary"
   - "Making a significant trade-off affecting maintenance or performance"
+  - "Evaluating competing technical alternatives"
 prerequisites:
   - "architecture.system-design"
 risk_profile: "medium"
@@ -20,11 +21,14 @@ This skill guides AI agents and engineers in capturing consequential architectur
 
 ## Core Directives
 1. **Identify Consequential Decisions**: Not every bug fix requires an ADR; write an ADR whenever a structural choice has long-term implications or accepts explicit trade-offs.
-2. **Follow Standard Structure**: Use the standard format: Title, Status, Context, Decision, Consequences.
-3. **Record Both Pros and Cons**: A balanced decision record explicitly documents accepted downsides and operational costs.
-4. **Immutable History**: Once an ADR is accepted, do not edit its historical decision text; create a new ADR that supersedes the prior one.
+2. **Follow MADR Standards**: Structure ADRs with clear Context, Decision Drivers, Options, Outcome, and Trade-offs.
+3. **Use Quantitative Matrices for Contested Choices**: When evaluating multiple competing technologies, employ a weighted decision matrix to anchor choices objectively.
+4. **Record Both Pros and Cons**: A balanced decision record explicitly documents accepted downsides and operational costs.
+5. **Immutable History**: Once an ADR is accepted, do not edit its historical decision text; create a new ADR that supersedes the prior one.
 
 ## Detailed Guidance
-- Read [ADR Lifecycle & Structural Guidelines](references/adr-lifecycle-and-structure.md).
-- Examine [Canonical ADR Sample](examples/canonical-adr-sample.md).
-- Execute the [ADR Authoring Checklist](checklists/adr-authoring-checklist.md).
+- [ADR Lifecycle & Structural Guidelines](references/adr-lifecycle-and-structure.md)
+- [MADR 3.0 & Quantitative Decision Matrices](references/madr-and-decision-matrices.md)
+- [Canonical ADR Sample](examples/canonical-adr-sample.md)
+- [Quantitative Decision Matrix Sample](examples/quantitative-decision-matrix-sample.md)
+- [ADR Authoring Checklist](checklists/adr-authoring-checklist.md)
