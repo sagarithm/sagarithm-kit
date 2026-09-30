@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SagarithmProjectManifest",
+  "type": "object",
+  "required": ["version", "name", "modules", "dependencies"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "name": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "runtime": {
+      "type": "string"
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "path"],
+        "properties": {
+          "name": { "type": "string" },
+          "path": { "type": "string" },
+          "domain": { "type": "string" },
+          "exports": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "dependencies": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "tests": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "apis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["endpoint", "method"],
+        "properties": {
+          "endpoint": { "type": "string" },
+          "method": { "type": "string" },
+          "handlerFile": { "type": "string" }
+        }
+      }
+    },
+    "database": {
+      "type": "object",
+      "properties": {
+        "orm": { "type": "string" },
+        "entities": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "migrationPath": { "type": "string" }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}

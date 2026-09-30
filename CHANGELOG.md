@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added - Phase 7: Project Intelligence & Topology Graph (v1.0.0)
+- Established Layer 5 Project Context and Intelligence subsystem:
+  - `context/schema/project-manifest.schema.json`: Standard schema for repository topology, modules, APIs, database models, and test harnesses.
+  - `context/examples/sample-manifest.json`: Reference implementation of a complete project manifest.
+  - `cli/src/graph/indexer.ts`: Codebase scanner constructing the in-memory module graph, extracting exports and imports, and mapping test suites.
+  - `cli/src/graph/query.ts`: Intelligence query engine providing abstraction discovery, blast radius calculation, and location suggestions.
+  - `sagarithm context` CLI command suite (`generate`, `find`, `blast-radius`, `suggest-location`).
+  - Unit tests verifying symbol parsing and blast radius analysis (`cli/tests/graph.test.ts`).
+- Created [context/README.md](context/README.md) documenting the project graph architecture.
+
 ### Added - Phase 6: Sagarithm Kit CLI (v1.0.0)
 - Implemented `@sagarithm/cli` operational tool under `cli/`:
   - `sagarithm init`: Workspace initialization and target agent autodetection.

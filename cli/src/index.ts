@@ -5,6 +5,7 @@ import { runSync } from './commands/sync.ts';
 import { runDoctor } from './commands/doctor.ts';
 import { runAudit } from './commands/audit.ts';
 import { runVerify } from './commands/verify.ts';
+import { runContext } from './commands/context.ts';
 
 const args = process.argv.slice(2);
 const command = args[0] || 'help';
@@ -21,6 +22,7 @@ Usage:
 Commands:
   init      Initialize Sagarithm Kit workspace configuration (sagarithm.config.json)
   sync      Compile canonical specifications into native agent configurations
+  context   Generate and query repository intelligence graph (find, blast-radius, suggest-location)
   doctor    Diagnose repository structure, .gitignore hygiene, and policy conformance
   audit     Audit active git changes against security and engineering policies
   verify    Run execution verification gate (Zero Assumed Success)
@@ -39,6 +41,10 @@ switch (command) {
   case 'sync':
   case 'compile':
     runSync(rootDir, args.slice(1));
+    break;
+  case 'context':
+  case 'graph':
+    runContext(rootDir, args.slice(1));
     break;
   case 'doctor':
     runDoctor(rootDir);

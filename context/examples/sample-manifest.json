@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "name": "ecommerce-platform",
+  "language": "typescript",
+  "runtime": "node",
+  "modules": [
+    {
+      "name": "auth",
+      "path": "src/modules/auth",
+      "domain": "security",
+      "exports": ["AuthService", "verifyJwtToken", "hashPassword"],
+      "dependencies": ["database", "notifications"],
+      "tests": ["src/modules/auth/auth.test.ts"]
+    },
+    {
+      "name": "billing",
+      "path": "src/modules/billing",
+      "domain": "finance",
+      "exports": ["PaymentService", "InvoiceGenerator"],
+      "dependencies": ["database"],
+      "tests": ["src/modules/billing/payment.test.ts"]
+    },
+    {
+      "name": "database",
+      "path": "src/infrastructure/database",
+      "domain": "infrastructure",
+      "exports": ["dbClient", "runTransaction"],
+      "dependencies": [],
+      "tests": []
+    }
+  ],
+  "apis": [
+    {
+      "endpoint": "/api/v1/auth/login",
+      "method": "POST",
+      "handlerFile": "src/modules/auth/login.controller.ts"
+    },
+    {
+      "endpoint": "/api/v1/checkout",
+      "method": "POST",
+      "handlerFile": "src/modules/billing/checkout.controller.ts"
+    }
+  ],
+  "database": {
+    "orm": "prisma",
+    "entities": ["User", "Account", "Order", "LineItem"],
+    "migrationPath": "prisma/migrations"
+  },
+  "dependencies": {
+    "zod": "^3.23.0",
+    "bcrypt": "^5.1.1"
+  }
+}

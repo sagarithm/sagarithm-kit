@@ -1,0 +1,107 @@
+{
+  "version": "1.0.0",
+  "name": "sagarithm-project",
+  "totalFiles": 105,
+  "modules": [
+    {
+      "name": "root",
+      "path": ".",
+      "fileCount": 7,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": "adapters",
+      "path": "adapters",
+      "fileCount": 21,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": "cli",
+      "path": "cli",
+      "fileCount": 19,
+      "exports": [
+        "runAudit",
+        "runContext",
+        "runDoctor",
+        "runInit",
+        "runSync",
+        "runVerify",
+        "injectContent",
+        "writeSafely",
+        "CompilationContext",
+        "compileForTarget",
+        "parseFrontmatter",
+        "readCanonicalArtifact",
+        "listMarkdownFiles",
+        "DEFAULT_CONFIG",
+        "findWorkspaceRoot",
+        "loadConfig",
+        "saveConfig",
+        "scanRepositoryFiles",
+        "extractExports",
+        "extractImports",
+        "buildProjectGraph",
+        "findExistingAbstractions",
+        "calculateBlastRadius",
+        "suggestModuleLocation",
+        "ModuleNode",
+        "ProjectGraph",
+        "BlastRadiusResult",
+        "TargetAgent",
+        "SagarithmConfig",
+        "CanonicalFrontmatter",
+        "CanonicalArtifact",
+        "AuditIssue",
+        "VerificationCheck"
+      ],
+      "tests": [
+        "cli/tests/parser.test.ts"
+      ]
+    },
+    {
+      "name": "constitution",
+      "path": "constitution",
+      "fileCount": 9,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": "context",
+      "path": "context",
+      "fileCount": 3,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": "policies",
+      "path": "policies",
+      "fileCount": 8,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": "skills",
+      "path": "skills",
+      "fileCount": 31,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": "specification",
+      "path": "specification",
+      "fileCount": 2,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": "workflows",
+      "path": "workflows",
+      "fileCount": 5,
+      "exports": [],
+      "tests": []
+    }
+  ],
+  "dependencies": {}
+}

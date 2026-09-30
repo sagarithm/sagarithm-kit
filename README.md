@@ -95,12 +95,22 @@ The phase-gated task lifecycles are cataloged in [workflows/README.md](workflows
 
 ---
 
+## Project Context & Intelligence
+
+Topological repository graph and discovery engine in [context/README.md](context/README.md):
+- [Project Manifest Schema](context/schema/project-manifest.schema.json)
+- [Sample Topology Manifest](context/examples/sample-manifest.json)
+- Graph discovery queries: abstraction lookup, blast radius calculation, and location suggestion
+
+---
+
 ## Agent Adapters & CLI
 
 - **Adapters**: Target platform compilation definitions in [adapters/README.md](adapters/README.md).
 - **CLI Engine**: Operational compiler, linter, and audit tool in [cli/README.md](cli/README.md):
   - `sagarithm init`: Workspace manifest generation
   - `sagarithm sync`: Multi-agent compiler
+  - `sagarithm context`: Project graph generator and topology query engine
   - `sagarithm doctor`: Structural sprawl and repository health check
   - `sagarithm audit`: Pre-commit policy and secrets scanner
   - `sagarithm verify`: Zero-Assumed-Success execution verification gate
@@ -126,7 +136,7 @@ Sagarithm Kit is developed under a disciplined 10-phase roadmap:
 - **[x] Phase 4 - Workflows**: Feature, Bug Fix, Refactor, Release lifecycles.
 - **[x] Phase 5 - Agent Adapters**: Native compilers for Antigravity, Cursor, Claude Code, Copilot, Windsurf, Codex.
 - **[x] Phase 6 - CLI**: `sagarithm init`, `sync`, `doctor`, `audit`, `verify`.
-- **[ ] Phase 7 - Project Intelligence**: Repository graph and context extraction engine.
+- **[x] Phase 7 - Project Intelligence**: Repository graph and context extraction engine.
 - **[ ] Phase 8 - Validation & Audit Engine**: Automated verification of implementation states.
 - **[ ] Phase 9 - Registry & Ecosystem**: Distributed skill registries and enterprise presets.
 
