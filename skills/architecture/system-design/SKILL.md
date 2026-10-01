@@ -1,7 +1,7 @@
 ---
 id: "architecture.system-design"
 name: "System Design & Modularity"
-version: "1.0.0"
+version: "1.0.1"
 domain: "architecture"
 description: "Decompose complex systems into highly cohesive, loosely coupled modules with explicit public interfaces, bounded contexts, and acyclic dependencies."
 triggers:

@@ -117,7 +117,7 @@ export function buildProjectGraph(rootDir: string): ProjectGraph {
   }
 
   return {
-    version: '1.0.0',
+    version: '1.0.1',
     name: 'sagarithm-project',
     rootPath: rootDir,
     modules,

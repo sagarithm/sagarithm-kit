@@ -48,7 +48,7 @@ export function runAudit(rootDir: string, args: string[] = []): void {
     if (!existsSync(manifestPath)) {
       const graph = buildProjectGraph(rootDir);
       const manifestData = {
-        version: '1.0.0',
+        version: '1.0.1',
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map(m => ({

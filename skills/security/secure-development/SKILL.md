@@ -1,7 +1,7 @@
 ---
 id: "security.secure-development"
 name: "Secure Development & Vulnerability Prevention"
-version: "1.0.0"
+version: "1.0.1"
 domain: "security"
 description: "Implement defense-in-depth controls, input validation at system boundaries, secret isolation, STRIDE threat mitigation, and SSRF/timing defenses."
 triggers:

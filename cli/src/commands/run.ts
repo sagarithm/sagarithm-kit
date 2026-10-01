@@ -23,7 +23,7 @@ export function runWorkflow(rootDir: string, args: string[]): void {
 
   if (!workflowName || workflowName === 'help') {
     console.log(`
-🤖 Sagarithm Autonomous Workflow Orchestrator (v1.0.0)
+🤖 Sagarithm Autonomous Workflow Orchestrator (v1.0.1)
 
 Usage:
   sagarithm run <workflow-name> [options]
@@ -72,7 +72,7 @@ Options:
     if (!manifestExists) {
       console.log('  ⚠️  Missing sagarithm.manifest.json — Auto-generating topology manifest...');
       const manifestData = {
-        version: '1.0.0',
+        version: '1.0.1',
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map(m => ({

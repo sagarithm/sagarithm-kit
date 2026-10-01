@@ -132,7 +132,7 @@ export function packArtifact(rootDir: string, targetPath: string): { packagePath
 
   const manifest: PackageManifest = {
     name: `@sagarithm/skill-${base}`,
-    version: '1.0.0',
+    version: '1.0.1',
     type: 'skill',
     description: `Packaged canonical artifact for ${base}`,
     author: 'Sagarithm Community',
@@ -146,7 +146,7 @@ export function packArtifact(rootDir: string, targetPath: string): { packagePath
     mkdirSync(distDir, { recursive: true });
   }
 
-  const packageFileName = `${manifest.name.replace(/[@/]/g, '-')}-1.0.0.json`;
+  const packageFileName = `${manifest.name.replace(/[@/]/g, '-')}-1.0.1.json`;
   const packagePath = resolve(distDir, packageFileName);
 
   const bundle = {

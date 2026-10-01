@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import type { SagarithmConfig } from './types.ts';
 
 export const DEFAULT_CONFIG: SagarithmConfig = {
-  version: '1.0.0',
+  version: '1.0.1',
   name: 'sagarithm-workspace',
   targets: ['cursor', 'claude-code', 'copilot', 'antigravity', 'windsurf', 'codex'],
   riskThreshold: 'high',

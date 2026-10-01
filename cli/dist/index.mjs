@@ -4,7 +4,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 var DEFAULT_CONFIG = {
-  version: "1.0.0",
+  version: "1.0.1",
   name: "sagarithm-workspace",
   targets: ["cursor", "claude-code", "copilot", "antigravity", "windsurf", "codex"],
   riskThreshold: "high",
@@ -624,7 +624,7 @@ function buildProjectGraph(rootDir2) {
     }
   }
   return {
-    version: "1.0.0",
+    version: "1.0.1",
     name: "sagarithm-project",
     rootPath: rootDir2,
     modules,
@@ -783,7 +783,7 @@ function runAudit(rootDir2, args2 = []) {
     if (!existsSync9(manifestPath)) {
       const graph = buildProjectGraph(rootDir2);
       const manifestData = {
-        version: "1.0.0",
+        version: "1.0.1",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -991,7 +991,7 @@ function runVerificationPipeline(rootDir2, options = {}) {
     state = "ASSUMED";
   }
   const report = {
-    version: "1.0.0",
+    version: "1.0.1",
     timestamp: (/* @__PURE__ */ new Date()).toISOString(),
     state,
     summary: {
@@ -1204,7 +1204,7 @@ function runContext(rootDir2, args2) {
     case "generate": {
       const manifestPath = resolve11(rootDir2, "sagarithm.manifest.json");
       const manifestData = {
-        version: "1.0.0",
+        version: "1.0.1",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -1370,7 +1370,7 @@ function packArtifact(rootDir2, targetPath) {
   const integrity = computeIntegrityHash(content);
   const manifest = {
     name: `@sagarithm/skill-${base}`,
-    version: "1.0.0",
+    version: "1.0.1",
     type: "skill",
     description: `Packaged canonical artifact for ${base}`,
     author: "Sagarithm Community",
@@ -1382,7 +1382,7 @@ function packArtifact(rootDir2, targetPath) {
   if (!existsSync11(distDir)) {
     mkdirSync3(distDir, { recursive: true });
   }
-  const packageFileName = `${manifest.name.replace(/[@/]/g, "-")}-1.0.0.json`;
+  const packageFileName = `${manifest.name.replace(/[@/]/g, "-")}-1.0.1.json`;
   const packagePath = resolve12(distDir, packageFileName);
   const bundle = {
     manifest,
@@ -1465,7 +1465,7 @@ Workflows (${preset.workflows.length}):`);
         } catch {
           console.log("\u26A0\uFE0F  Existing config invalid; creating new configuration.");
           config = {
-            version: "1.0.0",
+            version: "1.0.1",
             name: "sagarithm-project",
             targets: ["antigravity", "cursor", "claude-code"],
             riskThreshold: preset.riskThreshold,
@@ -1481,7 +1481,7 @@ Workflows (${preset.workflows.length}):`);
         }
       } else {
         config = {
-          version: "1.0.0",
+          version: "1.0.1",
           name: "sagarithm-project",
           targets: ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"],
           riskThreshold: preset.riskThreshold,
@@ -1587,7 +1587,7 @@ function runWorkflow(rootDir2, args2) {
   const workflowName = args2[0];
   if (!workflowName || workflowName === "help") {
     console.log(`
-\u{1F916} Sagarithm Autonomous Workflow Orchestrator (v1.0.0)
+\u{1F916} Sagarithm Autonomous Workflow Orchestrator (v1.0.1)
 
 Usage:
   sagarithm run <workflow-name> [options]
@@ -1630,7 +1630,7 @@ Options:
     if (!manifestExists) {
       console.log("  \u26A0\uFE0F  Missing sagarithm.manifest.json \u2014 Auto-generating topology manifest...");
       const manifestData = {
-        version: "1.0.0",
+        version: "1.0.1",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -1702,7 +1702,7 @@ var command = args[0] || "help";
 var rootDir = findWorkspaceRoot();
 function printHelp() {
   console.log(`
-Sagarithm Kit CLI (v1.0.0)
+Sagarithm Kit CLI (v1.0.1)
 Universal Cross-Agent Engineering Framework for AI Coding Agents
 
 Usage:
@@ -1759,6 +1759,11 @@ switch (command) {
     break;
   case "verify":
     runVerify(rootDir, args.slice(1));
+    break;
+  case "version":
+  case "--version":
+  case "-v":
+    console.log("1.0.1");
     break;
   case "help":
   case "--help":

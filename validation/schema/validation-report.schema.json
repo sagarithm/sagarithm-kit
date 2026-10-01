@@ -6,8 +6,7 @@
   "required": ["version", "timestamp", "state", "summary", "vectors", "issues"],
   "properties": {
     "version": {
-      "type": "string",
-      "const": "1.0.0"
+      "type": "string"
     },
     "timestamp": {
       "type": "string",

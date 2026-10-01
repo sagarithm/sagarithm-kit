@@ -81,7 +81,7 @@ export function runPreset(rootDir: string, args: string[]): void {
         } catch {
           console.log('⚠️  Existing config invalid; creating new configuration.');
           config = {
-            version: '1.0.0',
+            version: '1.0.1',
             name: 'sagarithm-project',
             targets: ['antigravity', 'cursor', 'claude-code'],
             riskThreshold: preset.riskThreshold,
@@ -97,7 +97,7 @@ export function runPreset(rootDir: string, args: string[]): void {
         }
       } else {
         config = {
-          version: '1.0.0',
+          version: '1.0.1',
           name: 'sagarithm-project',
           targets: ['antigravity', 'cursor', 'claude-code', 'copilot', 'windsurf', 'codex'],
           riskThreshold: preset.riskThreshold,

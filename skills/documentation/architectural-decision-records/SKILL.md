@@ -1,7 +1,7 @@
 ---
 id: "documentation.architectural-decision-records"
 name: "Architectural Decision Records (ADRs)"
-version: "1.0.0"
+version: "1.0.1"
 domain: "documentation"
 description: "Author, update, and manage Architectural Decision Records (ADRs) using MADR 3.0 and quantitative decision matrices to record trade-offs."
 triggers:

@@ -1,7 +1,7 @@
 ---
 id: "quality.coding-standards"
 name: "Clean Code & Quality Standards"
-version: "1.0.0"
+version: "1.0.1"
 domain: "quality"
 description: "Author expressive, type-safe, maintainable code with strict error handling, nominal typing, discriminated unions, and concurrency safety."
 triggers:
