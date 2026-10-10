@@ -60,6 +60,15 @@ jobs:
       - name: Publish to GitHub Packages
         run: |
           node -e 'const fs=require("fs"); const pkg = JSON.parse(fs.readFileSync("package.json", "utf8")); pkg.name = "@sagarithm/sagarithm-kit"; pkg.publishConfig = { registry: "https://npm.pkg.github.com", access: "public" }; fs.writeFileSync("package.json", JSON.stringify(pkg, null, 2));'
-          npm publish
+          OUTPUT=$(npm publish 2>&1) || {
+            EXIT_CODE=$?
+            echo "$OUTPUT"
+            if echo "$OUTPUT" | grep -q "409 Conflict"; then
+              echo "::notice ::Version already published to GitHub Packages. Skipping redundant publish."
+              exit 0
+            fi
+            exit $EXIT_CODE
+          }
+          echo "$OUTPUT"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
