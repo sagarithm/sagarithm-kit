@@ -1,7 +1,7 @@
 ---
 id: "documentation.architectural-decision-records"
 name: "Architectural Decision Records (ADRs)"
-version: "1.0.1"
+version: "1.1.1"
 domain: "documentation"
 description: "Author, update, and manage Architectural Decision Records (ADRs) using MADR 3.0 and quantitative decision matrices to record trade-offs."
 triggers:
@@ -25,6 +25,14 @@ This skill guides AI agents and engineers in capturing consequential architectur
 3. **Use Quantitative Matrices for Contested Choices**: When evaluating multiple competing technologies, employ a weighted decision matrix to anchor choices objectively.
 4. **Record Both Pros and Cons**: A balanced decision record explicitly documents accepted downsides and operational costs.
 5. **Immutable History**: Once an ADR is accepted, do not edit its historical decision text; create a new ADR that supersedes the prior one.
+
+## 🛑 Anti-Rationalization Matrix
+
+| Agent Excuse / Shortcut | Documentation Reality | Mandatory Action |
+|---|---|---|
+| *"We can document this technology choice later."* | Rationale is forgotten within weeks; future engineers will question why it was built this way. | Commit the ADR alongside the implementation PR. |
+| *"The choice was obvious, no need to write options considered."* | Without documenting rejected alternatives, teams repeat the same debates repeatedly. | Document at least two viable alternatives and why they were rejected. |
+| *"This architectural decision only affects this one file."* | If it introduces a new external dependency or state model, it affects the entire system. | Record any external dependency or protocol choice in `docs/adr/`. |
 
 ## Detailed Guidance
 - [ADR Lifecycle & Structural Guidelines](references/adr-lifecycle-and-structure.md)

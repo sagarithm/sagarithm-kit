@@ -1,7 +1,7 @@
 ---
 id: "quality.coding-standards"
 name: "Clean Code & Quality Standards"
-version: "1.0.1"
+version: "1.1.1"
 domain: "quality"
 description: "Author expressive, type-safe, maintainable code with strict error handling, nominal typing, discriminated unions, and concurrency safety."
 triggers:
@@ -25,6 +25,14 @@ This skill guides AI agents and engineers in authoring code that is immediately 
 4. **Explicit Failure Modeling**: For operations where failure is an expected domain branch (validation, parsing), consider `Result<T, E>` types rather than throwing unchecked exceptions.
 5. **Never Swallow Errors**: Handle errors at the appropriate layer; never leave empty catch blocks or discard stack traces.
 6. **Cancellation & Concurrency Hygiene**: Support `AbortSignal` for cancellable async tasks and guard against race conditions.
+
+## 🛑 Anti-Rationalization Matrix
+
+| Agent Excuse / Shortcut | Quality Reality | Mandatory Action |
+|---|---|---|
+| *"Using `any` here just speeds things up."* | `any` is a virus that silently disables compiler checking throughout the codebase. | Model explicit TypeScript interfaces or use `unknown` with type guards. |
+| *"I'll leave this `catch (e) {}` empty since it rarely fails."* | Swallowed exceptions cause invisible state corruption that takes days to debug. | Log the error or rethrow a domain-specific error. |
+| *"A generic string is fine for this ID."* | Primitive obsession causes accidental bugs where user IDs are passed as order IDs. | Use branded nominal types (e.g. `UserId = string & { __brand: 'UserId' }`). |
 
 ## Detailed Guidance
 - [Clean Code & Typing Principles](references/clean-code-and-typing.md)

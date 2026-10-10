@@ -15,7 +15,27 @@ export function RegistryBar() {
       tag: "GLOBAL CLI RUNTIME",
       command: "npx sagarithm-kit init",
       link: "https://www.npmjs.com/package/sagarithm-kit",
-      desc: "Live public release v1.0.1",
+      desc: "Live public release v1.1.1",
+    },
+    {
+      id: "mcp",
+      name: "Model Context Protocol",
+      badge: "MCP",
+      badgeColor: "bg-[#7c3aed] text-white",
+      tag: "STDIO JSON-RPC 2.0",
+      command: "sagarithm mcp",
+      link: "https://github.com/sagarithm/sagarithm-kit#model-context-protocol-mcp",
+      desc: "Antigravity • Claude • Cursor",
+    },
+    {
+      id: "adapters",
+      name: "Multi-Agent Adapters",
+      badge: "AI",
+      badgeColor: "bg-heat text-white",
+      tag: "6 TARGET RUNTIMES",
+      command: "sagarithm sync --target all",
+      link: "https://github.com/sagarithm/sagarithm-kit#universal-agent-adapters",
+      desc: "Compiler & zero drift",
     },
     {
       id: "github",
@@ -27,16 +47,6 @@ export function RegistryBar() {
       link: "https://github.com/sagarithm/sagarithm-kit/pkgs/npm/sagarithm-kit",
       desc: "Scoped enterprise package",
     },
-    {
-      id: "adapters",
-      name: "Multi-Agent Adapters",
-      badge: "AI",
-      badgeColor: "bg-heat text-white",
-      tag: "6 TARGET RUNTIMES",
-      command: "sagarithm sync --target all",
-      link: "https://github.com/sagarithm/sagarithm-kit#universal-agent-adapters",
-      desc: "Cursor • Antigravity • Claude Code",
-    },
   ];
 
   const handleCopy = (id: string, text: string) => {
@@ -47,7 +57,7 @@ export function RegistryBar() {
 
   return (
     <div className="shell full-rule">
-      <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-edge bg-canvas-surface">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-edge bg-canvas-surface">
         {packages.map((pkg) => (
           <div
             key={pkg.id}

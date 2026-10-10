@@ -45,6 +45,20 @@ export function Benchmark() {
       sagarithm: "AST Export/Import graph isolates unreferenced interfaces",
       status: [false, false, true],
     },
+    {
+      feature: "Model Context Protocol (MCP)",
+      raw: "None (Manual copy-pasting)",
+      basic: "Static markdown files only",
+      sagarithm: "Native JSON-RPC 2.0 stdio MCP Server (6 live verification tools)",
+      status: [false, false, true],
+    },
+    {
+      feature: "Idea Validation & Truth-Telling",
+      raw: "Blind compliance ('Sure, I will build that!')",
+      basic: "Unstructured brainstorming prompts",
+      sagarithm: "Senior truth-teller: Surfaces bottlenecks, non-goals, and invariants",
+      status: [false, false, true],
+    },
   ];
 
   return (
@@ -73,7 +87,7 @@ export function Benchmark() {
           </div>
 
           {/* Benchmark Table */}
-          <div className="overflow-x-auto rounded-xl border border-edge bg-canvas-surface shadow-sm">
+          <div className="overflow-x-auto rounded-xl border border-edge bg-canvas-surface shadow-sm scrollbar-none no-scrollbar">
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
                 <tr className="border-b border-edge bg-canvas-base font-mono text-[11px] uppercase tracking-wider text-ink-48">
@@ -81,7 +95,7 @@ export function Benchmark() {
                   <th className="py-4 px-4 sm:px-6 font-medium text-ink-64">Raw LLM Prompting</th>
                   <th className="py-4 px-4 sm:px-6 font-medium text-ink-64">.agents</th>
                   <th className="py-4 px-4 sm:px-6 font-bold text-heat bg-heat/5 border-l border-r border-heat/20">
-                    Sagarithm Kit v1.0.1
+                    Sagarithm Kit v1.1.1
                   </th>
                 </tr>
               </thead>

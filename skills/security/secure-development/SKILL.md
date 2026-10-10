@@ -1,7 +1,7 @@
 ---
 id: "security.secure-development"
 name: "Secure Development & Vulnerability Prevention"
-version: "1.0.1"
+version: "1.1.1"
 domain: "security"
 description: "Implement defense-in-depth controls, input validation at system boundaries, secret isolation, STRIDE threat mitigation, and SSRF/timing defenses."
 triggers:
@@ -26,6 +26,14 @@ This skill guides AI agents and engineers in constructing software that resists 
 4. **Enforce Least Privilege**: Run processes and queries with the minimal permissions necessary.
 5. **Mitigate Timing Attacks**: Always use constant-time comparison functions when evaluating tokens, signatures, or HMACs.
 6. **Defend Against SSRF**: Validate resolved IP addresses of external URLs to block internal network access and cloud metadata exploitation.
+
+## 🛑 Anti-Rationalization Matrix
+
+| Agent Excuse / Shortcut | Security Reality | Mandatory Action |
+|---|---|---|
+| *"I'll hardcode the API key temporarily for local testing."* | Temporary keys get committed accidentally, triggering irreversible credential exposure. | Always load secrets from environment variables or `.env.local`. |
+| *"This input comes from an internal source, so validation is redundant."* | Internal boundaries erode over time, leading to lateral privilege escalation. | Validate all inputs with strict schemas at module boundaries. |
+| *"Using string concatenation for this SQL/Command is safe here."* | String concatenation is the root cause of SQL injection and command injection flaws. | Strictly use parameterized statements and structured argument arrays. |
 
 ## Detailed Guidance
 - [OWASP Defense in Depth Guidelines](references/owasp-defense-in-depth.md)

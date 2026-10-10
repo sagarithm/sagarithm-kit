@@ -1,5 +1,5 @@
 // Service Worker for Sagarithm Kit (kit.sagarithm.in)
-const CACHE_NAME = 'sagarithm-kit-v1.0.1';
+const CACHE_NAME = 'sagarithm-kit-v1.1.1';
 
 const PRECACHE_ASSETS = [
   '/',

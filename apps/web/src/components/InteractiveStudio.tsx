@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Check, Copy, Play, Shield, Sparkles, Terminal } from "lucide-react";
 
 export function InteractiveStudio() {
-  const [selectedAgent, setSelectedAgent] = useState<"cursor" | "antigravity" | "claude" | "copilot" | "windsurf">(
+  const [selectedAgent, setSelectedAgent] = useState<"cursor" | "antigravity" | "claude" | "copilot" | "windsurf" | "mcp">(
     "cursor"
   );
   const [selectedPreset, setSelectedPreset] = useState<"fullstack" | "api" | "systems" | "agentic">("systems");
@@ -17,6 +17,7 @@ export function InteractiveStudio() {
     claude: "CLAUDE.md",
     copilot: ".github/copilot-instructions.md",
     windsurf: ".windsurfrules",
+    mcp: ".agents/mcp_config.json",
   };
 
   const presetData = {
@@ -64,9 +65,30 @@ export function InteractiveStudio() {
 
   const activePreset = presetData[selectedPreset];
 
-  const generatedOutput = `<!-- SAGARITHM:START -->
+  const generatedOutput = selectedAgent === "mcp"
+    ? `{
+  "mcpServers": {
+    "sagarithm": {
+      "command": "npx",
+      "args": ["sagarithm-kit", "mcp"],
+      "env": {
+        "SAGARITHM_PRESET": "${activePreset.name}",
+        "SAGARITHM_STRICT": "true"
+      }
+    }
+  },
+  "tools": [
+    { "name": "sagarithm_verify", "desc": "5-Vector Verification Gate (Zero Assumed Success)" },
+    { "name": "sagarithm_scan_secrets", "desc": "Shannon Entropy H >= 4.5 Credential Scanner" },
+    { "name": "sagarithm_query_graph", "desc": "Martin Instability (I) & Abstraction Query" },
+    { "name": "sagarithm_validate_idea", "desc": "Architectural Truth-Teller & Anti-Rationalization" },
+    { "name": "sagarithm_health", "desc": "100-Point Composite Codebase Health Index" },
+    { "name": "sagarithm_get_skill", "desc": "Canonical Engineering Skills & Directives" }
+  ]
+}`
+    : `<!-- SAGARITHM:START -->
 # SAGARITHM ENGINEERING CONSTITUTION (Target: ${targetFiles[selectedAgent]})
-# Preset: ${activePreset.name} | Version: 1.0.1
+# Preset: ${activePreset.name} | Version: 1.1.1
 
 ## Supreme Behavioral Governors
 - Zero Assumed Success: You are strictly forbidden from declaring a task complete without empirical test evidence.
@@ -155,6 +177,7 @@ ${activePreset.rules.map((r) => `- ${r}`).join("\n")}
                         { id: "claude", label: "Claude Code" },
                         { id: "copilot", label: "Copilot" },
                         { id: "windsurf", label: "Windsurf" },
+                        { id: "mcp", label: "MCP Protocol" },
                       ].map((item) => (
                         <button
                           key={item.id}

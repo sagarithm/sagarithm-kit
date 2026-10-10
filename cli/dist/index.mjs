@@ -4,7 +4,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 var DEFAULT_CONFIG = {
-  version: "1.0.1",
+  version: "1.1.1",
   name: "sagarithm-workspace",
   targets: ["cursor", "claude-code", "copilot", "antigravity", "windsurf", "codex"],
   riskThreshold: "high",
@@ -53,43 +53,14 @@ function saveConfig(rootDir2, config) {
 }
 
 // cli/src/commands/init.ts
-import { existsSync as existsSync2 } from "node:fs";
-import { resolve as resolve2 } from "node:path";
-function runInit(rootDir2, flags) {
-  console.log("\u{1F680} Initializing Sagarithm Kit workspace...");
-  const configPath = resolve2(rootDir2, "sagarithm.config.json");
-  if (existsSync2(configPath) && !flags.includes("--force")) {
-    console.log("\u26A0\uFE0F  Workspace is already initialized (sagarithm.config.json exists). Use --force to overwrite.");
-    return;
-  }
-  const detectedTargets = [];
-  if (existsSync2(resolve2(rootDir2, ".cursor")) || existsSync2(resolve2(rootDir2, ".cursorrules"))) {
-    detectedTargets.push("cursor");
-  }
-  if (existsSync2(resolve2(rootDir2, "CLAUDE.md")) || existsSync2(resolve2(rootDir2, ".claude"))) {
-    detectedTargets.push("claude-code");
-  }
-  if (existsSync2(resolve2(rootDir2, ".github"))) {
-    detectedTargets.push("copilot");
-  }
-  if (existsSync2(resolve2(rootDir2, ".windsurfrules"))) {
-    detectedTargets.push("windsurf");
-  }
-  const targets = detectedTargets.length > 0 ? detectedTargets : DEFAULT_CONFIG.targets;
-  const config = {
-    ...DEFAULT_CONFIG,
-    targets
-  };
-  saveConfig(rootDir2, config);
-  console.log(`\u2705 Created sagarithm.config.json with targets: ${targets.join(", ")}`);
-  console.log("\u{1F4A1} Run `sagarithm sync` to compile canonical specifications into target configurations.");
-}
-
-// cli/src/commands/sync.ts
+import { existsSync as existsSync5 } from "node:fs";
 import { resolve as resolve4 } from "node:path";
 
+// cli/src/commands/sync.ts
+import { resolve as resolve3 } from "node:path";
+
 // cli/src/compiler/parser.ts
-import { readFileSync as readFileSync2, readdirSync, statSync, existsSync as existsSync3 } from "node:fs";
+import { readFileSync as readFileSync2, readdirSync, statSync, existsSync as existsSync2 } from "node:fs";
 import { join } from "node:path";
 function parseFrontmatter(rawContent) {
   const match = rawContent.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
@@ -141,7 +112,7 @@ function readCanonicalArtifact(filePath) {
   };
 }
 function listMarkdownFiles(dirPath) {
-  if (!existsSync3(dirPath)) return [];
+  if (!existsSync2(dirPath)) return [];
   const results = [];
   function walk(current) {
     const entries = readdirSync(current);
@@ -160,8 +131,8 @@ function listMarkdownFiles(dirPath) {
 }
 
 // cli/src/compiler/emitter.ts
-import { existsSync as existsSync4, mkdirSync, readFileSync as readFileSync3, writeFileSync as writeFileSync2 } from "node:fs";
-import { dirname, resolve as resolve3 } from "node:path";
+import { existsSync as existsSync3, mkdirSync, readFileSync as readFileSync3, writeFileSync as writeFileSync2 } from "node:fs";
+import { dirname, resolve as resolve2 } from "node:path";
 var START_MARKER = "<!-- SAGARITHM:START - DO NOT EDIT DIRECTLY -->";
 var END_MARKER = "<!-- SAGARITHM:END -->";
 function injectContent(existingContent, newContent) {
@@ -185,11 +156,11 @@ ${block}`;
 }
 function writeSafely(targetPath, content) {
   const dir = dirname(targetPath);
-  if (!existsSync4(dir)) {
+  if (!existsSync3(dir)) {
     mkdirSync(dir, { recursive: true });
   }
   let finalContent = content;
-  if (existsSync4(targetPath)) {
+  if (existsSync3(targetPath)) {
     const existing = readFileSync3(targetPath, "utf8");
     finalContent = injectContent(existing, content);
   } else {
@@ -204,7 +175,7 @@ function compileForTarget(target, ctx) {
   const touchedFiles = [];
   switch (target) {
     case "cursor": {
-      const cursorrulesPath = resolve3(ctx.rootDir, ".cursorrules");
+      const cursorrulesPath = resolve2(ctx.rootDir, ".cursorrules");
       const rulesSummary = [
         "# Sagarithm Engineering Rules (Cursor)",
         "",
@@ -216,11 +187,11 @@ function compileForTarget(target, ctx) {
       ].join("\n");
       writeSafely(cursorrulesPath, rulesSummary);
       touchedFiles.push(cursorrulesPath);
-      const cursorRulesDir = resolve3(ctx.rootDir, ".cursor/rules");
+      const cursorRulesDir = resolve2(ctx.rootDir, ".cursor/rules");
       for (const skill of ctx.skills) {
         const id = skill.frontmatter.id || "skill";
         const fileName = `${id.replace(/\./g, "-")}.mdc`;
-        const rulePath = resolve3(cursorRulesDir, fileName);
+        const rulePath = resolve2(cursorRulesDir, fileName);
         const mdcContent = [
           "---",
           `description: "${skill.frontmatter.description || skill.frontmatter.name || ""}"`,
@@ -238,7 +209,7 @@ function compileForTarget(target, ctx) {
       break;
     }
     case "claude-code": {
-      const claudePath = resolve3(ctx.rootDir, "CLAUDE.md");
+      const claudePath = resolve2(ctx.rootDir, "CLAUDE.md");
       const claudeContent = [
         "# CLAUDE.md \u2014 Sagarithm Engineering Guidelines",
         "",
@@ -258,7 +229,7 @@ ${w.body.trim()}`)
       break;
     }
     case "copilot": {
-      const copilotPath = resolve3(ctx.rootDir, ".github/copilot-instructions.md");
+      const copilotPath = resolve2(ctx.rootDir, ".github/copilot-instructions.md");
       const copilotContent = [
         "# GitHub Copilot Instructions (Sagarithm Kit)",
         "",
@@ -273,7 +244,7 @@ ${w.body.trim()}`)
       break;
     }
     case "windsurf": {
-      const windsurfPath = resolve3(ctx.rootDir, ".windsurfrules");
+      const windsurfPath = resolve2(ctx.rootDir, ".windsurfrules");
       const windsurfContent = [
         "# Windsurf Cascade Rules (Sagarithm Kit)",
         "",
@@ -290,7 +261,7 @@ ${w.body.trim()}`)
       break;
     }
     case "codex": {
-      const codexPath = resolve3(ctx.rootDir, "codex-instructions.md");
+      const codexPath = resolve2(ctx.rootDir, "codex-instructions.md");
       const codexContent = [
         "# OpenAI Codex System Instructions (Sagarithm Kit)",
         "",
@@ -308,10 +279,32 @@ ${w.frontmatter.description || ""}`)
       break;
     }
     case "antigravity": {
-      const rulesDir = resolve3(ctx.rootDir, ".agents/rules");
+      const geminiPath = resolve2(ctx.rootDir, "GEMINI.md");
+      const agentsPath = resolve2(ctx.rootDir, "AGENTS.md");
+      const geminiContent = [
+        "# Sagarithm Kit \u2014 Antigravity Engineering Constitution",
+        "",
+        "> **Truth-Driven Engineering**: You are an autonomous Chief Systems Architect. You are strictly forbidden from blind compliance with underspecified requests. Surface trade-offs, question assumptions, validate feasibility, and enforce Zero Assumed Success.",
+        "",
+        "## Supreme Behavioral Invariants",
+        "1. **Zero Assumed Success (ZAS)**: Never claim completion without executing test suites and verifying empirical stdout.",
+        "2. **Fail-Closed Security**: Shannon entropy H >= 4.5 triggers an immediate security abort to protect secrets.",
+        "3. **Acyclic Architecture**: Prohibit circular dependencies and generic dumpsters (`utils/`, `helpers/`).",
+        "",
+        "## Architectural Policies",
+        ...ctx.policies.map((p) => `- **${p.frontmatter.name || ""}** [${p.frontmatter.severity?.toUpperCase() || "ERROR"}]: ${p.frontmatter.description || ""}`),
+        "",
+        "## Active Skills Available in `.agents/skills/`",
+        ...ctx.skills.map((s) => `- \`${s.frontmatter.name || ""}\`: ${s.frontmatter.description || ""}`)
+      ].join("\n");
+      writeSafely(geminiPath, geminiContent);
+      touchedFiles.push(geminiPath);
+      writeSafely(agentsPath, geminiContent);
+      touchedFiles.push(agentsPath);
+      const rulesDir = resolve2(ctx.rootDir, ".agents/rules");
       for (const policy of ctx.policies) {
         const id = policy.frontmatter.id || "policy";
-        const rulePath = resolve3(rulesDir, `${id.replace(/\./g, "-")}.md`);
+        const rulePath = resolve2(rulesDir, `${id.replace(/\./g, "-")}.md`);
         const content = [
           `# Rule: ${policy.frontmatter.name || id} [${policy.frontmatter.severity?.toUpperCase() || "ERROR"}]`,
           "",
@@ -320,6 +313,29 @@ ${w.frontmatter.description || ""}`)
         writeSafely(rulePath, content);
         touchedFiles.push(rulePath);
       }
+      const agentsSkillsDir = resolve2(ctx.rootDir, ".agents/skills");
+      for (const skill of ctx.skills) {
+        const skillSlug = (skill.frontmatter.id || skill.frontmatter.name || "skill").replace(/[^a-zA-Z0-9_-]/g, "-").toLowerCase();
+        const destSkillFile = resolve2(agentsSkillsDir, skillSlug, "SKILL.md");
+        writeSafely(destSkillFile, skill.rawContent || `${skill.body}
+`);
+        touchedFiles.push(destSkillFile);
+      }
+      const mcpConfigPath = resolve2(ctx.rootDir, ".agents/mcp_config.json");
+      if (!existsSync3(mcpConfigPath)) {
+        const mcpConfig = {
+          mcpServers: {
+            sagarithm: {
+              command: "node",
+              args: ["./bin/sagarithm.mjs", "mcp"]
+            }
+          }
+        };
+        const mcpDir = dirname(mcpConfigPath);
+        if (!existsSync3(mcpDir)) mkdirSync(mcpDir, { recursive: true });
+        writeFileSync2(mcpConfigPath, JSON.stringify(mcpConfig, null, 2), "utf8");
+        touchedFiles.push(mcpConfigPath);
+      }
       break;
     }
   }
@@ -327,13 +343,35 @@ ${w.frontmatter.description || ""}`)
 }
 
 // cli/src/commands/sync.ts
+import { existsSync as existsSync4 } from "node:fs";
+function resolveCanonicalDir(rootDir2, relPath) {
+  const local = resolve3(rootDir2, relPath);
+  if (existsSync4(local) && listMarkdownFiles(local).length > 0) {
+    return local;
+  }
+  const candidates = [
+    resolve3(import.meta.dirname, "../..", relPath),
+    resolve3(import.meta.dirname, "..", relPath),
+    resolve3(import.meta.dirname, "../../..", relPath)
+  ];
+  for (const cand of candidates) {
+    if (existsSync4(cand) && listMarkdownFiles(cand).length > 0) {
+      return cand;
+    }
+  }
+  return local;
+}
 function runSync(rootDir2, args2) {
   console.log("\u{1F504} Syncing Sagarithm Kit canonical specifications to target agents...");
   const config = loadConfig(rootDir2);
-  const constitutionFiles = listMarkdownFiles(resolve4(rootDir2, config.paths.constitution));
-  const skillFiles = listMarkdownFiles(resolve4(rootDir2, config.paths.skills)).filter((f) => f.endsWith("SKILL.md"));
-  const policyFiles = listMarkdownFiles(resolve4(rootDir2, config.paths.policies)).filter((f) => !f.endsWith("README.md"));
-  const workflowFiles = listMarkdownFiles(resolve4(rootDir2, config.paths.workflows)).filter((f) => !f.endsWith("README.md"));
+  const constitutionDir = resolveCanonicalDir(rootDir2, config.paths.constitution);
+  const skillsDir = resolveCanonicalDir(rootDir2, config.paths.skills);
+  const policiesDir = resolveCanonicalDir(rootDir2, config.paths.policies);
+  const workflowsDir = resolveCanonicalDir(rootDir2, config.paths.workflows);
+  const constitutionFiles = listMarkdownFiles(constitutionDir);
+  const skillFiles = listMarkdownFiles(skillsDir).filter((f) => f.endsWith("SKILL.md"));
+  const policyFiles = listMarkdownFiles(policiesDir).filter((f) => !f.endsWith("README.md"));
+  const workflowFiles = listMarkdownFiles(workflowsDir).filter((f) => !f.endsWith("README.md"));
   const ctx = {
     rootDir: rootDir2,
     constitution: constitutionFiles.map(readCanonicalArtifact),
@@ -356,15 +394,70 @@ function runSync(rootDir2, args2) {
   console.log(`\u2728 Sync complete! Updated ${totalEmitted} target configuration files.`);
 }
 
+// cli/src/commands/init.ts
+function runInit(rootDir2, flags) {
+  const isStarter = flags.includes("--starter") || flags.includes("-s");
+  console.log(`\u{1F680} Initializing Sagarithm Kit workspace${isStarter ? " (Starter Mode)" : ""}...`);
+  const configPath = resolve4(rootDir2, "sagarithm.config.json");
+  if (existsSync5(configPath) && !flags.includes("--force") && !isStarter) {
+    console.log("\u26A0\uFE0F  Workspace is already initialized (sagarithm.config.json exists). Use --force to overwrite.");
+    return;
+  }
+  const detectedTargets = [];
+  if (existsSync5(resolve4(rootDir2, ".cursor")) || existsSync5(resolve4(rootDir2, ".cursorrules"))) {
+    detectedTargets.push("cursor");
+  }
+  if (existsSync5(resolve4(rootDir2, "CLAUDE.md")) || existsSync5(resolve4(rootDir2, ".claude"))) {
+    detectedTargets.push("claude-code");
+  }
+  if (existsSync5(resolve4(rootDir2, ".github"))) {
+    detectedTargets.push("copilot");
+  }
+  if (existsSync5(resolve4(rootDir2, ".windsurfrules"))) {
+    detectedTargets.push("windsurf");
+  }
+  const targets = isStarter ? ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"] : detectedTargets.length > 0 ? detectedTargets : DEFAULT_CONFIG.targets;
+  const config = {
+    ...DEFAULT_CONFIG,
+    targets
+  };
+  saveConfig(rootDir2, config);
+  console.log(`\u2705 Configured sagarithm.config.json with targets: ${targets.join(", ")}`);
+  if (isStarter) {
+    console.log("\u{1F504} Compiling canonical specifications and skills into target agent environments...");
+    runSync(rootDir2, []);
+    console.log(`
+\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+\u{1F6E1}\uFE0F  SAGARITHM KIT READY \u2014 CHIEF SYSTEMS ARCHITECT ACTIVATED
+\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+
+To begin building with high-integrity truth validation, ask your AI:
+
+  "I have activated Sagarithm Kit. Here is what I want to build: <your idea>. 
+   Validate this idea, tell me the hard architectural truths, surface hidden 
+   failure points, and establish our specification before writing any code."
+
+Your AI agent will:
+  1. Act as a Chief Architect (zero blind compliance).
+  2. Question assumptions and define strict Non-Goals.
+  3. Formulate an atomic execution plan and TDD verification matrix.
+  4. Enforce Zero Assumed Success [VERIFIED] state across all code.
+\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+`);
+  } else {
+    console.log("\u{1F4A1} Run `sagarithm sync` to compile canonical specifications into target configurations.");
+  }
+}
+
 // cli/src/commands/doctor.ts
-import { existsSync as existsSync5, readFileSync as readFileSync4 } from "node:fs";
+import { existsSync as existsSync6, readFileSync as readFileSync4 } from "node:fs";
 import { resolve as resolve5 } from "node:path";
 function runDoctor(rootDir2) {
   console.log("\u{1FA7A} Running Sagarithm Doctor on workspace...");
   const config = loadConfig(rootDir2);
   let issueCount = 0;
   const gitignorePath = resolve5(rootDir2, ".gitignore");
-  if (!existsSync5(gitignorePath)) {
+  if (!existsSync6(gitignorePath)) {
     console.log("  \u274C Missing .gitignore file (severity: error)");
     issueCount++;
   } else {
@@ -379,12 +472,12 @@ function runDoctor(rootDir2) {
   }
   const forbiddenFolders = ["utils", "helpers", "src/utils", "src/helpers", "common"];
   for (const f of forbiddenFolders) {
-    if (existsSync5(resolve5(rootDir2, f))) {
+    if (existsSync6(resolve5(rootDir2, f))) {
       console.log(`  \u274C Detected generic structural sprawl folder: '${f}' (violates policy.directory-creation)`);
       issueCount++;
     }
   }
-  const hasLockfile = existsSync5(resolve5(rootDir2, "package-lock.json")) || existsSync5(resolve5(rootDir2, "pnpm-lock.yaml")) || existsSync5(resolve5(rootDir2, "yarn.lock")) || existsSync5(resolve5(rootDir2, "Cargo.lock")) || existsSync5(resolve5(rootDir2, "poetry.lock"));
+  const hasLockfile = existsSync6(resolve5(rootDir2, "package-lock.json")) || existsSync6(resolve5(rootDir2, "pnpm-lock.yaml")) || existsSync6(resolve5(rootDir2, "yarn.lock")) || existsSync6(resolve5(rootDir2, "Cargo.lock")) || existsSync6(resolve5(rootDir2, "poetry.lock"));
   if (!hasLockfile) {
     console.log("  \u26A0\uFE0F  No package lockfile detected in repository root (violates policy.dependency-management)");
     issueCount++;
@@ -398,12 +491,12 @@ function runDoctor(rootDir2) {
 }
 
 // cli/src/commands/audit.ts
-import { readdirSync as readdirSync4, statSync as statSync4, existsSync as existsSync9, writeFileSync as writeFileSync3 } from "node:fs";
+import { readdirSync as readdirSync4, statSync as statSync4, existsSync as existsSync10, writeFileSync as writeFileSync3 } from "node:fs";
 import { resolve as resolve9, relative as relative3 } from "node:path";
 
 // cli/src/validation/secrets.ts
 import { spawnSync } from "node:child_process";
-import { readFileSync as readFileSync5, existsSync as existsSync6 } from "node:fs";
+import { readFileSync as readFileSync5, existsSync as existsSync7 } from "node:fs";
 import { resolve as resolve6 } from "node:path";
 var KNOWN_SECRET_RULES = [
   {
@@ -514,7 +607,7 @@ function scanFilesForSecrets(rootDir2, files) {
   const issues = [];
   for (const relFile of files) {
     const fullPath = resolve6(rootDir2, relFile);
-    if (!existsSync6(fullPath)) continue;
+    if (!existsSync7(fullPath)) continue;
     try {
       const content = readFileSync5(fullPath, "utf8");
       issues.push(...scanContentForSecrets(content, relFile));
@@ -525,11 +618,11 @@ function scanFilesForSecrets(rootDir2, files) {
 }
 
 // cli/src/validation/fitness.ts
-import { readdirSync as readdirSync3, statSync as statSync3, existsSync as existsSync8, readFileSync as readFileSync7 } from "node:fs";
+import { readdirSync as readdirSync3, statSync as statSync3, existsSync as existsSync9, readFileSync as readFileSync7 } from "node:fs";
 import { resolve as resolve8, relative as relative2 } from "node:path";
 
 // cli/src/graph/indexer.ts
-import { existsSync as existsSync7, readdirSync as readdirSync2, readFileSync as readFileSync6, statSync as statSync2 } from "node:fs";
+import { existsSync as existsSync8, readdirSync as readdirSync2, readFileSync as readFileSync6, statSync as statSync2 } from "node:fs";
 import { join as join2, relative, resolve as resolve7 } from "node:path";
 var IGNORED_DIRS = /* @__PURE__ */ new Set([
   ".git",
@@ -616,7 +709,7 @@ function buildProjectGraph(rootDir2) {
   }
   let dependencies = {};
   const pkgPath = resolve7(rootDir2, "package.json");
-  if (existsSync7(pkgPath)) {
+  if (existsSync8(pkgPath)) {
     try {
       const pkg = JSON.parse(readFileSync6(pkgPath, "utf8"));
       dependencies = { ...pkg.dependencies, ...pkg.devDependencies };
@@ -624,7 +717,7 @@ function buildProjectGraph(rootDir2) {
     }
   }
   return {
-    version: "1.0.1",
+    version: "1.1.1",
     name: "sagarithm-project",
     rootPath: rootDir2,
     modules,
@@ -726,13 +819,13 @@ function evaluateArchitecturalFitness(rootDir2) {
   } catch {
   }
   const manifestPath = resolve8(rootDir2, "sagarithm.manifest.json");
-  if (existsSync8(manifestPath)) {
+  if (existsSync9(manifestPath)) {
     try {
       const manifest = JSON.parse(readFileSync7(manifestPath, "utf8"));
       if (manifest.entrypoints && Array.isArray(manifest.entrypoints)) {
         for (const entry of manifest.entrypoints) {
           const entryFile = resolve8(rootDir2, entry.path);
-          if (!existsSync8(entryFile)) {
+          if (!existsSync9(entryFile)) {
             issues.push({
               ruleId: "policy.architecture-fitness.arch-manifest",
               severity: "warn",
@@ -780,10 +873,10 @@ function runAudit(rootDir2, args2 = []) {
   if (isFix) {
     console.log("\u{1F527} Auto-remediating safe policy issues...");
     const manifestPath = resolve9(rootDir2, "sagarithm.manifest.json");
-    if (!existsSync9(manifestPath)) {
+    if (!existsSync10(manifestPath)) {
       const graph = buildProjectGraph(rootDir2);
       const manifestData = {
-        version: "1.0.1",
+        version: "1.1.1",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -849,7 +942,7 @@ function runAudit(rootDir2, args2 = []) {
 
 // cli/src/validation/engine.ts
 import { spawnSync as spawnSync2 } from "node:child_process";
-import { existsSync as existsSync10, readFileSync as readFileSync8, writeFileSync as writeFileSync4, mkdirSync as mkdirSync2 } from "node:fs";
+import { existsSync as existsSync11, readFileSync as readFileSync8, writeFileSync as writeFileSync4, mkdirSync as mkdirSync2 } from "node:fs";
 import { resolve as resolve10 } from "node:path";
 function runNpmScript(script, rootDir2) {
   if (process.platform === "win32") {
@@ -866,7 +959,7 @@ function runVerificationPipeline(rootDir2, options = {}) {
   let staticPassed = false;
   const pkgPath = resolve10(rootDir2, "package.json");
   let pkgScripts = {};
-  if (existsSync10(pkgPath)) {
+  if (existsSync11(pkgPath)) {
     try {
       const pkg = JSON.parse(readFileSync8(pkgPath, "utf8"));
       pkgScripts = pkg.scripts || {};
@@ -966,7 +1059,7 @@ function runVerificationPipeline(rootDir2, options = {}) {
     };
   }
   const docStart = Date.now();
-  const manifestExists = existsSync10(resolve10(rootDir2, "sagarithm.manifest.json"));
+  const manifestExists = existsSync11(resolve10(rootDir2, "sagarithm.manifest.json"));
   vectors.documentation = {
     status: manifestExists ? "passed" : "warn",
     durationMs: Date.now() - docStart,
@@ -991,7 +1084,7 @@ function runVerificationPipeline(rootDir2, options = {}) {
     state = "ASSUMED";
   }
   const report = {
-    version: "1.0.1",
+    version: "1.1.1",
     timestamp: (/* @__PURE__ */ new Date()).toISOString(),
     state,
     summary: {
@@ -1004,7 +1097,7 @@ function runVerificationPipeline(rootDir2, options = {}) {
     issues
   };
   const sagarithmDir = resolve10(rootDir2, ".sagarithm");
-  if (!existsSync10(sagarithmDir)) {
+  if (!existsSync11(sagarithmDir)) {
     try {
       mkdirSync2(sagarithmDir, { recursive: true });
     } catch {
@@ -1179,20 +1272,20 @@ function calculateSystemComplexity(graph) {
   };
 }
 function detectOrphanAbstractions(graph) {
-  const orphans = [];
+  const orphans2 = [];
   const allImportStatements = graph.modules.flatMap((m) => m.imports);
   for (const mod of graph.modules) {
     for (const exp of mod.exports) {
       const isReferencedInImports = allImportStatements.some((imp) => imp.includes(exp));
       if (!isReferencedInImports) {
-        orphans.push({
+        orphans2.push({
           symbol: exp,
           module: mod.name
         });
       }
     }
   }
-  return orphans;
+  return orphans2;
 }
 
 // cli/src/commands/context.ts
@@ -1204,7 +1297,7 @@ function runContext(rootDir2, args2) {
     case "generate": {
       const manifestPath = resolve11(rootDir2, "sagarithm.manifest.json");
       const manifestData = {
-        version: "1.0.1",
+        version: "1.1.1",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -1239,16 +1332,16 @@ function runContext(rootDir2, args2) {
     }
     case "orphans": {
       console.log("\u{1F50D} Scanning workspace for unused / unimported exports...");
-      const orphans = detectOrphanAbstractions(graph);
-      if (orphans.length === 0) {
+      const orphans2 = detectOrphanAbstractions(graph);
+      if (orphans2.length === 0) {
         console.log("\u2705 Clean! No unimported public abstractions detected.");
       } else {
-        console.log(`\u26A0\uFE0F  Found ${orphans.length} unreferenced exported symbol(s):`);
-        for (const o of orphans.slice(0, 10)) {
+        console.log(`\u26A0\uFE0F  Found ${orphans2.length} unreferenced exported symbol(s):`);
+        for (const o of orphans2.slice(0, 10)) {
           console.log(`  - [${o.module}] ${o.symbol}`);
         }
-        if (orphans.length > 10) {
-          console.log(`  ... and ${orphans.length - 10} more.`);
+        if (orphans2.length > 10) {
+          console.log(`  ... and ${orphans2.length - 10} more.`);
         }
       }
       break;
@@ -1298,18 +1391,37 @@ function runContext(rootDir2, args2) {
       console.log(`  \u21B3 Place new files in: '${suggestion}' (adheres to policy.directory-creation)`);
       break;
     }
+    case "graph":
+    case "diagram":
+    case "mermaid": {
+      console.log("\u{1F4C8} Emitting Topological Dependency Graph (Mermaid.js)...");
+      const lines = ["```mermaid", "graph TD"];
+      for (const mod of graph.modules) {
+        lines.push(`  ${mod.name.replace(/[^a-zA-Z0-9_]/g, "_")}["${mod.name} (${mod.files.length} files)"]`);
+      }
+      for (const [from, toList] of Object.entries(graph.dependencies)) {
+        const fromClean = from.replace(/[^a-zA-Z0-9_]/g, "_");
+        for (const to of toList) {
+          const toClean = to.replace(/[^a-zA-Z0-9_]/g, "_");
+          lines.push(`  ${fromClean} --> ${toClean}`);
+        }
+      }
+      lines.push("```");
+      console.log("\n" + lines.join("\n") + "\n");
+      break;
+    }
     default:
-      console.log(`Unknown context action '${subCommand}'. Supported: generate, stats, orphans, find, blast-radius, suggest-location.`);
+      console.log(`Unknown context action '${subCommand}'. Supported: generate, stats, graph, orphans, find, blast-radius, suggest-location.`);
       break;
   }
 }
 
 // cli/src/commands/preset.ts
-import { existsSync as existsSync12, readFileSync as readFileSync10, writeFileSync as writeFileSync7 } from "node:fs";
+import { existsSync as existsSync13, readFileSync as readFileSync10, writeFileSync as writeFileSync7 } from "node:fs";
 import { resolve as resolve13 } from "node:path";
 
 // cli/src/registry/loader.ts
-import { existsSync as existsSync11, readFileSync as readFileSync9, mkdirSync as mkdirSync3, writeFileSync as writeFileSync6 } from "node:fs";
+import { existsSync as existsSync12, readFileSync as readFileSync9, mkdirSync as mkdirSync3, writeFileSync as writeFileSync6 } from "node:fs";
 import { resolve as resolve12, basename } from "node:path";
 import { createHash } from "node:crypto";
 function loadRegistryIndex(rootDir2) {
@@ -1318,7 +1430,7 @@ function loadRegistryIndex(rootDir2) {
     resolve12(rootDir2, "../registry/index.json")
   ];
   for (const cand of candidates) {
-    if (existsSync11(cand)) {
+    if (existsSync12(cand)) {
       try {
         return JSON.parse(readFileSync9(cand, "utf8"));
       } catch {
@@ -1333,7 +1445,7 @@ function loadPreset(rootDir2, presetId) {
     return index.presets[presetId];
   }
   const directPath = resolve12(rootDir2, `registry/presets/${presetId}.json`);
-  if (existsSync11(directPath)) {
+  if (existsSync12(directPath)) {
     try {
       return JSON.parse(readFileSync9(directPath, "utf8"));
     } catch {
@@ -1361,16 +1473,16 @@ function computeIntegrityHash(content) {
 }
 function packArtifact(rootDir2, targetPath) {
   const absPath = resolve12(rootDir2, targetPath);
-  if (!existsSync11(absPath)) {
+  if (!existsSync12(absPath)) {
     throw new Error(`Target path does not exist: ${targetPath}`);
   }
-  const skillFile = existsSync11(resolve12(absPath, "SKILL.md")) ? resolve12(absPath, "SKILL.md") : null;
+  const skillFile = existsSync12(resolve12(absPath, "SKILL.md")) ? resolve12(absPath, "SKILL.md") : null;
   const content = skillFile ? readFileSync9(skillFile, "utf8") : readFileSync9(absPath, "utf8");
   const base = basename(absPath).replace(/\.md$/, "");
   const integrity = computeIntegrityHash(content);
   const manifest = {
     name: `@sagarithm/skill-${base}`,
-    version: "1.0.1",
+    version: "1.1.1",
     type: "skill",
     description: `Packaged canonical artifact for ${base}`,
     author: "Sagarithm Community",
@@ -1379,10 +1491,10 @@ function packArtifact(rootDir2, targetPath) {
     entrypoint: skillFile ? "SKILL.md" : basename(absPath)
   };
   const distDir = resolve12(rootDir2, ".sagarithm/dist");
-  if (!existsSync11(distDir)) {
+  if (!existsSync12(distDir)) {
     mkdirSync3(distDir, { recursive: true });
   }
-  const packageFileName = `${manifest.name.replace(/[@/]/g, "-")}-1.0.1.json`;
+  const packageFileName = `${manifest.name.replace(/[@/]/g, "-")}-1.1.1.json`;
   const packagePath = resolve12(distDir, packageFileName);
   const bundle = {
     manifest,
@@ -1459,13 +1571,13 @@ Workflows (${preset.workflows.length}):`);
       console.log(`\u2699\uFE0F  Applying preset '${preset.name}' to workspace...`);
       const configPath = resolve13(rootDir2, "sagarithm.config.json");
       let config;
-      if (existsSync12(configPath)) {
+      if (existsSync13(configPath)) {
         try {
           config = JSON.parse(readFileSync10(configPath, "utf8"));
         } catch {
           console.log("\u26A0\uFE0F  Existing config invalid; creating new configuration.");
           config = {
-            version: "1.0.1",
+            version: "1.1.1",
             name: "sagarithm-project",
             targets: ["antigravity", "cursor", "claude-code"],
             riskThreshold: preset.riskThreshold,
@@ -1481,7 +1593,7 @@ Workflows (${preset.workflows.length}):`);
         }
       } else {
         config = {
-          version: "1.0.1",
+          version: "1.1.1",
           name: "sagarithm-project",
           targets: ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"],
           riskThreshold: preset.riskThreshold,
@@ -1581,13 +1693,13 @@ Sagarithm Registry Commands:
 }
 
 // cli/src/commands/run.ts
-import { existsSync as existsSync13, mkdirSync as mkdirSync4, writeFileSync as writeFileSync8 } from "node:fs";
+import { existsSync as existsSync14, mkdirSync as mkdirSync4, writeFileSync as writeFileSync8 } from "node:fs";
 import { resolve as resolve14 } from "node:path";
 function runWorkflow(rootDir2, args2) {
   const workflowName = args2[0];
   if (!workflowName || workflowName === "help") {
     console.log(`
-\u{1F916} Sagarithm Autonomous Workflow Orchestrator (v1.0.1)
+\u{1F916} Sagarithm Autonomous Workflow Orchestrator (v1.1.1)
 
 Usage:
   sagarithm run <workflow-name> [options]
@@ -1626,11 +1738,11 @@ Options:
       details: `${graph.modules.length} modules, ${graph.allFiles.length} files`
     });
     console.log("\n\u25B6 Phase 2: Architectural Policy Pre-Flight & Hygiene...");
-    const manifestExists = existsSync13(resolve14(rootDir2, "sagarithm.manifest.json"));
+    const manifestExists = existsSync14(resolve14(rootDir2, "sagarithm.manifest.json"));
     if (!manifestExists) {
       console.log("  \u26A0\uFE0F  Missing sagarithm.manifest.json \u2014 Auto-generating topology manifest...");
       const manifestData = {
-        version: "1.0.1",
+        version: "1.1.1",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -1680,7 +1792,7 @@ Options:
       details: "Audit trail recorded cleanly"
     });
     const runsDir = resolve14(rootDir2, ".sagarithm/runs");
-    if (!existsSync13(runsDir)) {
+    if (!existsSync14(runsDir)) {
       mkdirSync4(runsDir, { recursive: true });
     }
     writeFileSync8(resolve14(runsDir, `${runId}.json`), JSON.stringify(runRecord, null, 2), "utf8");
@@ -1696,31 +1808,692 @@ Options:
   }
 }
 
+// cli/src/commands/validate.ts
+import { existsSync as existsSync15, mkdirSync as mkdirSync5, writeFileSync as writeFileSync9 } from "node:fs";
+import { resolve as resolve15 } from "node:path";
+function runValidate(rootDir2, args2) {
+  const idea = args2.join(" ").trim();
+  if (!idea) {
+    console.log(`
+\u{1F3AF} Sagarithm Architectural Truth Validator
+
+Usage:
+  sagarithm validate "<your software or feature idea>"
+
+Example:
+  sagarithm validate "real-time collaborative markdown editor with offline sync"
+
+Purpose:
+  Evaluates feasibility, challenges assumptions, surfaces failure points,
+  and establishes strict Non-Goals before any code is generated.
+`);
+    return;
+  }
+  console.log(`
+\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+\u{1F3AF} SAGARITHM ARCHITECTURAL TRUTH ASSESSMENT (NO BLIND COMPLIANCE)
+\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+Evaluating Concept: "${idea}"
+
+\u25B6 1. Technical Feasibility & State Model:
+  \u2022 State Model: Evaluate whether state is strictly local, synchronized, or distributed.
+  \u2022 Concurrency & Race Conditions: Identify potential read/write synchronization locks.
+  \u2022 Performance Bottlenecks: Note latency, unbounded memory buffers, or cold-start overheads.
+
+\u25B6 2. Top 3 Hidden Failure Points:
+  1. Distributed State Desynchronization (Split-brain, packet drops, clock skew).
+  2. Security Perimeter Breaches (Unvalidated payload injection, token leakage).
+  3. Scope Explosion & Dead Abstractions (Premature microservices / excessive boilerplate).
+
+\u25B6 3. Anti-Rationalization Reality Check:
+  \u26A0\uFE0F  DO NOT BUILD: Generic "everything" dashboard or uncontrolled monolithic helpers.
+  \u26A0\uFE0F  RULE: Every boundary crossing requires strict runtime schema validation.
+  \u26A0\uFE0F  RULE: Zero Assumed Success \u2014 automated test assertions must accompany every domain rule.
+
+\u25B6 4. Architectural Sharpening Question:
+  \u2753 What is the single binding constraint: Is this optimizing for low-latency throughput, 
+     or strict ACID consistency?
+
+  \u{1F4A1} Chief Architect Recommendation:
+     Default to a modular monolith with bounded contexts and event-driven decoupled 
+     projections before considering any distributed services.
+\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+`);
+  const specsDir = resolve15(rootDir2, "docs/specs");
+  if (!existsSync15(specsDir)) {
+    mkdirSync5(specsDir, { recursive: true });
+  }
+  const slug = idea.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 30);
+  const specPath = resolve15(specsDir, `${slug}-spec.md`);
+  if (!existsSync15(specPath)) {
+    const specContent = `# Specification: ${idea}
+
+> **Status**: DRAFT | **Governance**: Sagarithm Kit (Zero Assumed Success)
+
+## 1. Problem Statement
+- **What**: ${idea}
+- **Target User**: [Specify primary beneficiary]
+- **Value Proposition**: [Quantifiable business or developer value]
+
+## 2. Non-Goals (Strict Scope Boundary)
+- \u274C We are NOT building: [List out-of-scope feature 1]
+- \u274C We are NOT building: [List out-of-scope feature 2]
+
+## 3. Public Interface & Contract
+\`\`\`typescript
+// Contract interfaces and DTOs go here before implementation
+\`\`\`
+
+## 4. Verification Acceptance Criteria (Given / When / Then)
+- [ ] **Scenario 1**: Given valid input, when executed, then state matches expected invariant.
+- [ ] **Scenario 2 (Edge Case)**: Given network or boundary failure, error is handled gracefully.
+
+## 5. Verification Gate Status
+- [ ] Static Vector: Compiles cleanly with zero errors
+- [ ] Security Vector: 0 secret leaks (Shannon entropy H < 4.5)
+- [ ] Architecture Vector: Acyclic dependency graph
+- [ ] Behavioral Vector: 100% green automated tests
+`;
+    writeFileSync9(specPath, specContent, "utf8");
+    console.log(`\u{1F4DD} Generated draft architectural specification: docs/specs/${slug}-spec.md
+`);
+  }
+}
+
+// cli/src/commands/health.ts
+import { existsSync as existsSync16, readFileSync as readFileSync11 } from "node:fs";
+import { resolve as resolve16 } from "node:path";
+function evaluateCodebaseHealth(rootDir2) {
+  const graph = buildProjectGraph(rootDir2);
+  const orphans2 = detectOrphanAbstractions(graph);
+  let hygieneScore = 25;
+  const forbiddenFolders = ["utils", "helpers", "src/utils", "src/helpers", "common", "misc"];
+  const violations = [];
+  for (const f of forbiddenFolders) {
+    if (existsSync16(resolve16(rootDir2, f))) {
+      hygieneScore = Math.max(0, hygieneScore - 10);
+      violations.push(f);
+    }
+  }
+  let modularityScore = 25;
+  let totalInstability = 0;
+  let measuredModules = 0;
+  for (const mod of graph.modules) {
+    const complexity = calculateSystemComplexity(graph, mod.name);
+    if (complexity.afferentCoupling > 0 || complexity.efferentCoupling > 0) {
+      totalInstability += complexity.instability;
+      measuredModules++;
+    }
+  }
+  const avgInstability = measuredModules > 0 ? totalInstability / measuredModules : 0;
+  if (avgInstability > 0.8) modularityScore -= 8;
+  if (graph.modules.length < 2 && graph.allFiles.length > 15) modularityScore -= 10;
+  let maintenanceScore = 20;
+  const orphanRatio = graph.modules.length > 0 && graph.allFiles.length > 0 ? orphans2.length / Math.max(1, graph.allFiles.length) : 0;
+  if (orphanRatio > 0.5) maintenanceScore -= 15;
+  else if (orphanRatio > 0.2) maintenanceScore -= 8;
+  let securityScore = 20;
+  let secretCount = 0;
+  for (const file of graph.allFiles.slice(0, 50)) {
+    try {
+      const fullPath = resolve16(rootDir2, file);
+      if (existsSync16(fullPath)) {
+        const content = readFileSync11(fullPath, "utf8");
+        const issues = scanContentForSecrets(content, file);
+        secretCount += issues.length;
+      }
+    } catch {
+    }
+  }
+  if (secretCount > 0) securityScore = Math.max(0, securityScore - secretCount * 5);
+  let testingScore = 10;
+  let testCount = 0;
+  for (const mod of graph.modules) {
+    testCount += mod.tests.length;
+  }
+  if (testCount === 0) testingScore = 2;
+  else if (testCount < 3) testingScore = 6;
+  const totalScore = hygieneScore + modularityScore + maintenanceScore + securityScore + testingScore;
+  let grade = "A+";
+  let badge = "\u2705 EXCELLENT";
+  if (totalScore < 60) {
+    grade = "F";
+    badge = "\u{1F6A8} CRITICAL";
+  } else if (totalScore < 75) {
+    grade = "C";
+    badge = "\u26A0\uFE0F  AT RISK";
+  } else if (totalScore < 90) {
+    grade = "B+";
+    badge = "\u26A1 HEALTHY";
+  }
+  return {
+    totalScore,
+    grade,
+    badge,
+    hygieneScore,
+    modularityScore,
+    maintenanceScore,
+    securityScore,
+    testingScore,
+    violations,
+    totalFiles: graph.allFiles.length,
+    totalModules: graph.modules.length,
+    orphanCount: orphans2.length,
+    secretCount,
+    avgInstability
+  };
+}
+function runHealth(rootDir2, args2) {
+  console.log("\u26A1 Computing Sagarithm Comprehensive Codebase Health Index...\n");
+  const metrics = evaluateCodebaseHealth(rootDir2);
+  const {
+    totalScore,
+    grade,
+    badge,
+    hygieneScore,
+    modularityScore,
+    maintenanceScore,
+    securityScore,
+    testingScore,
+    violations,
+    totalFiles,
+    totalModules,
+    orphanCount,
+    secretCount
+  } = metrics;
+  const barFilled = Math.round(totalScore / 5);
+  const bar = "\u2588".repeat(barFilled) + "\u2591".repeat(20 - barFilled);
+  console.log(`\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557`);
+  console.log(`\u2551               SAGARITHM CODEBASE HEALTH DASHBOARD                    \u2551`);
+  console.log(`\u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D`);
+  console.log(`
+  OVERALL HEALTH INDEX: [${bar}] ${totalScore}/100 (Grade: ${grade})`);
+  console.log(`  STATUS EVALUATION:    ${badge}
+`);
+  console.log(`\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510`);
+  console.log(`\u2502 Health Dimension               \u2502 Score      \u2502 Benchmark Target       \u2502`);
+  console.log(`\u251C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524`);
+  console.log(`\u2502 1. Structural Hygiene          \u2502 ${String(hygieneScore).padStart(2)} / 25 pts \u2502 Zero generic dumpsters \u2502`);
+  console.log(`\u2502 2. Modularity & Coupling       \u2502 ${String(modularityScore).padStart(2)} / 25 pts \u2502 Avg Instability <= 0.6 \u2502`);
+  console.log(`\u2502 3. Dead Code & Orphan Ratio    \u2502 ${String(maintenanceScore).padStart(2)} / 20 pts \u2502 Orphan exports < 15%   \u2502`);
+  console.log(`\u2502 4. Secret & Entropy Defense    \u2502 ${String(securityScore).padStart(2)} / 20 pts \u2502 Zero H >= 4.5 secrets  \u2502`);
+  console.log(`\u2502 5. Automated Test Density      \u2502 ${String(testingScore).padStart(2)} / 10 pts \u2502 Comprehensive TDD      \u2502`);
+  console.log(`\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518`);
+  console.log(`
+\u{1F4CA} Topology Telemetry:`);
+  console.log(`  \u2022 Indexed Files:        ${totalFiles}`);
+  console.log(`  \u2022 Bounded Modules:      ${totalModules}`);
+  console.log(`  \u2022 Orphan Abstractions:  ${orphanCount} detected`);
+  console.log(`  \u2022 Secret Leak Flags:    ${secretCount} detected`);
+  if (violations.length > 0 || orphanCount > 0 || secretCount > 0) {
+    console.log(`
+\u{1F4A1} Recommended Remediation Priorities:`);
+    if (violations.length > 0) {
+      console.log(`  1. Remove or refactor generic folders: ${violations.join(", ")}`);
+    }
+    if (orphanCount > 0) {
+      console.log(`  2. Run 'sagarithm context orphans' to eliminate ${orphanCount} unused export(s).`);
+    }
+    if (secretCount > 0) {
+      console.log(`  3. Run 'sagarithm audit --fix' to quarantine exposed credentials.`);
+    }
+  } else {
+    console.log(`
+\u{1F3C6} Pristine Architecture: All health dimensions conform to Sagarithm Kit standards.`);
+  }
+  if (args2.includes("--json")) {
+    console.log("\n" + JSON.stringify({
+      totalScore,
+      grade,
+      hygieneScore,
+      modularityScore,
+      maintenanceScore,
+      securityScore,
+      testingScore,
+      orphansCount: orphans.length,
+      secretCount
+    }, null, 2));
+  }
+}
+
+// cli/src/mcp/server.ts
+import { resolve as resolve17 } from "node:path";
+import { existsSync as existsSync17, readFileSync as readFileSync12 } from "node:fs";
+var MCP_TOOLS = [
+  {
+    name: "sagarithm_verify",
+    description: "Executes the Sagarithm Kit 5-Vector Verification Gate (Zero Assumed Success). Validates static, security, architectural, behavioral (tests), and documentation vectors.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        strict: {
+          type: "boolean",
+          description: "Enforce zero-warning tolerance mode (treat warnings as errors)."
+        }
+      }
+    }
+  },
+  {
+    name: "sagarithm_scan_secrets",
+    description: "Scans code content or snippets for Shannon entropy (H >= 4.5) and exposed credentials before saving.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        content: {
+          type: "string",
+          description: "The code content or diff to scan for credential leaks."
+        },
+        filePath: {
+          type: "string",
+          description: "Optional file path for contextual error reporting."
+        }
+      },
+      required: ["content"]
+    }
+  },
+  {
+    name: "sagarithm_query_graph",
+    description: "Queries the architectural repository graph. Calculates module coupling, instability, and finds existing abstractions to prevent duplicate code.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        symbol: {
+          type: "string",
+          description: "Optional symbol or function name to search across module exports."
+        },
+        moduleName: {
+          type: "string",
+          description: "Optional module name to calculate afferent/efferent coupling and instability."
+        }
+      }
+    }
+  },
+  {
+    name: "sagarithm_validate_idea",
+    description: "Architectural truth-teller: Stress-tests an engineering idea, challenges assumptions, surfaces failure points, and produces an anti-rationalization validation matrix.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        idea: {
+          type: "string",
+          description: "The raw feature idea or architectural concept to validate."
+        }
+      },
+      required: ["idea"]
+    }
+  },
+  {
+    name: "sagarithm_health",
+    description: "Calculates the composite 100-point Codebase Health Index, evaluating structural hygiene, Martin modularity, dead code/orphans, secret isolation, and test density.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        detailed: {
+          type: "boolean",
+          description: "Include detailed violation lists and module breakdown."
+        }
+      }
+    }
+  },
+  {
+    name: "sagarithm_get_skill",
+    description: "Retrieves canonical Sagarithm Kit skill guidelines, directives, and anti-rationalization tables for a specific domain.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        skillId: {
+          type: "string",
+          description: "The skill identifier: ideation, spec, planning, review, shipping, modularity, security, testing, coding, adr."
+        }
+      },
+      required: ["skillId"]
+    }
+  }
+];
+var SKILL_MAP = {
+  ideation: "skills/ideation/idea-validation/SKILL.md",
+  "idea-validation": "skills/ideation/idea-validation/SKILL.md",
+  spec: "skills/architecture/spec-driven-development/SKILL.md",
+  "spec-driven-development": "skills/architecture/spec-driven-development/SKILL.md",
+  planning: "skills/lifecycle/planning-and-task-breakdown/SKILL.md",
+  "planning-and-task-breakdown": "skills/lifecycle/planning-and-task-breakdown/SKILL.md",
+  review: "skills/quality/code-review-and-quality/SKILL.md",
+  "code-review-and-quality": "skills/quality/code-review-and-quality/SKILL.md",
+  shipping: "skills/delivery/shipping-and-launch/SKILL.md",
+  "shipping-and-launch": "skills/delivery/shipping-and-launch/SKILL.md",
+  modularity: "skills/architecture/system-design/SKILL.md",
+  "system-design": "skills/architecture/system-design/SKILL.md",
+  security: "skills/security/secure-development/SKILL.md",
+  "secure-development": "skills/security/secure-development/SKILL.md",
+  testing: "skills/testing/test-driven-verification/SKILL.md",
+  "test-driven-verification": "skills/testing/test-driven-verification/SKILL.md",
+  coding: "skills/quality/coding-standards/SKILL.md",
+  "coding-standards": "skills/quality/coding-standards/SKILL.md",
+  adr: "skills/documentation/architectural-decision-records/SKILL.md",
+  "architectural-decision-records": "skills/documentation/architectural-decision-records/SKILL.md"
+};
+function dispatchMcpRequest(req, rootDir2) {
+  const isNotification = req.id === void 0 || req.id === null;
+  switch (req.method) {
+    case "initialize": {
+      return {
+        jsonrpc: "2.0",
+        id: req.id,
+        result: {
+          protocolVersion: "2024-11-05",
+          capabilities: {
+            tools: {}
+          },
+          serverInfo: {
+            name: "sagarithm-kit-mcp",
+            version: "1.1.1"
+          }
+        }
+      };
+    }
+    case "notifications/initialized": {
+      return null;
+    }
+    case "ping": {
+      if (isNotification) return null;
+      return {
+        jsonrpc: "2.0",
+        id: req.id,
+        result: {}
+      };
+    }
+    case "tools/list": {
+      if (isNotification) return null;
+      return {
+        jsonrpc: "2.0",
+        id: req.id,
+        result: {
+          tools: MCP_TOOLS
+        }
+      };
+    }
+    case "tools/call": {
+      if (isNotification) return null;
+      const toolName = req.params?.name;
+      const args2 = req.params?.arguments || {};
+      try {
+        let resultText = "";
+        if (toolName === "sagarithm_verify") {
+          const report = runVerificationPipeline(rootDir2, { strict: Boolean(args2.strict) });
+          const vectorLines = Object.entries(report.vectors).map(([vecName, v]) => {
+            if (!v) return "";
+            const status = v.status.toUpperCase();
+            const duration = v.durationMs !== void 0 ? ` (${v.durationMs}ms)` : "";
+            const details = v.details ? `: ${v.details}` : "";
+            return `- [${status}] **${vecName.toUpperCase()}**${duration}${details}`;
+          }).filter(Boolean);
+          resultText = [
+            `# Sagarithm Verification Gate Status: [${report.state}]`,
+            `Timestamp: ${report.timestamp}`,
+            `Total Checks: ${report.summary.totalChecks} | Passed: ${report.summary.passed} | Errors: ${report.summary.errors}`,
+            "",
+            "## Verification Vectors:",
+            ...vectorLines
+          ].join("\n");
+        } else if (toolName === "sagarithm_scan_secrets") {
+          const content = String(args2.content || "");
+          const filePath = String(args2.filePath || "snippet.ts");
+          const issues = scanContentForSecrets(content, filePath);
+          if (issues.length === 0) {
+            resultText = "\u2705 Zero secrets or high-entropy tokens detected. Code is secure.";
+          } else {
+            resultText = [
+              `\u26A0\uFE0F Detected ${issues.length} security / secret issue(s):`,
+              ...issues.map((i) => `- [Line ${i.line}] **${i.ruleId}** (${i.severity}): ${i.message}`)
+            ].join("\n");
+          }
+        } else if (toolName === "sagarithm_query_graph") {
+          const graph = buildProjectGraph(rootDir2);
+          const lines = [`# Sagarithm Repository Topology (${graph.name})`];
+          if (args2.symbol) {
+            const abstractions = findExistingAbstractions(graph, String(args2.symbol));
+            lines.push(`
+## Search for symbol: "${args2.symbol}"`);
+            if (abstractions.length === 0) {
+              lines.push(`Zero existing abstractions found matching "${args2.symbol}".`);
+            } else {
+              for (const abs of abstractions) {
+                lines.push(`- **${abs.symbol}** (${abs.kind}) in \`${abs.filePath}\``);
+              }
+            }
+          }
+          if (args2.moduleName) {
+            const complexity = calculateSystemComplexity(graph, String(args2.moduleName));
+            lines.push(`
+## Module Complexity: "${args2.moduleName}"`);
+            lines.push(`- Afferent Coupling (Ca): ${complexity.afferentCoupling}`);
+            lines.push(`- Efferent Coupling (Ce): ${complexity.efferentCoupling}`);
+            lines.push(`- Instability Metric (I): ${complexity.instability.toFixed(2)}`);
+          }
+          if (!args2.symbol && !args2.moduleName) {
+            lines.push(`
+Total Modules: ${graph.modules.length} | Total Files: ${graph.allFiles.length}`);
+            lines.push(`Modules: ${graph.modules.map((m) => m.name).join(", ")}`);
+          }
+          resultText = lines.join("\n");
+        } else if (toolName === "sagarithm_validate_idea") {
+          const idea = String(args2.idea || "");
+          resultText = [
+            `# \u{1F3AF} Sagarithm Architectural Truth Assessment`,
+            `**Evaluated Concept**: "${idea}"`,
+            "",
+            "## 1. Feasibility & State Complexity Analysis",
+            `- **State Model**: Evaluate whether state is ephemeral, synchronized, or persistent.`,
+            `- **Hidden Bottlenecks**: Assess asynchronous boundary race conditions, external network latency, and memory ceilings.`,
+            "",
+            "## 2. Anti-Rationalization Checklist",
+            `- [ ] Is this introducing unnecessary microservices or distributed complexity?`,
+            `- [ ] Are domain entities separated from presentation/UI logic?`,
+            `- [ ] Has a strict "Non-Goals" (Not Doing) list been defined?`,
+            "",
+            "## 3. Truth-Teller Directive for Agent",
+            `Do NOT agree blindly. Present the simplest viable architecture, outline the hardest edge cases, and define the acceptance criteria before touching code.`
+          ].join("\n");
+        } else if (toolName === "sagarithm_health") {
+          const health = evaluateCodebaseHealth(rootDir2);
+          resultText = [
+            `# \u{1F3E5} Sagarithm Codebase Health Index: ${health.totalScore}/100 (${health.grade} - ${health.badge})`,
+            "",
+            "## Dimension Breakdown:",
+            `- **Structural Hygiene**: ${health.hygieneScore}/25 pts`,
+            `- **Modularity & Coupling**: ${health.modularityScore}/25 pts (Avg Instability: ${health.avgInstability.toFixed(2)})`,
+            `- **Dead Code & Orphans**: ${health.maintenanceScore}/20 pts (${health.orphanCount} detected)`,
+            `- **Secret Isolation (H < 4.5)**: ${health.securityScore}/20 pts (${health.secretCount} leaks detected)`,
+            `- **Verification & Tests**: ${health.testingScore}/10 pts`,
+            "",
+            "## Telemetry:",
+            `- Total Files: ${health.totalFiles}`,
+            `- Bounded Modules: ${health.totalModules}`,
+            health.violations.length > 0 ? `
+\u26A0\uFE0F Violations: Forbidden generic directories: ${health.violations.join(", ")}` : "\u2705 Zero forbidden directory anti-patterns."
+          ].join("\n");
+        } else if (toolName === "sagarithm_get_skill") {
+          const rawId = String(args2.skillId || "").toLowerCase().trim();
+          const relPath = SKILL_MAP[rawId] || SKILL_MAP["ideation"];
+          let fullPath = resolve17(rootDir2, relPath);
+          if (!existsSync17(fullPath)) {
+            const candidates = [
+              resolve17(import.meta.dirname, "../..", relPath),
+              resolve17(import.meta.dirname, "..", relPath),
+              resolve17(import.meta.dirname, "../../..", relPath)
+            ];
+            for (const c of candidates) {
+              if (existsSync17(c)) {
+                fullPath = c;
+                break;
+              }
+            }
+          }
+          if (existsSync17(fullPath)) {
+            resultText = readFileSync12(fullPath, "utf8");
+          } else {
+            resultText = `Skill file for "${rawId}" not found at ${relPath}. Available skills: ${Object.keys(SKILL_MAP).join(", ")}`;
+          }
+        } else {
+          return {
+            jsonrpc: "2.0",
+            id: req.id,
+            error: {
+              code: -32601,
+              message: `Tool "${toolName}" not recognized`
+            }
+          };
+        }
+        return {
+          jsonrpc: "2.0",
+          id: req.id,
+          result: {
+            content: [
+              {
+                type: "text",
+                text: resultText
+              }
+            ]
+          }
+        };
+      } catch (toolErr) {
+        return {
+          jsonrpc: "2.0",
+          id: req.id,
+          result: {
+            isError: true,
+            content: [
+              {
+                type: "text",
+                text: `Execution failed: ${toolErr?.message || String(toolErr)}`
+              }
+            ]
+          }
+        };
+      }
+    }
+    default: {
+      if (isNotification) return null;
+      return {
+        jsonrpc: "2.0",
+        id: req.id,
+        error: {
+          code: -32601,
+          message: `Unhandled method: ${req.method}`
+        }
+      };
+    }
+  }
+}
+function startMcpServer() {
+  const rootDir2 = findWorkspaceRoot();
+  let buffer = "";
+  const sendResponse = (response) => {
+    process.stdout.write(JSON.stringify(response) + "\n");
+  };
+  process.stdin.setEncoding("utf8");
+  process.stdin.on("data", (chunk) => {
+    buffer += chunk;
+    while (true) {
+      if (buffer.startsWith("Content-Length:")) {
+        const headerEnd = buffer.indexOf("\r\n\r\n");
+        if (headerEnd === -1) {
+          break;
+        }
+        const headerLine = buffer.slice(0, headerEnd);
+        const match = headerLine.match(/Content-Length:\s*(\d+)/i);
+        if (!match) {
+          buffer = buffer.slice(headerEnd + 4);
+          continue;
+        }
+        const length = parseInt(match[1], 10);
+        const bodyStart = headerEnd + 4;
+        if (buffer.length < bodyStart + length) {
+          break;
+        }
+        const body = buffer.slice(bodyStart, bodyStart + length);
+        buffer = buffer.slice(bodyStart + length);
+        try {
+          const req = JSON.parse(body);
+          const res = dispatchMcpRequest(req, rootDir2);
+          if (res) sendResponse(res);
+        } catch (err) {
+          sendResponse({
+            jsonrpc: "2.0",
+            error: {
+              code: -32700,
+              message: `Parse error: ${err?.message || "Invalid JSON"}`
+            }
+          });
+        }
+        continue;
+      }
+      const newlineIndex = buffer.indexOf("\n");
+      if (newlineIndex !== -1) {
+        const line = buffer.slice(0, newlineIndex).trim();
+        buffer = buffer.slice(newlineIndex + 1);
+        if (!line) continue;
+        try {
+          const req = JSON.parse(line);
+          const res = dispatchMcpRequest(req, rootDir2);
+          if (res) sendResponse(res);
+        } catch (err) {
+          sendResponse({
+            jsonrpc: "2.0",
+            error: {
+              code: -32700,
+              message: `Parse error: ${err?.message || "Invalid JSON"}`
+            }
+          });
+        }
+        continue;
+      }
+      break;
+    }
+  });
+  process.stdin.on("end", () => {
+    const trimmed = buffer.trim();
+    if (trimmed) {
+      try {
+        const req = JSON.parse(trimmed);
+        const res = dispatchMcpRequest(req, rootDir2);
+        if (res) sendResponse(res);
+      } catch {
+      }
+    }
+    process.exit(0);
+  });
+}
+
 // cli/src/index.ts
 var args = process.argv.slice(2);
 var command = args[0] || "help";
 var rootDir = findWorkspaceRoot();
 function printHelp() {
   console.log(`
-Sagarithm Kit CLI (v1.0.1)
+Sagarithm Kit CLI (v1.1.1)
 Universal Cross-Agent Engineering Framework for AI Coding Agents
 
 Usage:
   sagarithm <command> [options]
 
 Commands:
-  init      Initialize Sagarithm Kit workspace configuration (sagarithm.config.json)
+  init      Initialize Sagarithm Kit workspace configuration (--starter for instant turnkey setup)
+  validate  Validate a software or feature idea critically (truth-teller, no blind compliance)
   preset    List, inspect, and apply curated engineering presets (fullstack-web, api-backend, etc.)
   registry  Search canonical catalog and package artifacts with SHA-256 integrity
   sync      Compile canonical specifications into native agent configurations
   run       Orchestrate autonomous canonical workflow (feature-development, bug-fix, release)
-  context   Generate and query repository intelligence graph (find, blast-radius, suggest-location)
+  context   Generate and query repository intelligence graph (find, blast-radius, graph)
+  health    Compute comprehensive codebase health index (hygiene, coupling, dead code, secrets)
   doctor    Diagnose repository structure, .gitignore hygiene, and policy conformance
   audit     Audit workspace against security, secrets, and architecture policies (--fix to remediate)
   verify    Run execution verification gate (Zero Assumed Success)
+  mcp       Start native Model Context Protocol (MCP) server for AI coding agents
   help      Display this help menu
 
 Options:
+  --starter          Turnkey zero-friction starter mode (compiles all agent targets & activates architect)
   --target <agent>   Filter sync to a specific target (antigravity, cursor, claude-code, copilot, windsurf, codex)
   --force            Force overwrite existing configurations during init
   --fix              Automatically remediate safe policy violations in audit
@@ -1732,7 +2505,16 @@ Options:
 }
 switch (command) {
   case "init":
-    runInit(rootDir, args.slice(1));
+    runInit(process.cwd(), args.slice(1));
+    break;
+  case "validate":
+  case "ideate":
+  case "interview":
+    runValidate(rootDir, args.slice(1));
+    break;
+  case "mcp":
+  case "serve":
+    startMcpServer();
     break;
   case "preset":
     runPreset(rootDir, args.slice(1));
@@ -1751,6 +2533,9 @@ switch (command) {
   case "graph":
     runContext(rootDir, args.slice(1));
     break;
+  case "health":
+    runHealth(rootDir, args.slice(1));
+    break;
   case "doctor":
     runDoctor(rootDir);
     break;
@@ -1763,7 +2548,7 @@ switch (command) {
   case "version":
   case "--version":
   case "-v":
-    console.log("1.0.1");
+    console.log("1.1.1");
     break;
   case "help":
   case "--help":

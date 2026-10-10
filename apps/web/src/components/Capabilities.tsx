@@ -1,5 +1,5 @@
 import React from "react";
-import { Cpu, Lock, Network, RefreshCw } from "lucide-react";
+import { Cpu, Lock, Network, RefreshCw, Radio, Sparkles, HeartPulse } from "lucide-react";
 
 export function Capabilities() {
   const capabilities = [
@@ -15,6 +15,26 @@ export function Capabilities() {
     },
     {
       id: "02",
+      filename: "server.ts",
+      title: "Native Model Context Protocol (MCP)",
+      description:
+        "Zero-dependency JSON-RPC 2.0 stdio server exposing 6 architectural tools directly to Antigravity, Claude Code, and Cursor for live verification.",
+      icon: Radio,
+      command: "sagarithm mcp",
+      highlight: "JSON-RPC 2.0 Protocol",
+    },
+    {
+      id: "03",
+      filename: "validate.ts",
+      title: "Truth-Driven Idea Validation",
+      description:
+        "Senior Principal Architect stress-test forbidding blind AI compliance. Surfaces operational bottlenecks, state model risks, and defines strict non-goals.",
+      icon: Sparkles,
+      command: 'sagarithm validate "<idea>"',
+      highlight: "No Blind Compliance",
+    },
+    {
+      id: "04",
       filename: "secrets.ts",
       title: "Algorithmic Shannon Entropy Scanner",
       description:
@@ -24,7 +44,7 @@ export function Capabilities() {
       highlight: "Information Entropy H >= 4.5",
     },
     {
-      id: "03",
+      id: "05",
       filename: "graph.ts",
       title: "Robert C. Martin Instability & Coupling",
       description:
@@ -34,14 +54,14 @@ export function Capabilities() {
       highlight: "Afferent/Efferent Metric Graph",
     },
     {
-      id: "04",
-      filename: "compiler.ts",
-      title: "Deterministic Cross-Agent Compiler",
+      id: "06",
+      filename: "health.ts",
+      title: "Composite Codebase Health Index",
       description:
-        "Maintains a single canonical source of truth for architectural laws, injecting precision demarcated instruction blocks into Cursor, Antigravity, Claude, and Copilot.",
-      icon: RefreshCw,
-      command: "sagarithm sync --target all",
-      highlight: "Zero Configuration Drift",
+        "100-point repository health score across structural hygiene, modularity, dead code, secrets, and test density for automated CI/CD quality gating.",
+      icon: HeartPulse,
+      command: "sagarithm health",
+      highlight: "100-Point Quality Radar",
     },
   ];
 
@@ -64,14 +84,14 @@ export function Capabilities() {
             </div>
             <div>
               <p className="text-ink-64 text-base sm:text-lg leading-relaxed">
-                Embedding architectural governance, entropy token defense, and topological graph analysis directly into
+                Embedding architectural governance, native MCP tools, entropy token defense, and topological graph analysis directly into
                 the agentic development loop.
               </p>
             </div>
           </div>
 
-          {/* 4-card capability grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* 6-card capability grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {capabilities.map((cap) => {
               const Icon = cap.icon;
               return (

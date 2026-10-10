@@ -13,7 +13,7 @@ export function runContext(rootDir: string, args: string[]): void {
     case 'generate': {
       const manifestPath = resolve(rootDir, 'sagarithm.manifest.json');
       const manifestData = {
-        version: '1.0.1',
+        version: '1.1.1',
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map(m => ({
@@ -112,8 +112,28 @@ export function runContext(rootDir: string, args: string[]): void {
       break;
     }
 
+    case 'graph':
+    case 'diagram':
+    case 'mermaid': {
+      console.log('📈 Emitting Topological Dependency Graph (Mermaid.js)...');
+      const lines = ['```mermaid', 'graph TD'];
+      for (const mod of graph.modules) {
+        lines.push(`  ${mod.name.replace(/[^a-zA-Z0-9_]/g, '_')}["${mod.name} (${mod.files.length} files)"]`);
+      }
+      for (const [from, toList] of Object.entries(graph.dependencies)) {
+        const fromClean = from.replace(/[^a-zA-Z0-9_]/g, '_');
+        for (const to of toList) {
+          const toClean = to.replace(/[^a-zA-Z0-9_]/g, '_');
+          lines.push(`  ${fromClean} --> ${toClean}`);
+        }
+      }
+      lines.push('```');
+      console.log('\n' + lines.join('\n') + '\n');
+      break;
+    }
+
     default:
-      console.log(`Unknown context action '${subCommand}'. Supported: generate, stats, orphans, find, blast-radius, suggest-location.`);
+      console.log(`Unknown context action '${subCommand}'. Supported: generate, stats, graph, orphans, find, blast-radius, suggest-location.`);
       break;
   }
 }

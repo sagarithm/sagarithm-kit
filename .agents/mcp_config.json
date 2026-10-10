@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "sagarithm": {
+      "command": "node",
+      "args": [
+        "./bin/sagarithm.mjs",
+        "mcp"
+      ]
+    }
+  }
+}

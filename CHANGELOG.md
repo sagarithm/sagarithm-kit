@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2026-10-10
+
+### Added
+- **Turnkey Starter Setup (`sagarithm init --starter`)**:
+  - One-command initialization bootstrapping all engineering skills, rules, and governance before the user prompts or begins building.
+  - Generates `.agents/skills/<name>/SKILL.md`, `.agents/rules/`, `GEMINI.md`, and `AGENTS.md` for native Antigravity and multi-agent IDE discovery.
+  - Automatically provisions `.agents/mcp_config.json` registering the native Sagarithm MCP server.
+- **Native Model Context Protocol (MCP) Server (`sagarithm mcp`)**:
+  - Lightweight, zero-external-dependency JSON-RPC 2.0 stdio MCP server bridging Sagarithm Kit directly to Antigravity, Claude Code, and Cursor.
+  - Exposes 5 architectural tools: `sagarithm_verify`, `sagarithm_scan_secrets`, `sagarithm_query_graph`, `sagarithm_validate_idea`, and `sagarithm_get_skill`.
+- **Truth-Driven Idea Validation Engine (`sagarithm validate "<idea>"`)**:
+  - Senior Principal Architect stress-testing engine that prevents blind AI compliance.
+  - Dissects software ideas and features by analyzing feasibility, critical bottlenecks, state divergence risks, operational constraints, contract invariants, and non-goals before code is written.
+- **Codebase Health Dashboard (`sagarithm health`)**:
+  - Composite 100-point repository health score across 5 architectural pillars: Architectural Hygiene (25%), Modularity & Martin Coupling (25%), Dead Code & Orphan Abstractions (20%), Secret Isolation & Shannon Entropy (15%), and Verification & Test Density (15%).
+  - Provides categorical grades (A through F) and supports `--json` and `--threshold <score>` for automated CI/CD gating.
+- **Mermaid Topological Graph Visualizer (`sagarithm context graph`)**:
+  - Emits clean Mermaid.js syntax (`graph TD`) mapping repository modules, dependencies, and test bindings for instant visualization in documentation and PR descriptions.
+- **5 New Canonical Skills (Expanding Framework to 10 Canonical Skills)**:
+  - `skills/ideation/idea-validation/SKILL.md`: Truth-driven idea validation and anti-blind-compliance doctrine.
+  - `skills/architecture/spec-driven-development/SKILL.md`: Specification-driven development, contract interfaces, and state machines.
+  - `skills/lifecycle/planning-and-task-breakdown/SKILL.md`: Atomic INVEST task breakdown and blast-radius containment.
+  - `skills/quality/code-review-and-quality/SKILL.md`: Adversarial senior-level code reviews and architectural fitness enforcement.
+  - `skills/delivery/shipping-and-launch/SKILL.md`: 4-gate production release verification and multi-platform CI/CD attestation.
+- **Embedded Anti-Rationalization Tables Across All 10 Skills**:
+  - Added explicit anti-rationalization tables to all skills, preemptively defeating common AI excuses (e.g., skip-tests-for-trivial-changes, mock-instead-of-real-test, dump-into-utils, assume-zero-secrets).
+- **Web App & Documentation Updates (`kit.sagarithm.in`)**:
+  - Bumped version to `v1.1.1` across Navbar, Hero, Terminal Preview, Registry Bar, Interactive Studio, Benchmark, Footer, and Service Worker.
+  - Added interactive showcases for `health`, `validate`, and `mcp` CLI commands.
+
+### Changed
+- Synchronized canonical version `1.1.1` across root `package.json`, `cli/package.json`, `apps/web/package.json`, `sagarithm.manifest.json`, and all 10 canonical skill definitions.
+
 ## [1.0.1] - 2026-09-30
 
 ### Fixed

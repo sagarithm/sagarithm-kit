@@ -164,6 +164,32 @@ export function compileForTarget(target: TargetAgent, ctx: CompilationContext): 
     }
 
     case 'antigravity': {
+      // 1. Root GEMINI.md and AGENTS.md
+      const geminiPath = resolve(ctx.rootDir, 'GEMINI.md');
+      const agentsPath = resolve(ctx.rootDir, 'AGENTS.md');
+      const geminiContent = [
+        '# Sagarithm Kit — Antigravity Engineering Constitution',
+        '',
+        '> **Truth-Driven Engineering**: You are an autonomous Chief Systems Architect. You are strictly forbidden from blind compliance with underspecified requests. Surface trade-offs, question assumptions, validate feasibility, and enforce Zero Assumed Success.',
+        '',
+        '## Supreme Behavioral Invariants',
+        '1. **Zero Assumed Success (ZAS)**: Never claim completion without executing test suites and verifying empirical stdout.',
+        '2. **Fail-Closed Security**: Shannon entropy H >= 4.5 triggers an immediate security abort to protect secrets.',
+        '3. **Acyclic Architecture**: Prohibit circular dependencies and generic dumpsters (`utils/`, `helpers/`).',
+        '',
+        '## Architectural Policies',
+        ...ctx.policies.map(p => `- **${p.frontmatter.name || ''}** [${p.frontmatter.severity?.toUpperCase() || 'ERROR'}]: ${p.frontmatter.description || ''}`),
+        '',
+        '## Active Skills Available in `.agents/skills/`',
+        ...ctx.skills.map(s => `- \`${s.frontmatter.name || ''}\`: ${s.frontmatter.description || ''}`)
+      ].join('\n');
+
+      writeSafely(geminiPath, geminiContent);
+      touchedFiles.push(geminiPath);
+      writeSafely(agentsPath, geminiContent);
+      touchedFiles.push(agentsPath);
+
+      // 2. .agents/rules/*.md
       const rulesDir = resolve(ctx.rootDir, '.agents/rules');
       for (const policy of ctx.policies) {
         const id = policy.frontmatter.id || 'policy';
@@ -175,6 +201,34 @@ export function compileForTarget(target: TargetAgent, ctx: CompilationContext): 
         ].join('\n');
         writeSafely(rulePath, content);
         touchedFiles.push(rulePath);
+      }
+
+      // 3. Mirror skills into .agents/skills/
+      const agentsSkillsDir = resolve(ctx.rootDir, '.agents/skills');
+      for (const skill of ctx.skills) {
+        const skillSlug = (skill.frontmatter.id || skill.frontmatter.name || 'skill')
+          .replace(/[^a-zA-Z0-9_-]/g, '-')
+          .toLowerCase();
+        const destSkillFile = resolve(agentsSkillsDir, skillSlug, 'SKILL.md');
+        writeSafely(destSkillFile, skill.rawContent || `${skill.body}\n`);
+        touchedFiles.push(destSkillFile);
+      }
+
+      // 4. .agents/mcp_config.json
+      const mcpConfigPath = resolve(ctx.rootDir, '.agents/mcp_config.json');
+      if (!existsSync(mcpConfigPath)) {
+        const mcpConfig = {
+          mcpServers: {
+            sagarithm: {
+              command: 'node',
+              args: ['./bin/sagarithm.mjs', 'mcp']
+            }
+          }
+        };
+        const mcpDir = dirname(mcpConfigPath);
+        if (!existsSync(mcpDir)) mkdirSync(mcpDir, { recursive: true });
+        writeFileSync(mcpConfigPath, JSON.stringify(mcpConfig, null, 2), 'utf8');
+        touchedFiles.push(mcpConfigPath);
       }
       break;
     }

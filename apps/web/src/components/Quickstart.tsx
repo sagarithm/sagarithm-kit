@@ -104,6 +104,57 @@ Orphan Abstractions: 0 detected`,
 ✔ Documentation Vector: Passed
 🏆 VERIFICATION STATE: [VERIFIED]`,
     },
+    {
+      name: "health",
+      command: "npx sagarithm-kit health",
+      summary: "Composite 100-point Codebase Health Index",
+      description:
+        "Evaluates repository architectural hygiene, Martin modularity, dead code orphans, credential leaks, and test density into an actionable health score.",
+      options: [
+        { flag: "--json", desc: "Emit machine-readable health metrics JSON" },
+        { flag: "--threshold <score>", desc: "Fail CI if composite health falls below minimum (e.g. 80)" },
+      ],
+      sampleOutput: `🏥 Codebase Health Evaluation (v1.1.1)
+  Category                   Score    Weight
+  Architectural Hygiene      100/100  25%
+  Modularity & Cohesion       90/100  25%
+  Dead Code & Orphans        100/100  20%
+  Secret Isolation (H<4.5)   100/100  15%
+  Verification & Test        100/100  15%
+--------------------------------------------------
+🎯 Composite Health Index:   98/100 [GRADE A - EXCELLENT]`,
+    },
+    {
+      name: "validate",
+      command: 'npx sagarithm-kit validate "Realtime collaborative canvas with CRDT"',
+      summary: "Truth-driven architectural idea validation",
+      description:
+        "Senior engineering stress test. Challenges assumptions, surfaces state divergence and network latency failure modes, and prescribes contract interfaces before writing code.",
+      options: [
+        { flag: "<idea>", desc: "Software idea, architecture proposition, or feature concept" },
+        { flag: "--spec", desc: "Auto-generate formal MADR specification from validation breakdown" },
+      ],
+      sampleOutput: `🎯 Sagarithm Truth-Driven Idea Validation
+Idea: "Realtime collaborative canvas with CRDT"
+FEASIBILITY RATING: HIGH | ARCHITECTURAL RISK: HIGH
+⚡ Bottlenecks: Network partition reconciliation, memory footprint of tombstoned ops
+🛡 Invariants: Convergence guaranteed under arbitrary message reordering
+🚫 Non-Goals: Offline raster image rendering, synchronous lock server`,
+    },
+    {
+      name: "mcp",
+      command: "npx sagarithm-kit mcp",
+      summary: "Model Context Protocol (MCP) server integration",
+      description:
+        "Exposes native JSON-RPC stdio tools (sagarithm_verify, sagarithm_scan_secrets, sagarithm_query_graph, sagarithm_validate_idea, sagarithm_get_skill) directly to Antigravity, Claude Code, and Cursor.",
+      options: [
+        { flag: "--transport <stdio>", desc: "MCP transport protocol (default: stdio)" },
+      ],
+      sampleOutput: `📡 Starting Sagarithm Model Context Protocol (MCP) Server...
+✔ Protocol Version: 2024-11-05
+✔ Tools Registered: 5 active architectural verification tools
+✔ Transport: JSON-RPC 2.0 stdio listening on active IDE process`,
+    },
   ];
 
   const current = cliCommands[activeCommand];
@@ -142,12 +193,12 @@ Orphan Abstractions: 0 detected`,
           {/* Interactive Command Tabs */}
           <div className="overflow-hidden rounded-xl border border-edge bg-canvas-surface shadow-md">
             {/* Command Navigation Tabs */}
-            <div className="flex overflow-x-auto border-b border-edge bg-canvas-base p-1.5 gap-1 font-mono text-xs scrollbar-none">
+            <div className="flex flex-wrap border-b border-edge bg-canvas-base p-2 gap-1.5 font-mono text-xs scrollbar-none no-scrollbar">
               {cliCommands.map((cmd, idx) => (
                 <button
                   key={cmd.name}
                   onClick={() => setActiveCommand(idx)}
-                  className={`px-3.5 py-2 rounded-md font-medium whitespace-nowrap transition-all ${
+                  className={`px-3 py-1.5 rounded-md font-medium whitespace-nowrap transition-all ${
                     activeCommand === idx
                       ? "bg-canvas-surface border border-edge shadow-xs text-heat font-bold"
                       : "text-ink-48 hover:text-ink hover:bg-canvas-lighter"
@@ -206,7 +257,7 @@ Orphan Abstractions: 0 detected`,
                 <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-ink-48 mb-3">
                   Simulated Output
                 </h4>
-                <pre className="rounded-lg border border-edge bg-canvas-base p-4 font-mono text-xs leading-relaxed text-ink-88 overflow-x-auto whitespace-pre">
+                <pre className="rounded-lg border border-edge bg-canvas-base p-4 font-mono text-xs leading-relaxed text-ink-88 overflow-x-auto whitespace-pre scrollbar-none no-scrollbar">
                   {current.sampleOutput}
                 </pre>
               </div>

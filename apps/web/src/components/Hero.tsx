@@ -30,7 +30,11 @@ export function Hero() {
                 <span>Open Source • Apache-2.0</span>
               </div>
               <div className="flex items-center gap-1.5 rounded-md border border-ink bg-ink px-2.5 py-1 text-white shadow-xs">
-                <span className="font-bold text-heat">TS</span>
+                <span className="font-bold text-heat">MCP</span>
+                <span>Native Model Context Protocol</span>
+              </div>
+              <div className="flex items-center gap-1.5 rounded-md border border-edge-muted bg-white/80 px-2.5 py-1 text-ink-64 shadow-xs">
+                <span className="font-bold text-ink">v1.1.1</span>
                 <span>Node 22+ Native Engine</span>
               </div>
             </div>
@@ -42,7 +46,7 @@ export function Hero() {
 
             <p className="mt-5 max-w-xl text-base sm:text-lg text-ink-64 leading-relaxed tracking-tight">
               Universal cross-agent framework delivering architectural governance, empirical verification, living
-              context graphs, and quality gates to Cursor, Antigravity, Claude Code, Copilot, and Windsurf.
+              context graphs, and quality gates to Cursor, Antigravity, Claude Code, & Copilot.
             </p>
 
             {/* Actions */}
@@ -70,13 +74,17 @@ export function Hero() {
             </div>
 
             {/* Quick stats under CTAs */}
-            <div className="mt-8 flex items-center gap-6 pt-6 border-t border-edge font-mono text-xs text-ink-48">
+            <div className="mt-8 flex flex-wrap items-center gap-6 pt-6 border-t border-edge font-mono text-xs text-ink-48">
               <div>
-                <span className="font-bold text-ink">6 Agents</span> Supported
+                <span className="font-bold text-ink">10 Skills</span> Canonical Architecture
               </div>
               <div className="h-3 w-px bg-edge" />
               <div>
-                <span className="font-bold text-ink">5 Vectors</span> Verification
+                <span className="font-bold text-ink">Native MCP</span> Protocol Tools
+              </div>
+              <div className="h-3 w-px bg-edge" />
+              <div>
+                <span className="font-bold text-ink">5 Vectors</span> Verification Gate
               </div>
               <div className="h-3 w-px bg-edge" />
               <div>

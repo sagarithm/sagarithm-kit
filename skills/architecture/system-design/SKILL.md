@@ -1,7 +1,7 @@
 ---
 id: "architecture.system-design"
 name: "System Design & Modularity"
-version: "1.0.1"
+version: "1.1.1"
 domain: "architecture"
 description: "Decompose complex systems into highly cohesive, loosely coupled modules with explicit public interfaces, bounded contexts, and acyclic dependencies."
 triggers:
@@ -25,6 +25,14 @@ This skill guides AI agents and engineers in decomposing system requirements int
 4. **Cohesion Over Fragmentation**: Avoid arbitrary file splitting. Keep concepts that change together within the same domain boundary.
 5. **Protect the Domain with ACLs**: Isolate third-party schemas and external API changes through an Anti-Corruption Layer (ACL).
 6. **Automate Architecture Verification**: Codify layer boundaries into automated Architectural Fitness Functions.
+
+## 🛑 Anti-Rationalization Matrix
+
+| Agent Excuse / Shortcut | Architectural Reality | Mandatory Action |
+|---|---|---|
+| *"I'll just add this function to an existing module to save time."* | Unrelated functions pollute bounded contexts and increase coupling ($Ce$). | Place the function in its own cohesive domain or create a clean port interface. |
+| *"A circular import between these two files is harmless."* | Circular dependencies cause runtime undefined imports and brittle initialization bugs. | Refactor shared abstractions into a common contract or use event emission. |
+| *"I'll create a `utils/` folder for miscellaneous helpers."* | Prohibited by policy. Generic helper dumps become unmaintainable junk drawers. | Group helpers directly with the domain logic they serve. |
 
 ## Detailed Guidance
 - [Modularity and Coupling Guidelines](references/modularity-and-coupling.md)
