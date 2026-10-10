@@ -2,7 +2,7 @@
 
 ## 1. System Vision & Product Thesis
 
-**Sagarithm Kit** is a cross-agent software engineering framework for AI coding agents.
+**Sagarithm Kit** is a universal cross-agent software engineering framework for AI coding agents.
 
 Its purpose is to provide AI coding agents with the structured engineering environment required to develop production-grade software according to disciplined, industry-standard engineering practices.
 
@@ -11,32 +11,34 @@ AI coding agents commonly enter a repository with only a user prompt. Without em
 - Creating redundant abstractions, unnecessary folders, and duplicate utilities.
 - Modifying critical code without inspecting existing architecture or dependencies.
 - Confusing speculative code generation with actual verification.
+- Blind compliance: agreeing with flawed user ideas instead of stress-testing technical feasibility.
 - Introducing security vulnerabilities, unvetted dependencies, and architectural drift.
 
 ### 1.2 The Core Thesis
 AI coding agents must not enter a codebase with only a prompt. They must enter with:
-- **Project Context & Topology**
-- **Engineering Principles & Coding Standards**
-- **Specialized Engineering Skills**
-- **Behavioral Policies & Boundaries**
-- **Disciplined Workflows & Verification Gates**
-- **Security & Quality Practices**
+- **Project Context & Topology**: Understanding existing abstractions, modules, and call graphs.
+- **Truth-Driven Ideation**: Stress-testing feasibility, non-goals, and operational bottlenecks before code is authored.
+- **Engineering Principles & Coding Standards**: Strict adherence to architectural invariants and clean code paradigms.
+- **Specialized Engineering Skills**: Modular, discipline-specific procedural knowledge with anti-rationalization defense.
+- **Behavioral Policies & Boundaries**: Non-negotiable constraints preventing structural sprawl and security leaks.
+- **Disciplined Workflows & Verification Gates**: Phased lifecycles with empirical Zero Assumed Success.
+- **Native Protocol Interfaces (MCP)**: Providing AI models with runtime tools for verification, secret scanning, and topology querying.
 
 The conceptual engineering lifecycle is:
-$$\text{Human} \longrightarrow \text{Sagarithm Kit} \longrightarrow \left[ \begin{matrix} \text{Context} \\ \text{Skills} \\ \text{Policies} \\ \text{Workflows} \end{matrix} \right] \longrightarrow \text{AI Agent} \longrightarrow \text{Implementation} \longrightarrow \text{Validation Gate} \longrightarrow \text{Production Software}$$
+$$\text{Human Idea} \longrightarrow \text{Idea Validation} \longrightarrow \text{Specification} \longrightarrow \text{Sagarithm Kit} \longrightarrow \left[ \begin{matrix} \text{Context} \\ \text{Skills} \\ \text{Policies} \\ \text{Workflows} \\ \text{MCP Tools} \end{matrix} \right] \longrightarrow \text{AI Agent} \longrightarrow \text{Verification Gate} \longrightarrow \text{Production Software}$$
 
 ### 1.3 What Sagarithm Kit Is NOT
 Sagarithm Kit is explicitly **NOT**:
 - A starter template or boilerplate
 - A generic prompt library
-- A flat collection of `SKILL.md` files
+- A flat collection of loose markdown files
 - An `AGENTS.md` generator
 - An AI IDE or editor replacement
 - An application framework
 - A code-snippet repository
 - An Antigravity-specific or single-agent utility
 
-Sagarithm Kit is an **engineering system** that maintains canonical engineering intelligence and projects it across multiple AI coding agents.
+Sagarithm Kit is an **engineering operating system** that maintains canonical engineering intelligence and projects it across multiple AI coding agents and protocols.
 
 ---
 
@@ -45,15 +47,16 @@ Sagarithm Kit is an **engineering system** that maintains canonical engineering 
 > **Google Antigravity is the development environment, NOT the target platform.**
 > Sagarithm Kit must not become dependent on Antigravity-specific functionality, syntax, or runtime conventions.
 
-Sagarithm Kit is designed as an agent-agnostic system. The initial ecosystem accounts for, at minimum:
+Sagarithm Kit is designed as an agent-agnostic system. It supports, at minimum:
 - **Google Antigravity**
 - **Cursor**
-- **Claude Code**
+- **Claude Code / Claude Desktop**
 - **VS Code / GitHub Copilot**
 - **Windsurf**
 - **OpenAI Codex**
+- **Any MCP-Compliant Agent** (via Model Context Protocol JSON-RPC 2.0 stdio server)
 
-Additional AI coding agents will be supported via adapters without altering canonical specifications.
+Additional AI coding agents are supported via adapters and MCP without altering canonical specifications.
 
 ---
 
@@ -68,11 +71,13 @@ mindmap
       Software Architect
       Principal Engineer
       Tech Lead
+    Ideation & Strategy
+      Truth-Driven Systems Engineer
+      Feasibility Analyst
     Core Implementation
       Senior Software Engineer
       Frontend Engineer
       Backend Engineer
-      Product Engineer
     Reliability & Quality
       QA / Quality Engineer
       Security Engineer
@@ -84,17 +89,17 @@ mindmap
 
 ### 3.1 Engineering Domains
 The system organizes specialized engineering knowledge across 11 core domains:
-1. **Architecture**: System design, modularity, domain boundaries, separation of concerns, dependency graphs, ADRs, event-driven systems.
-2. **Frontend**: Component architecture, state management, forms, accessibility, performance, design systems, frontend security.
-3. **Backend**: API contracts, validation, error hierarchies, authentication/authorization, async queues, caching, observability.
-4. **Database**: Schema normalization, indexing, migration strategies, transaction isolation, query tuning, data integrity.
-5. **Testing**: Unit, integration, E2E, contract, property-based testing, mocking strategies, test isolation, coverage gates.
-6. **Security**: Threat modeling, OWASP practices, input sanitization, secrets handling, dependency auditing, session integrity, rate limiting.
-7. **DevOps / SRE**: CI/CD pipelines, containerization, deployment strategies, logging, metrics, tracing, health checks, rollback mechanisms.
-8. **Quality Engineering**: Static analysis, type safety, linting, complexity budgets, maintainability metrics, quality gates.
-9. **Documentation**: Architectural Decision Records (ADRs), API references, operational playbooks, developer guides, changelogs.
-10. **Product Engineering**: Requirements breakdown, acceptance criteria, edge-case analysis, technical feasibility, Definition of Done.
-11. **AI Engineering**: LLM application patterns, prompt architectures, structured outputs, tool-calling validation, evaluation suites, AI security.
+1. **Ideation**: Truth-driven engineering, feasibility stress-testing, architectural non-goals, operational bottlenecks, anti-compliance.
+2. **Architecture**: System design, modularity, domain boundaries, separation of concerns, dependency graphs, ADRs, event-driven systems.
+3. **Frontend**: Component architecture, state management, accessibility, performance, design systems, frontend security.
+4. **Backend**: API contracts, validation, error hierarchies, authentication/authorization, async queues, caching, observability.
+5. **Database**: Schema normalization, indexing, migration strategies, transaction isolation, query tuning, data integrity.
+6. **Testing**: Unit, integration, E2E, contract, property-based testing, mocking strategies, test isolation, coverage gates.
+7. **Security**: Threat modeling, OWASP practices, input sanitization, Shannon entropy secrets handling, dependency auditing.
+8. **DevOps / SRE**: CI/CD pipelines, containerization, deployment strategies, health checks, rollback mechanisms.
+9. **Quality Engineering**: Static analysis, type safety, linting, complexity budgets, maintainability metrics, code review defense.
+10. **Documentation**: Architectural Decision Records (ADRs), API references, operational playbooks, developer guides, changelogs.
+11. **Delivery**: SemVer versioning, release governance, multi-platform artifact attestation, changelog synchronization.
 
 ---
 
@@ -102,41 +107,42 @@ The system organizes specialized engineering knowledge across 11 core domains:
 
 Sagarithm Kit enforces 10 foundational principles across all interactions:
 
-1. **Understand Before Modifying**: Inspect relevant existing code, architecture, dependencies, conventions, and constraints before significant modification.
-2. **Inspect Before Creating**: Before creating a file, directory, abstraction, component, service, dependency, or configuration, inspect the existing repository.
-3. **Reuse Before Duplicating**: Prefer extending or reusing existing functionality over inventing parallel implementations.
-4. **Plan Before Significant Implementation**: Formulate a cohesive implementation plan before extensive code execution.
-5. **Architecture Before Convenience**: Never sacrifice system architecture merely for short-term implementation convenience.
-6. **Minimal Necessary Change**: Avoid unrelated modifications, style rewrites, or speculative refactoring.
-7. **Validate Before Completion**: Code being written is not equivalent to code being verified.
-8. **Never Claim Unverified Success**: Never claim tests, builds, deployments, or migrations succeeded without executing and inspecting verifiable evidence.
-9. **Document Consequential Decisions**: Important architectural decisions and trade-offs must be recorded (e.g., via ADRs).
-10. **Production Mindset**: Favor maintainability, reliability, security, testability, scalability, observability, accessibility, and operational correctness at all times.
+1. **Truth Before Compliance**: Forbid blind AI agreement. Surface trade-offs, question underspecified assumptions, and validate feasibility before building.
+2. **Understand Before Modifying**: Inspect relevant existing code, architecture, dependencies, conventions, and constraints before significant modification.
+3. **Inspect Before Creating**: Before creating a file, directory, abstraction, component, service, or dependency, inspect the existing repository.
+4. **Reuse Before Duplicating**: Prefer extending or reusing existing functionality over inventing parallel implementations.
+5. **Plan Before Significant Implementation**: Formulate a cohesive, atomic implementation plan before extensive code execution.
+6. **Architecture Before Convenience**: Never sacrifice system architecture merely for short-term implementation convenience.
+7. **Minimal Necessary Change**: Avoid unrelated modifications, style rewrites, or speculative refactoring.
+8. **Validate Before Completion**: Code being written is not equivalent to code being verified.
+9. **Zero Assumed Success (ZAS)**: Never claim tests, builds, deployments, or migrations succeeded without executing and inspecting verifiable empirical evidence.
+10. **Document Consequential Decisions**: Important architectural decisions and trade-offs must be recorded (e.g., via ADRs).
 
 ---
 
-## 5. The Six Decoupled Architectural Layers
+## 5. The Seven Decoupled Architectural Layers
 
-Sagarithm Kit enforces strict separation between canonical specifications and target-agent implementations:
+Sagarithm Kit enforces strict separation between canonical specifications, target-agent compilation, and runtime protocol interfaces:
 
 ```mermaid
 graph TD
     subgraph Canonical["Canonical Layer (Single Source of Truth - Agent Agnostic)"]
         K["1. Canonical Knowledge<br/>(Architectural Principles, Standards)"]
-        S["2. Skills<br/>('How to practice a discipline')"]
-        P["3. Policies<br/>('What must or must not be done')"]
-        W["4. Workflows<br/>('Sequence of execution & gates')"]
+        S["2. 10 Canonical Skills<br/>('How to practice a discipline')"]
+        P["3. Behavioral Policies<br/>('What must or must not be done')"]
+        W["4. Phase-Gated Workflows<br/>('Sequence of execution & gates')"]
         C["5. Project Context<br/>(Repository topology & manifests)"]
     end
 
-    subgraph Engine["Adaptation Engine"]
-        A["6. Agent-Specific Adapters<br/>(Deterministic compilers / generators)"]
+    subgraph Engine["Adaptation & Interface Engine"]
+        A["6. Multi-Agent Adapters<br/>(Deterministic compilers / emitters)"]
+        M["7. Model Context Protocol (MCP)<br/>(Live JSON-RPC 2.0 stdio server)"]
     end
 
     subgraph Targets["Target AI Environments"]
         T1["Google Antigravity"]
         T2["Cursor"]
-        T3["Claude Code"]
+        T3["Claude Code / Desktop"]
         T4["VS Code / Copilot"]
         T5["Windsurf"]
         T6["OpenAI Codex"]
@@ -148,35 +154,59 @@ graph TD
     W --> A
     C --> A
 
+    C --> M
+    S --> M
+    P --> M
+
     A --> T1
     A --> T2
     A --> T3
     A --> T4
     A --> T5
     A --> T6
+
+    M -.-> T1
+    M -.-> T2
+    M -.-> T3
 ```
 
 ### Layer 1: Canonical Engineering Knowledge
 - **Purpose**: Curated principles, architectural paradigms, design patterns, and engineering reasoning.
 - **Form**: Neutral Markdown documents enriched with semantic YAML metadata.
 
-### Layer 2: Skills
-- **Purpose**: Answers *"How should an AI agent perform this engineering discipline correctly?"*
-- **Form**: Composable, discoverable, versionable skill packages containing guidelines, references, code examples, and checklists.
+### Layer 2: 10 Canonical Skills
+- **Purpose**: Modular, discipline-specific guides with explicit anti-rationalization tables:
+  1. *Idea Validation & Truth-Driven Engineering* (`ideation.idea-validation`)
+  2. *Specification-Driven Architecture* (`architecture.spec-driven-development`)
+  3. *System Design & Modularity* (`architecture.system-design`)
+  4. *Atomic Planning & Task Breakdown* (`lifecycle.planning-and-task-breakdown`)
+  5. *Clean Code & Quality Standards* (`quality.coding-standards`)
+  6. *Rigorous Code Review & Quality Defense* (`quality.code-review-and-quality`)
+  7. *Secure Development & Vulnerability Prevention* (`security.secure-development`)
+  8. *Test-Driven Verification* (`testing.test-driven-verification`)
+  9. *Architectural Decision Records* (`documentation.architectural-decision-records`)
+  10. *Production Shipping & Release Governance* (`delivery.shipping-and-launch`)
 
-### Layer 3: Policies
-- **Purpose**: Answers *"What must or must not be done?"*
-- **Form**: Non-negotiable behavioral boundaries and constraints categorized by severity (`error`, `warn`, `advisory`).
+### Layer 3: Behavioral Policies
+- **Purpose**: Non-negotiable boundaries preventing structural sprawl, secret leaks, and unvetted dependencies. Categorized by severity (`error`, `warn`, `advisory`).
 
 ### Layer 4: Workflows
-- **Purpose**: Answers *"What sequence should the agent follow to complete this type of task?"*
-- **Form**: Phase-gated task lifecycles with prerequisites, execution steps, and mandatory verification gates.
+- **Purpose**: Phase-gated task lifecycles (Feature, Bug Fix, Refactor, Release) with strict verification prerequisites.
 
 ### Layer 5: Project Context
-- **Purpose**: Declarative workspace manifests (topology, dependencies, public interfaces, test harnesses) allowing agents to navigate existing code intelligently.
+- **Purpose**: Declarative workspace manifests (topology, dependencies, public interfaces, test harnesses) and AST coupling analytics (Martin Instability $I = C_e / (C_a + C_e)$).
 
 ### Layer 6: Agent-Specific Adapters
-- **Purpose**: One-way transformation pipeline that ingests Layers 1–5 and compiles native configuration files for target AI platforms.
+- **Purpose**: One-way transformation pipeline that ingests Layers 1–5 and compiles native configuration files for target AI platforms (`.cursorrules`, `CLAUDE.md`, `AGENTS.md`, `GEMINI.md`, etc.).
+
+### Layer 7: Model Context Protocol (MCP) Server
+- **Purpose**: Real-time stdio JSON-RPC 2.0 interface equipping AI models directly with runtime architectural tools:
+  - `sagarithm_verify`: Empirical multi-vector verification gate
+  - `sagarithm_scan_secrets`: Shannon entropy ($H \ge 4.5$) secret detection
+  - `sagarithm_query_graph`: AST symbols, blast-radius, and coupling queries
+  - `sagarithm_validate_idea`: Truth-driven idea stress-testing
+  - `sagarithm_health`: 100-point composite codebase health dashboard
+  - `sagarithm_get_skill`: Dynamic skill and anti-rationalization retrieval
 
 ---
 
@@ -194,21 +224,22 @@ Sagarithm Kit categorizes changes into 4 risk tiers to calibrate the required va
 
 ### 6.2 Verification Taxonomy
 Sagarithm Kit strictly prohibits **Assumed Success**. All work tracks through explicit verification states:
+$$\text{ASSUMED} \longrightarrow \text{IMPLEMENTED} \longrightarrow \text{TESTED} \longrightarrow \text{VERIFIED}$$
+
 - **Implemented** $\neq$ **Tested** $\neq$ **Verified**.
 
 ---
 
-## 7. Phased Implementation Roadmap
+## 7. Implementation Roadmap & Release History
 
-Development of Sagarithm Kit proceeds across 10 disciplined phases:
-
-- **Phase 0 — Foundation**: Repository inspection, canonical taxonomy, meta-specification, architecture, and governance standards. *(Current Phase)*
-- **Phase 1 — Engineering Constitution**: Encoding core engineering, architectural, coding, security, and testing principles.
-- **Phase 2 — Core Skills**: Prototyping and validating the initial skill specification across Architecture, Coding Standards, Testing, Security, and Documentation.
-- **Phase 3 — Policies**: Implementing invariant policies (file creation, directory creation, dependency limits, change containment).
-- **Phase 4 — Workflows**: Formalizing task lifecycles (Feature, Bug Fix, Refactor, Release).
-- **Phase 5 — Agent Adapters**: Developing native compilers for Antigravity, Cursor, Claude Code, Copilot, Windsurf, and Codex.
-- **Phase 6 — CLI**: Building the `sagarithm` CLI (`init`, `sync`, `doctor`, `audit`, `verify`).
-- **Phase 7 — Project Intelligence**: Repository graph analysis, topology indexing, and context extraction.
-- **Phase 8 — Validation & Audit Engine**: Automated engineering health checks and policy audit runners.
-- **Phase 9 — Registry & Ecosystem**: Community skill ecosystem, versioning, organization presets, and enterprise governance.
+- **Phase 0 — Foundation**: Repository inspection, canonical taxonomy, meta-specification, architecture, and governance standards. *(Completed)*
+- **Phase 1 — Engineering Constitution**: Encoding core engineering, architectural, coding, security, and testing principles. *(Completed)*
+- **Phase 2 — Core Skills**: Prototyping and validating initial skills across Architecture, Coding Standards, Testing, Security, and ADRs. *(Completed)*
+- **Phase 3 — Policies**: Implementing invariant policies (file creation, directory creation, dependency limits, change containment). *(Completed)*
+- **Phase 4 — Workflows**: Formalizing task lifecycles (Feature, Bug Fix, Refactor, Release). *(Completed)*
+- **Phase 5 — Agent Adapters**: Developing native compilers for Antigravity, Cursor, Claude Code, Copilot, Windsurf, and Codex. *(Completed)*
+- **Phase 6 — CLI**: Building the `sagarithm` CLI (`init`, `sync`, `doctor`, `audit`, `verify`, `preset`, `context`). *(Completed)*
+- **Phase 7 — Project Intelligence**: Repository graph analysis, AST topology indexing, and context extraction. *(Completed)*
+- **Phase 8 — Validation & Audit Engine**: Automated engineering health checks and policy audit runners. *(Completed)*
+- **Phase 9 — Registry & Ecosystem**: Decentralized package distribution, SHA-256 integrity, and curated discipline presets. *(Completed)*
+- **v1.1.1 Production Release**: Native Model Context Protocol (MCP) server, Truth-Driven Idea Validation engine, 10 Canonical Skills, Starter preset initialization, and 100-point Codebase Health Index. *(Current Release)*
