@@ -22,7 +22,7 @@ export function TerminalPreview() {
   return (
     <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#161616] text-[#ededed] shadow-2xl">
             {/* Terminal Title Bar */}
-      <div className="flex h-10 sm:h-11 items-center justify-between border-b border-white/10 px-2 sm:px-4 font-mono text-[11px] bg-white/[0.02] gap-1 sm:gap-2 overflow-hidden">
+      <div className="flex h-10 sm:h-11 items-center justify-between border-b border-white/10 px-2 sm:px-4 font-mono text-[11px] bg-white/[0.02] gap-1 sm:gap-2">
         {/* macOS Colored Window Controls & Title */}
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0 min-w-0">
           <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
@@ -34,7 +34,7 @@ export function TerminalPreview() {
             <span className="text-white/90 font-medium text-[11px] sm:text-xs">
               <span className="hidden sm:inline">sagarithm-</span>cli
             </span>
-            <span className="rounded bg-white/10 px-1 sm:px-1.5 py-0.5 text-[9px] sm:text-[10px] text-white/40 font-mono">
+            <span className="hidden sm:inline-flex rounded bg-white/10 px-1 sm:px-1.5 py-0.5 text-[9px] sm:text-[10px] text-white/40 font-mono">
               v1.2.0
             </span>
           </div>
@@ -60,10 +60,10 @@ export function TerminalPreview() {
 
           <button
             onClick={copyCommand}
-            className="flex items-center justify-center gap-1 rounded-md border border-white/10 bg-white/5 px-1.5 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-[11px] text-white/70 hover:border-white/30 hover:text-white transition-all shrink-0"
+            className="flex w-[56px] sm:w-[74px] items-center justify-center gap-1 rounded-md border border-white/10 bg-white/5 px-1 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-[11px] text-white/70 hover:border-white/30 hover:text-white transition-all shrink-0"
             title="Copy command"
           >
-            {copied ? <Check className="h-3 w-3 text-green-400" /> : <Copy className="h-3 w-3" />}
+            {copied ? <Check className="h-3 w-3 text-green-400 shrink-0" /> : <Copy className="h-3 w-3 shrink-0" />}
             <span className="font-mono">{copied ? "Copied" : "Copy"}</span>
           </button>
         </div>

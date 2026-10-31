@@ -21,21 +21,26 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#ededed_1px,transparent_1px),linear-gradient(to_bottom,#ededed_1px,transparent_1px)] bg-[size:56px_56px] opacity-40 [mask-image:radial-gradient(circle_at_70%_35%,black,transparent_60%)]" />
 
       <div className="shell">
-        <div className="pad min-h-[580px] pt-12 pb-16 lg:pt-20 lg:pb-24 grid grid-cols-1 lg:grid-cols-[1.35fr,1fr] gap-8 lg:gap-10 items-center">
+        <div className="pad min-h-[580px] pt-12 pb-16 lg:pt-20 lg:pb-24 grid grid-cols-1 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] gap-8 lg:gap-10 items-center">
           {/* Left Column: Copy & Actions */}
-          <div>
-            <div className="mb-6 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider">
-              <div className="flex items-center gap-2 rounded-md border border-edge-muted bg-white/80 px-2.5 py-1 text-ink-64 shadow-xs">
-                <span className="h-3 w-1 bg-heat rounded-xs" />
-                <span>Open Source • Apache-2.0</span>
+          <div className="min-w-0">
+            {/* Badges: Row 1 (Open Source + MCP) and Row 2 (v1.2.0) */}
+            <div className="mb-6 flex flex-col gap-2 font-mono text-[11px] uppercase tracking-wider">
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
+                <div className="flex items-center gap-2 rounded-md border border-edge-muted bg-white/80 px-2.5 py-1 text-ink-64 shadow-xs shrink-0">
+                  <span className="h-3 w-1 bg-heat rounded-xs" />
+                  <span>Open Source • Apache-2.0</span>
+                </div>
+                <div className="flex items-center gap-1.5 rounded-md border border-ink bg-ink px-2.5 py-1 text-white shadow-xs shrink-0">
+                  <span className="font-bold text-heat">MCP</span>
+                  <span>Native Model Context Protocol</span>
+                </div>
               </div>
-              <div className="flex items-center gap-1.5 rounded-md border border-ink bg-ink px-2.5 py-1 text-white shadow-xs">
-                <span className="font-bold text-heat">MCP</span>
-                <span>Native Model Context Protocol</span>
-              </div>
-              <div className="flex items-center gap-1.5 rounded-md border border-edge-muted bg-white/80 px-2.5 py-1 text-ink-64 shadow-xs">
-                <span className="font-bold text-ink">v1.2.0</span>
-                <span>Node 22+ Native Engine</span>
+              <div className="flex items-center">
+                <div className="inline-flex items-center gap-1.5 rounded-md border border-edge-muted bg-white/80 px-2.5 py-1 text-ink-64 shadow-xs shrink-0">
+                  <span className="font-bold text-ink">v1.2.0</span>
+                  <span>Node 22+ Native Engine</span>
+                </div>
               </div>
             </div>
 
@@ -53,10 +58,10 @@ export function Hero() {
             </p>
 
             {/* Actions */}
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-wrap sm:flex-nowrap items-center gap-3">
               <button
                 onClick={handleCopy}
-                className="group inline-flex h-11 items-center gap-2.5 rounded-lg border border-heat bg-heat px-5 text-sm font-medium text-white shadow-sm transition-all hover:border-heat-dark hover:bg-heat-dark"
+                className="group inline-flex h-11 items-center gap-2.5 rounded-lg border border-heat bg-heat px-5 text-sm font-medium text-white shadow-sm transition-all hover:border-heat-dark hover:bg-heat-dark shrink-0"
               >
                 <Terminal className="h-4 w-4 opacity-90" />
                 <span className="font-mono">{command}</span>
@@ -69,7 +74,7 @@ export function Hero() {
 
               <Link
                 href="#studio"
-                className="inline-flex h-11 items-center gap-2 rounded-lg border border-edge-muted bg-canvas-surface px-4 text-sm font-medium text-ink transition-all hover:border-ink-32 hover:bg-white"
+                className="inline-flex h-11 items-center gap-2 rounded-lg border border-edge-muted bg-canvas-surface px-4 text-sm font-medium text-ink transition-all hover:border-ink-32 hover:bg-white shrink-0 whitespace-nowrap"
               >
                 <span>Interactive Studio</span>
                 <ArrowRight className="h-3.5 w-3.5 text-heat" />
@@ -78,7 +83,7 @@ export function Hero() {
           </div>
 
           {/* Right Column: Terminal Preview */}
-          <div className="w-full">
+          <div className="w-full min-w-0">
             <TerminalPreview />
           </div>
         </div>
