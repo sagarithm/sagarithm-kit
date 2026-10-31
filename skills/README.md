@@ -20,7 +20,7 @@ skills/<domain>/<skill-name>/
 
 ---
 
-## Canonical Skills Catalog (v1.1.1)
+## Canonical Skills Catalog (v1.2.0)
 
 Sagarithm Kit maintains **10 Canonical Engineering Skills** covering the complete software engineering lifecycle from ideation to production shipping:
 

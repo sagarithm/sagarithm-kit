@@ -1,7 +1,7 @@
 ---
 id: "database.architecture-and-modeling"
 name: "Database Architecture & Data Modeling"
-version: "1.1.1"
+version: "1.2.0"
 domain: "database"
 description: "Architect high-performance relational and document schemas, deterministic zero-downtime migrations, B-Tree/GIN indexing strategies, and ACID transaction boundaries."
 triggers:

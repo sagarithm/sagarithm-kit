@@ -1,7 +1,7 @@
 ---
 id: "lifecycle.planning-and-task-breakdown"
 name: "Atomic Planning & Task Breakdown"
-version: "1.1.1"
+version: "1.2.0"
 domain: "lifecycle"
 description: "Deconstructs complex specifications into hermetic, sequentially verifiable implementation slices. Enforces blast-radius containment and rollback checkpoints."
 triggers:

@@ -129,7 +129,7 @@ export function buildProjectGraph(rootDir: string): ProjectGraph {
   }
 
   return {
-    version: '1.1.1',
+    version: '1.2.0',
     name: 'sagarithm-project',
     rootPath: rootDir,
     modules,

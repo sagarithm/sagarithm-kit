@@ -19,7 +19,7 @@ const rootDir = findWorkspaceRoot();
 
 function printHelp() {
   console.log(`
-Sagarithm Kit CLI (v1.1.1)
+Sagarithm Kit CLI (v1.2.0)
 Universal Cross-Agent Engineering Framework for AI Coding Agents
 
 Usage:
@@ -97,7 +97,7 @@ switch (command) {
   case 'version':
   case '--version':
   case '-v':
-    console.log('1.1.1');
+    console.log('1.2.0');
     break;
   case 'help':
   case '--help':

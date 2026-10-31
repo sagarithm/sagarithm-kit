@@ -1,7 +1,7 @@
 ---
 id: "architecture.spec-driven-development"
 name: "Specification-Driven Architecture"
-version: "1.1.1"
+version: "1.2.0"
 domain: "architecture"
 description: "Transforms validated ideas into formal, testable architectural specifications. Defines bounded contexts, contract interfaces, state machines, and acceptance criteria before implementation."
 triggers:

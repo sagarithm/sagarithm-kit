@@ -34,7 +34,7 @@ export function Hero() {
                 <span>Native Model Context Protocol</span>
               </div>
               <div className="flex items-center gap-1.5 rounded-md border border-edge-muted bg-white/80 px-2.5 py-1 text-ink-64 shadow-xs">
-                <span className="font-bold text-ink">v1.1.1</span>
+                <span className="font-bold text-ink">v1.2.0</span>
                 <span>Node 22+ Native Engine</span>
               </div>
             </div>

@@ -2,7 +2,7 @@
 ---
 id: "delivery.shipping-and-launch"
 name: "Production Shipping & Release Governance"
-version: "1.1.1"
+version: "1.2.0"
 domain: "delivery"
 description: "Governs production deployments, releases, and distribution. Enforces formal verification gates, SemVer versioning, changelog synchronization, and multi-platform CI/CD attestation."
 triggers:

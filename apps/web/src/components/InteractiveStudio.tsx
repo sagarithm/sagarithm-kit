@@ -88,7 +88,7 @@ export function InteractiveStudio() {
 }`
     : `<!-- SAGARITHM:START -->
 # SAGARITHM ENGINEERING CONSTITUTION (Target: ${targetFiles[selectedAgent]})
-# Preset: ${activePreset.name} | Version: 1.1.1
+# Preset: ${activePreset.name} | Version: 1.2.0
 
 ## Supreme Behavioral Governors
 - Zero Assumed Success: You are strictly forbidden from declaring a task complete without empirical test evidence.

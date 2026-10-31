@@ -791,7 +791,7 @@ function buildProjectGraph(rootDir2) {
     }
   }
   return {
-    version: "1.1.1",
+    version: "1.2.0",
     name: "sagarithm-project",
     rootPath: rootDir2,
     modules,
@@ -950,7 +950,7 @@ function runAudit(rootDir2, args2 = []) {
     if (!existsSync10(manifestPath)) {
       const graph = buildProjectGraph(rootDir2);
       const manifestData = {
-        version: "1.1.1",
+        version: "1.2.0",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -1158,7 +1158,7 @@ function runVerificationPipeline(rootDir2, options = {}) {
     state = "ASSUMED";
   }
   const report = {
-    version: "1.1.1",
+    version: "1.2.0",
     timestamp: (/* @__PURE__ */ new Date()).toISOString(),
     state,
     summary: {
@@ -1416,7 +1416,7 @@ function runContext(rootDir2, args2) {
     case "generate": {
       const manifestPath = resolve11(rootDir2, "sagarithm.manifest.json");
       const manifestData = {
-        version: "1.1.1",
+        version: "1.2.0",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -1601,7 +1601,7 @@ function packArtifact(rootDir2, targetPath) {
   const integrity = computeIntegrityHash(content);
   const manifest = {
     name: `@sagarithm/skill-${base}`,
-    version: "1.1.1",
+    version: "1.2.0",
     type: "skill",
     description: `Packaged canonical artifact for ${base}`,
     author: "Sagarithm Community",
@@ -1613,7 +1613,7 @@ function packArtifact(rootDir2, targetPath) {
   if (!existsSync12(distDir)) {
     mkdirSync3(distDir, { recursive: true });
   }
-  const packageFileName = `${manifest.name.replace(/[@/]/g, "-")}-1.1.1.json`;
+  const packageFileName = `${manifest.name.replace(/[@/]/g, "-")}-1.2.0.json`;
   const packagePath = resolve12(distDir, packageFileName);
   const bundle = {
     manifest,
@@ -1696,7 +1696,7 @@ Workflows (${preset.workflows.length}):`);
         } catch {
           console.log("\u26A0\uFE0F  Existing config invalid; creating new configuration.");
           config = {
-            version: "1.1.1",
+            version: "1.2.0",
             name: "sagarithm-project",
             targets: ["antigravity", "cursor", "claude-code"],
             riskThreshold: preset.riskThreshold,
@@ -1712,7 +1712,7 @@ Workflows (${preset.workflows.length}):`);
         }
       } else {
         config = {
-          version: "1.1.1",
+          version: "1.2.0",
           name: "sagarithm-project",
           targets: ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"],
           riskThreshold: preset.riskThreshold,
@@ -1818,7 +1818,7 @@ function runWorkflow(rootDir2, args2) {
   const workflowName = args2[0];
   if (!workflowName || workflowName === "help") {
     console.log(`
-\u{1F916} Sagarithm Autonomous Workflow Orchestrator (v1.1.1)
+\u{1F916} Sagarithm Autonomous Workflow Orchestrator (v1.2.0)
 
 Usage:
   sagarithm run <workflow-name> [options]
@@ -1861,7 +1861,7 @@ Options:
     if (!manifestExists) {
       console.log("  \u26A0\uFE0F  Missing sagarithm.manifest.json \u2014 Auto-generating topology manifest...");
       const manifestData = {
-        version: "1.1.1",
+        version: "1.2.0",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -2305,7 +2305,7 @@ function dispatchMcpRequest(req, rootDir2) {
           },
           serverInfo: {
             name: "sagarithm-kit-mcp",
-            version: "1.1.1"
+            version: "1.2.0"
           }
         }
       };
@@ -2590,7 +2590,7 @@ var command = args[0] || "help";
 var rootDir = findWorkspaceRoot();
 function printHelp() {
   console.log(`
-Sagarithm Kit CLI (v1.1.1)
+Sagarithm Kit CLI (v1.2.0)
 Universal Cross-Agent Engineering Framework for AI Coding Agents
 
 Usage:
@@ -2667,7 +2667,7 @@ switch (command) {
   case "version":
   case "--version":
   case "-v":
-    console.log("1.1.1");
+    console.log("1.2.0");
     break;
   case "help":
   case "--help":

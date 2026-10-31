@@ -112,7 +112,7 @@ The foundational laws governing all agent interactions are codified in the [Engi
 
 ---
 
-## Canonical Skills (v1.1.1)
+## Canonical Skills (v1.2.0)
 
 The complete suite of 10 canonical skills is cataloged in [skills/README.md](skills/README.md):
 

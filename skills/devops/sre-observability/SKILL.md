@@ -1,7 +1,7 @@
 ---
 id: "devops.sre-observability"
 name: "DevOps, SRE & Cloud Deployment Governance"
-version: "1.1.1"
+version: "1.2.0"
 domain: "devops"
 description: "Govern production deployment lifecycles, hermetic multi-stage containerization, CI/CD verification gates, OpenTelemetry observability, and zero-downtime releases."
 triggers:

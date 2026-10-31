@@ -95,7 +95,7 @@ export function Benchmark() {
                   <th className="py-4 px-4 sm:px-6 font-medium text-ink-64">Raw LLM Prompting</th>
                   <th className="py-4 px-4 sm:px-6 font-medium text-ink-64">.agents</th>
                   <th className="py-4 px-4 sm:px-6 font-bold text-heat bg-heat/5 border-l border-r border-heat/20">
-                    Sagarithm Kit v1.1.1
+                    Sagarithm Kit v1.2.0
                   </th>
                 </tr>
               </thead>

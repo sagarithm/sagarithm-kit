@@ -242,4 +242,4 @@ $$\text{ASSUMED} \longrightarrow \text{IMPLEMENTED} \longrightarrow \text{TESTED
 - **Phase 7 — Project Intelligence**: Repository graph analysis, AST topology indexing, and context extraction. *(Completed)*
 - **Phase 8 — Validation & Audit Engine**: Automated engineering health checks and policy audit runners. *(Completed)*
 - **Phase 9 — Registry & Ecosystem**: Decentralized package distribution, SHA-256 integrity, and curated discipline presets. *(Completed)*
-- **v1.1.1 Production Release**: Native Model Context Protocol (MCP) server, Truth-Driven Idea Validation engine, 10 Canonical Skills, Starter preset initialization, and 100-point Codebase Health Index. *(Current Release)*
+- **v1.2.0 Production Release**: Native Model Context Protocol (MCP) server, Truth-Driven Idea Validation engine, 10 Canonical Skills, Starter preset initialization, and 100-point Codebase Health Index. *(Current Release)*

@@ -1,7 +1,7 @@
 ---
 id: "testing.test-driven-verification"
 name: "Test-Driven Verification"
-version: "1.1.1"
+version: "1.2.0"
 domain: "testing"
 description: "Design and implement deterministic, hermetic automated test suites, property-based invariants, and mutation verification."
 triggers:

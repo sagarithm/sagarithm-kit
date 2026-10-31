@@ -1,7 +1,7 @@
 ---
 id: "performance.profiling-and-optimization"
 name: "Systems Performance & Profiling Engineering"
-version: "1.1.1"
+version: "1.2.0"
 domain: "performance"
 description: "Diagnose and eliminate performance bottlenecks, CPU hotspots, memory leaks, event-loop lag, and sub-optimal algorithmic complexity."
 triggers:

@@ -2,7 +2,7 @@
 ---
 id: "quality.code-review-and-quality"
 name: "Rigorous Code Review & Quality Defense"
-version: "1.1.1"
+version: "1.2.0"
 domain: "quality"
 description: "Applies senior-engineer scrutiny to all code modifications. Enforces architectural fitness, zero-leak secret defense, minimal blast radius, and anti-rationalization pushback."
 triggers:

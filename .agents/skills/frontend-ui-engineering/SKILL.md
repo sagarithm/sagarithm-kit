@@ -2,7 +2,7 @@
 ---
 id: "frontend.ui-engineering"
 name: "Frontend Architecture & UI/UX Engineering"
-version: "1.1.1"
+version: "1.2.0"
 domain: "frontend"
 description: "Engineer production-grade frontend architectures, design systems, accessible UI components, state machines, and optimal Core Web Vitals with minimal token overhead."
 triggers:

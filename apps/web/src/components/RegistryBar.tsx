@@ -15,7 +15,7 @@ export function RegistryBar() {
       tag: "GLOBAL CLI RUNTIME",
       command: "npx sagarithm-kit init",
       link: "https://www.npmjs.com/package/sagarithm-kit",
-      desc: "Live public release v1.1.1",
+      desc: "Live public release v1.2.0",
     },
     {
       id: "mcp",

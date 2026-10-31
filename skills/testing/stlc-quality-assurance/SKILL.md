@@ -1,7 +1,7 @@
 ---
 id: "testing.stlc-quality-assurance"
 name: "STLC & Enterprise Quality Assurance"
-version: "1.1.1"
+version: "1.2.0"
 domain: "testing"
 description: "Execute all 6 phases of the Software Testing Life Cycle (STLC), test pyramid governance, deterministic test fixtures, mutation testing, and regression gates."
 triggers:

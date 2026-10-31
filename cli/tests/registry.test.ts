@@ -61,7 +61,7 @@ test('packArtifact generates integrity-verified package bundle', () => {
 
   assert.ok(existsSync(packagePath), 'Package bundle must be written to disk');
   assert.ok(manifest.name.startsWith('@sagarithm/skill-'));
-  assert.strictEqual(manifest.version, '1.1.1');
+  assert.strictEqual(manifest.version, '1.2.0');
   assert.ok(manifest.integrity?.startsWith('sha256-'));
 
   // Clean up generated test package artifact

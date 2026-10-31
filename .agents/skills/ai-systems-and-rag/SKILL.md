@@ -2,7 +2,7 @@
 ---
 id: "ai.systems-and-rag"
 name: "Applied AI Systems & RAG Architecture"
-version: "1.1.1"
+version: "1.2.0"
 domain: "ai"
 description: "Architect production AI systems, deterministic tool calling, schema-constrained generation, high-density token conservation, and RAG pipelines."
 triggers:

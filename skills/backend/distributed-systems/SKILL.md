@@ -1,7 +1,7 @@
 ---
 id: "backend.distributed-systems"
 name: "Backend Architecture & Distributed Systems"
-version: "1.1.1"
+version: "1.2.0"
 domain: "backend"
 description: "Design and implement resilient, scalable backend architectures, strict API contracts, idempotent operations, and distributed failure tolerance with maximum efficiency."
 triggers:
