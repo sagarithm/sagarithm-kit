@@ -56,11 +56,11 @@ export function TerminalPreview() {
 
           <button
             onClick={copyCommand}
-            className="flex items-center justify-center gap-1.5 rounded-md border border-white/10 bg-white/5 w-[76px] py-1 text-[11px] text-white/70 hover:border-white/30 hover:text-white transition-all shrink-0"
+            className="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 sm:px-2.5 py-1 text-[11px] text-white/70 hover:border-white/30 hover:text-white transition-all shrink-0"
             title="Copy command"
           >
             {copied ? <Check className="h-3 w-3 text-green-400" /> : <Copy className="h-3 w-3" />}
-            <span className="font-mono hidden sm:inline">{copied ? "Copied" : "Copy"}</span>
+            <span className="font-mono hidden sm:inline-block w-[38px] text-left">{copied ? "Copied" : "Copy"}</span>
           </button>
         </div>
       </div>

@@ -21,21 +21,19 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#ededed_1px,transparent_1px),linear-gradient(to_bottom,#ededed_1px,transparent_1px)] bg-[size:56px_56px] opacity-40 [mask-image:radial-gradient(circle_at_70%_35%,black,transparent_60%)]" />
 
       <div className="shell">
-        <div className="pad min-h-[580px] pt-12 pb-16 lg:pt-20 lg:pb-24 grid grid-cols-1 lg:grid-cols-[minmax(0,1.25fr),minmax(0,1fr)] gap-10 lg:gap-12 items-center">
+        <div className="pad min-h-[580px] pt-12 pb-16 lg:pt-20 lg:pb-24 grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] gap-12 lg:gap-14 items-center">
           {/* Left Column: Copy & Actions */}
-          <div className="min-w-0">
+          <div>
             <div className="mb-6 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider">
-              <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
-                <div className="flex items-center gap-2 rounded-md border border-edge-muted bg-white/80 px-2.5 py-1 text-ink-64 shadow-xs whitespace-nowrap">
-                  <span className="h-3 w-1 bg-heat rounded-xs" />
-                  <span>Open Source • Apache-2.0</span>
-                </div>
-                <div className="flex items-center gap-1.5 rounded-md border border-ink bg-ink px-2.5 py-1 text-white shadow-xs whitespace-nowrap">
-                  <span className="font-bold text-heat">MCP</span>
-                  <span>Native Model Context Protocol</span>
-                </div>
+              <div className="flex items-center gap-2 rounded-md border border-edge-muted bg-white/80 px-2.5 py-1 text-ink-64 shadow-xs">
+                <span className="h-3 w-1 bg-heat rounded-xs" />
+                <span>Open Source • Apache-2.0</span>
               </div>
-              <div className="flex items-center gap-1.5 rounded-md border border-edge-muted bg-white/80 px-2.5 py-1 text-ink-64 shadow-xs whitespace-nowrap">
+              <div className="flex items-center gap-1.5 rounded-md border border-ink bg-ink px-2.5 py-1 text-white shadow-xs">
+                <span className="font-bold text-heat">MCP</span>
+                <span>Native Model Context Protocol</span>
+              </div>
+              <div className="flex items-center gap-1.5 rounded-md border border-edge-muted bg-white/80 px-2.5 py-1 text-ink-64 shadow-xs">
                 <span className="font-bold text-ink">v1.2.0</span>
                 <span>Node 22+ Native Engine</span>
               </div>
@@ -58,13 +56,11 @@ export function Hero() {
               >
                 <Terminal className="h-4 w-4 opacity-90" />
                 <span className="font-mono">{command}</span>
-                <span className="w-4 h-4 flex items-center justify-center shrink-0">
-                  {copied ? (
-                    <Check className="h-4 w-4 text-white" />
-                  ) : (
-                    <Copy className="h-3.5 w-3.5 opacity-80 group-hover:opacity-100 transition-opacity" />
-                  )}
-                </span>
+                {copied ? (
+                  <Check className="h-4 w-4 text-white" />
+                ) : (
+                  <Copy className="h-3.5 w-3.5 opacity-80 group-hover:opacity-100 transition-opacity" />
+                )}
               </button>
 
               <Link
@@ -79,15 +75,15 @@ export function Hero() {
             {/* Quick stats under CTAs */}
             <div className="mt-8 flex flex-wrap items-center gap-6 pt-6 border-t border-edge font-mono text-xs text-ink-48">
               <div>
-                <span className="font-bold text-ink">116 Skills</span> 99 Personas
-              </div>
-              <div className="h-3 w-px bg-edge" />
-              <div>
-                <span className="font-bold text-ink">100/100</span> Health Index
+                <span className="font-bold text-ink">116 Skills</span> Canonical Architecture
               </div>
               <div className="h-3 w-px bg-edge" />
               <div>
                 <span className="font-bold text-ink">Native MCP</span> Protocol Tools
+              </div>
+              <div className="h-3 w-px bg-edge" />
+              <div>
+                <span className="font-bold text-ink">5 Vectors</span> Verification Gate
               </div>
               <div className="h-3 w-px bg-edge" />
               <div>
@@ -97,7 +93,7 @@ export function Hero() {
           </div>
 
           {/* Right Column: Terminal Preview */}
-          <div className="w-full min-w-0">
+          <div className="w-full">
             <TerminalPreview />
           </div>
         </div>
