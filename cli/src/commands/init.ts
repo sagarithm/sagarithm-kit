@@ -16,6 +16,13 @@ export function runInit(rootDir: string, flags: string[]): void {
 
   // Auto-detect existing agent environments
   const detectedTargets: TargetAgent[] = [];
+  if (
+    existsSync(resolve(rootDir, '.agents')) ||
+    existsSync(resolve(rootDir, 'AGENTS.md')) ||
+    existsSync(resolve(rootDir, 'GEMINI.md'))
+  ) {
+    detectedTargets.push('antigravity');
+  }
   if (existsSync(resolve(rootDir, '.cursor')) || existsSync(resolve(rootDir, '.cursorrules'))) {
     detectedTargets.push('cursor');
   }
@@ -29,10 +36,12 @@ export function runInit(rootDir: string, flags: string[]): void {
     detectedTargets.push('windsurf');
   }
 
-  // In starter mode, enable comprehensive cross-agent targets including Antigravity
+  // Enable detected targets or default config (which includes antigravity)
   const targets = isStarter
-    ? ['antigravity', 'cursor', 'claude-code', 'copilot', 'windsurf', 'codex'] as TargetAgent[]
-    : (detectedTargets.length > 0 ? detectedTargets : DEFAULT_CONFIG.targets);
+    ? (['antigravity', 'cursor', 'claude-code', 'copilot', 'windsurf', 'codex'] as TargetAgent[])
+    : (detectedTargets.length > 0
+        ? (detectedTargets.includes('antigravity') ? detectedTargets : ['antigravity', ...detectedTargets] as TargetAgent[])
+        : DEFAULT_CONFIG.targets);
 
   const config = {
     ...DEFAULT_CONFIG,
@@ -42,13 +51,17 @@ export function runInit(rootDir: string, flags: string[]): void {
   saveConfig(rootDir, config);
   console.log(`✅ Configured sagarithm.config.json with targets: ${targets.join(', ')}`);
 
-  if (isStarter) {
-    console.log('🔄 Compiling canonical specifications and skills into target agent environments...');
-    runSync(rootDir, []);
-    console.log(`
+  console.log('🔄 Compiling canonical specifications and skills into target agent environments...');
+  runSync(rootDir, []);
+
+  console.log(`
 ════════════════════════════════════════════════════════════════════════════════
 🛡️  SAGARITHM KIT READY — CHIEF SYSTEMS ARCHITECT ACTIVATED
 ════════════════════════════════════════════════════════════════════════════════
+
+All canonical skills and policies are synchronized into your workspace.
+For Antigravity: loaded in .agents/skills/ and documented in AGENTS.md / GEMINI.md.
+MCP Server is configured in .agents/mcp_config.json.
 
 To begin building with high-integrity truth validation, ask your AI:
 
@@ -63,8 +76,4 @@ Your AI agent will:
   4. Enforce Zero Assumed Success [VERIFIED] state across all code.
 ════════════════════════════════════════════════════════════════════════════════
 `);
-  } else {
-    console.log('💡 Run `sagarithm sync` to compile canonical specifications into target configurations.');
-  }
 }
-

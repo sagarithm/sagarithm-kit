@@ -1,0 +1,17 @@
+<!-- SAGARITHM:START - DO NOT EDIT DIRECTLY -->
+# Windsurf Cascade Rules (Sagarithm Kit)
+
+## Directives for Autonomous Actions
+- Inspect repository structure before creating any new file or folder.
+- Do not create generic "utils" or "helpers" directories.
+- Never claim tests or builds succeeded without terminal execution evidence.
+
+## Policies
+- [error] Confines code modifications strictly to the files and functions directly required to fulfill the user request.
+- [error] Restricts the introduction of third-party dependencies. Requires evaluation of native standard libraries and lockfile integrity.
+- [error] Strictly forbids the unauthorized creation of arbitrary directories, generic utility folders, or parallel folder hierarchies.
+- [warn] Requires synchronization of documentation, API specs, and ADRs whenever code architecture or interfaces change.
+- [error] Prevents creation of redundant files, duplicate helper abstractions, and mislocated source files.
+- [error] Prohibits committing credentials, raw SQL concatenation, untrusted shell executions, and unvalidated perimeter inputs.
+- [error] Mandates real terminal execution of automated tests, zero test failures, and regression tests for bug fixes.
+<!-- SAGARITHM:END -->

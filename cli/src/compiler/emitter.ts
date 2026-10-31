@@ -1,5 +1,5 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import type { CanonicalArtifact, TargetAgent } from '../types.ts';
 
 const START_MARKER = '<!-- SAGARITHM:START - DO NOT EDIT DIRECTLY -->';
@@ -47,6 +47,7 @@ export interface CompilationContext {
   skills: CanonicalArtifact[];
   policies: CanonicalArtifact[];
   workflows: CanonicalArtifact[];
+  agents?: CanonicalArtifact[];
 }
 
 export function compileForTarget(target: TargetAgent, ctx: CompilationContext): string[] {
@@ -88,6 +89,27 @@ export function compileForTarget(target: TargetAgent, ctx: CompilationContext): 
         writeSafely(rulePath, mdcContent);
         touchedFiles.push(rulePath);
       }
+
+      // 3. Mirror specialist agents into .cursor/rules/
+      if (ctx.agents) {
+        for (const agent of ctx.agents) {
+          const fileName = `${basename(agent.filePath, '.md')}.mdc`;
+          const rulePath = resolve(cursorRulesDir, fileName);
+          const mdcContent = [
+            '---',
+            `description: "${agent.frontmatter.description || agent.frontmatter.name || ''}"`,
+            'globs: ["**/*"]',
+            'alwaysApply: false',
+            '---',
+            '',
+            `# ${agent.frontmatter.name || basename(agent.filePath, '.md')}`,
+            '',
+            agent.body.trim()
+          ].join('\n');
+          writeSafely(rulePath, mdcContent);
+          touchedFiles.push(rulePath);
+        }
+      }
       break;
     }
 
@@ -120,10 +142,26 @@ export function compileForTarget(target: TargetAgent, ctx: CompilationContext): 
         ...ctx.policies.map(p => `- ${p.frontmatter.name}: ${p.frontmatter.description || ''}`),
         '',
         '## Engineering Practices',
-        ...ctx.skills.map(s => `- **${s.frontmatter.name}**: ${s.frontmatter.description || ''}`)
+        ...ctx.skills.map(s => `- **${s.frontmatter.name}**: ${s.frontmatter.description || ''}`),
+        ...(ctx.agents && ctx.agents.length > 0 ? [
+          '',
+          '## Specialized Copilot Agents in `.copilot/agents/`',
+          ...ctx.agents.slice(0, 30).map(a => `- **${a.frontmatter.name || 'Agent'}**: ${a.frontmatter.description || ''}`)
+        ] : [])
       ].join('\n');
       writeSafely(copilotPath, copilotContent);
       touchedFiles.push(copilotPath);
+
+      // Mirror specialist agents into .copilot/agents/
+      if (ctx.agents) {
+        const copilotAgentsDir = resolve(ctx.rootDir, '.copilot/agents');
+        for (const agent of ctx.agents) {
+          const fileName = basename(agent.filePath);
+          const destFile = resolve(copilotAgentsDir, fileName);
+          writeSafely(destFile, agent.rawContent);
+          touchedFiles.push(destFile);
+        }
+      }
       break;
     }
 
@@ -181,7 +219,12 @@ export function compileForTarget(target: TargetAgent, ctx: CompilationContext): 
         ...ctx.policies.map(p => `- **${p.frontmatter.name || ''}** [${p.frontmatter.severity?.toUpperCase() || 'ERROR'}]: ${p.frontmatter.description || ''}`),
         '',
         '## Active Skills Available in `.agents/skills/`',
-        ...ctx.skills.map(s => `- \`${s.frontmatter.name || ''}\`: ${s.frontmatter.description || ''}`)
+        ...ctx.skills.map(s => `- \`${s.frontmatter.name || ''}\`: ${s.frontmatter.description || ''}`),
+        ...(ctx.agents && ctx.agents.length > 0 ? [
+          '',
+          '## Specialized Engineering Personas in `.agents/agents/`',
+          ...ctx.agents.slice(0, 35).map(a => `- \`${a.frontmatter.name || basename(a.filePath, '.md')}\`: ${a.frontmatter.description || ''}`)
+        ] : [])
       ].join('\n');
 
       writeSafely(geminiPath, geminiContent);
@@ -203,7 +246,7 @@ export function compileForTarget(target: TargetAgent, ctx: CompilationContext): 
         touchedFiles.push(rulePath);
       }
 
-      // 3. Mirror skills into .agents/skills/
+      // 3. Mirror canonical skills into .agents/skills/
       const agentsSkillsDir = resolve(ctx.rootDir, '.agents/skills');
       for (const skill of ctx.skills) {
         const skillSlug = (skill.frontmatter.id || skill.frontmatter.name || 'skill')
@@ -214,7 +257,24 @@ export function compileForTarget(target: TargetAgent, ctx: CompilationContext): 
         touchedFiles.push(destSkillFile);
       }
 
-      // 4. .agents/mcp_config.json
+      // 4. Mirror specialist agent personas into .agents/agents/ AND .agents/skills/
+      if (ctx.agents) {
+        const agentsDir = resolve(ctx.rootDir, '.agents/agents');
+        for (const agent of ctx.agents) {
+          const fileName = basename(agent.filePath);
+          const destAgentFile = resolve(agentsDir, fileName);
+          writeSafely(destAgentFile, agent.rawContent);
+          touchedFiles.push(destAgentFile);
+
+          // Configure skill in .agents/skills/<slug>/SKILL.md
+          const agentSlug = basename(agent.filePath, '.md').toLowerCase();
+          const destSkillFile = resolve(agentsSkillsDir, agentSlug, 'SKILL.md');
+          writeSafely(destSkillFile, agent.rawContent);
+          touchedFiles.push(destSkillFile);
+        }
+      }
+
+      // 5. .agents/mcp_config.json
       const mcpConfigPath = resolve(ctx.rootDir, '.agents/mcp_config.json');
       if (!existsSync(mcpConfigPath)) {
         const mcpConfig = {

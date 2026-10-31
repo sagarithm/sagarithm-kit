@@ -18,6 +18,7 @@ export interface SagarithmConfig {
     policies: string;
     workflows: string;
     adapters: string;
+    agents?: string;
   };
 }
 
@@ -33,6 +34,9 @@ export interface CanonicalFrontmatter {
   prerequisites?: string[];
   risk_profile?: string;
   category?: string;
+  color?: string;
+  emoji?: string;
+  vibe?: string;
 }
 
 export interface CanonicalArtifact {
@@ -68,22 +72,21 @@ export interface VectorResult {
 }
 
 export interface ValidationReport {
-  version: string;
   timestamp: string;
+  version: string;
   state: VerificationState;
-  summary: {
-    totalChecks: number;
-    passed: number;
-    warnings: number;
-    errors: number;
-  };
+  score: number;
+  checks: VerificationCheck[];
   vectors: {
-    static?: VectorResult;
-    security?: VectorResult;
-    architecture?: VectorResult;
-    behavioral?: VectorResult;
-    documentation?: VectorResult;
+    static: VectorResult;
+    security: VectorResult;
+    architecture: VectorResult;
+    behavioral: VectorResult;
+    documentation: VectorResult;
   };
-  issues: AuditIssue[];
+  metadata?: {
+    commit?: string;
+    branch?: string;
+    targetAgent?: string;
+  };
 }
-
