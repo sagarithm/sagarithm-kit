@@ -71,25 +71,6 @@ export function Hero() {
                 <ArrowRight className="h-3.5 w-3.5 text-heat" />
               </Link>
             </div>
-
-            {/* Quick stats under CTAs */}
-            <div className="mt-8 flex flex-wrap items-center gap-6 pt-6 border-t border-edge font-mono text-xs text-ink-48">
-              <div>
-                <span className="font-bold text-ink">116 Skills</span> Canonical Architecture
-              </div>
-              <div className="h-3 w-px bg-edge" />
-              <div>
-                <span className="font-bold text-ink">Native MCP</span> Protocol Tools
-              </div>
-              <div className="h-3 w-px bg-edge" />
-              <div>
-                <span className="font-bold text-ink">5 Vectors</span> Verification Gate
-              </div>
-              <div className="h-3 w-px bg-edge" />
-              <div>
-                <span className="font-bold text-ink">Zero</span> Assumed Success
-              </div>
-            </div>
           </div>
 
           {/* Right Column: Terminal Preview */}
