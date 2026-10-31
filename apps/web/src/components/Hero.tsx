@@ -21,7 +21,7 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#ededed_1px,transparent_1px),linear-gradient(to_bottom,#ededed_1px,transparent_1px)] bg-[size:56px_56px] opacity-40 [mask-image:radial-gradient(circle_at_70%_35%,black,transparent_60%)]" />
 
       <div className="shell">
-        <div className="pad min-h-[580px] pt-12 pb-16 lg:pt-20 lg:pb-24 grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] gap-12 lg:gap-14 items-center">
+        <div className="pad min-h-[580px] pt-12 pb-16 lg:pt-20 lg:pb-24 grid grid-cols-1 lg:grid-cols-[1.35fr,1fr] gap-8 lg:gap-10 items-center">
           {/* Left Column: Copy & Actions */}
           <div>
             <div className="mb-6 flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider">

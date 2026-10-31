@@ -197,7 +197,7 @@ export function TerminalPreview() {
 
             <div className="mt-3 rounded-lg border border-white/8 bg-white/[0.025] p-2.5 flex items-center justify-between text-[11px] text-white/60">
               <span>Drift Status:</span>
-              <span className="text-white font-medium">0% Divergence Across All Targets (116 Skills Synced)</span>
+              <span className="text-white font-medium">0% Divergence Across All Targets</span>
             </div>
           </div>
         )}
