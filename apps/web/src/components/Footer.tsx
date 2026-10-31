@@ -77,6 +77,17 @@ export function Footer() {
                     Usage
                   </Link>
                 </li>
+                <li>
+                  <a
+                    href="/llms.txt"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-heat transition-colors flex items-center gap-1.5"
+                  >
+                    <span>llms.txt</span>
+                    <span className="rounded bg-heat/10 px-1 py-0.5 text-[9px] font-semibold text-heat">AI</span>
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -136,9 +147,18 @@ export function Footer() {
 
           {/* Bottom Bar */}
           <div className="pt-8 border-t border-edge flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px] text-ink-48">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <span className="h-1.5 w-1.5 rounded-full bg-heat" />
               <span className="font-medium text-ink-64">Built by Builder for Builders</span>
+              <span className="text-edge">•</span>
+              <a
+                href="/llms.txt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-heat transition-colors"
+              >
+                llms.txt (Agent Context)
+              </a>
             </div>
             <div>
               <span>Sagarithm</span>
