@@ -45,7 +45,7 @@ export function Hero() {
             </h1>
 
             <p className="mt-5 max-w-xl text-base sm:text-lg text-ink-64 leading-relaxed tracking-tight">
-              Universal cross-agent framework deploying an entire autonomous IT company into your workspace. 116 specialized skills, 99 agent personas, living context graphs, and 100/100 codebase verification gates across Antigravity, Cursor, Claude Code, and Copilot.
+              Universal cross-agent framework delivering architectural governance, empirical verification, living context graphs, and quality gates to Cursor, Antigravity, Claude Code, & Copilot.
             </p>
 
             {/* Actions */}
