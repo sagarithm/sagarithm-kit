@@ -40,8 +40,12 @@ export function Hero() {
             </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-[70px] font-medium leading-[1.03] tracking-[-0.045em] text-ink">
-              Engineering standards for{" "}
-              <em className="text-heat not-italic font-medium">AI coding agents</em>.
+              Engineering<br />
+              standards for<br />
+              <span className="text-heat">
+                AI coding<br />
+                agents<span className="text-ink">.</span>
+              </span>
             </h1>
 
             <p className="mt-5 max-w-xl text-base sm:text-lg text-ink-64 leading-relaxed tracking-tight">
