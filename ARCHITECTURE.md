@@ -128,7 +128,7 @@ Sagarithm Kit enforces strict separation between canonical specifications, targe
 graph TD
     subgraph Canonical["Canonical Layer (Single Source of Truth - Agent Agnostic)"]
         K["1. Canonical Knowledge<br/>(Architectural Principles, Standards)"]
-        S["2. 10 Canonical Skills<br/>('How to practice a discipline')"]
+        S["2. 17 Core Skills & 99 Specialist Personas<br/>(116 skills in .agents/skills)"]
         P["3. Behavioral Policies<br/>('What must or must not be done')"]
         W["4. Phase-Gated Workflows<br/>('Sequence of execution & gates')"]
         C["5. Project Context<br/>(Repository topology & manifests)"]
@@ -174,7 +174,7 @@ graph TD
 - **Purpose**: Curated principles, architectural paradigms, design patterns, and engineering reasoning.
 - **Form**: Neutral Markdown documents enriched with semantic YAML metadata.
 
-### Layer 2: 10 Canonical Skills
+### Layer 2: 17 Core Canonical Skills & 99 Specialist Personas
 - **Purpose**: Modular, discipline-specific guides with explicit anti-rationalization tables:
   1. *Idea Validation & Truth-Driven Engineering* (`ideation.idea-validation`)
   2. *Specification-Driven Architecture* (`architecture.spec-driven-development`)
@@ -242,4 +242,4 @@ $$\text{ASSUMED} \longrightarrow \text{IMPLEMENTED} \longrightarrow \text{TESTED
 - **Phase 7 — Project Intelligence**: Repository graph analysis, AST topology indexing, and context extraction. *(Completed)*
 - **Phase 8 — Validation & Audit Engine**: Automated engineering health checks and policy audit runners. *(Completed)*
 - **Phase 9 — Registry & Ecosystem**: Decentralized package distribution, SHA-256 integrity, and curated discipline presets. *(Completed)*
-- **v1.2.0 Production Release**: Native Model Context Protocol (MCP) server, Truth-Driven Idea Validation engine, 10 Canonical Skills, Starter preset initialization, and 100-point Codebase Health Index. *(Current Release)*
+- **v1.2.0 Production Release**: 17 Core Canonical Skills, 99 Autonomous Specialist Agent Personas (116 skills in .agents/skills), Native Model Context Protocol (MCP) server, Truth-Driven Idea Validation engine, Starter preset initialization, and 100/100 Pristine Codebase Health Index. *(Current Release)*

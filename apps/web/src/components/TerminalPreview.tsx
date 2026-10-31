@@ -148,7 +148,7 @@ export function TerminalPreview() {
                   <span className="text-green-400">✔</span>
                   <span>Vector 4: Behavioral Test Gate</span>
                 </span>
-                <span className="text-white/40">17/17 tests passing</span>
+                <span className="text-white/40">29/29 tests passing</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2">
@@ -197,7 +197,7 @@ export function TerminalPreview() {
 
             <div className="mt-3 rounded-lg border border-white/8 bg-white/[0.025] p-2.5 flex items-center justify-between text-[11px] text-white/60">
               <span>Drift Status:</span>
-              <span className="text-white font-medium">0% Divergence Across 5 Agents</span>
+              <span className="text-white font-medium">0% Divergence Across All Targets (116 Skills Synced)</span>
             </div>
           </div>
         )}

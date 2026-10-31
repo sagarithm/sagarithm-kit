@@ -45,8 +45,7 @@ export function Hero() {
             </h1>
 
             <p className="mt-5 max-w-xl text-base sm:text-lg text-ink-64 leading-relaxed tracking-tight">
-              Universal cross-agent framework delivering architectural governance, empirical verification, living
-              context graphs, and quality gates to Cursor, Antigravity, Claude Code, & Copilot.
+              Universal cross-agent framework deploying an entire autonomous IT company into your workspace. 116 specialized skills, 99 agent personas, living context graphs, and 100/100 codebase verification gates across Antigravity, Cursor, Claude Code, and Copilot.
             </p>
 
             {/* Actions */}
@@ -76,15 +75,15 @@ export function Hero() {
             {/* Quick stats under CTAs */}
             <div className="mt-8 flex flex-wrap items-center gap-6 pt-6 border-t border-edge font-mono text-xs text-ink-48">
               <div>
-                <span className="font-bold text-ink">10 Skills</span> Canonical Architecture
+                <span className="font-bold text-ink">116 Skills</span> 99 Personas
+              </div>
+              <div className="h-3 w-px bg-edge" />
+              <div>
+                <span className="font-bold text-ink">100/100</span> Health Index
               </div>
               <div className="h-3 w-px bg-edge" />
               <div>
                 <span className="font-bold text-ink">Native MCP</span> Protocol Tools
-              </div>
-              <div className="h-3 w-px bg-edge" />
-              <div>
-                <span className="font-bold text-ink">5 Vectors</span> Verification Gate
               </div>
               <div className="h-3 w-px bg-edge" />
               <div>

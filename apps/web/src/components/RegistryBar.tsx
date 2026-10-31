@@ -15,7 +15,7 @@ export function RegistryBar() {
       tag: "GLOBAL CLI RUNTIME",
       command: "npx sagarithm-kit init",
       link: "https://www.npmjs.com/package/sagarithm-kit",
-      desc: "Live public release v1.2.0",
+      desc: "Live public release v1.2.0 (116 Skills & 99 Personas)",
     },
     {
       id: "mcp",
@@ -32,7 +32,7 @@ export function RegistryBar() {
       name: "Multi-Agent Adapters",
       badge: "AI",
       badgeColor: "bg-heat text-white",
-      tag: "6 TARGET RUNTIMES",
+      tag: "116 SKILLS & 99 PERSONAS",
       command: "sagarithm sync --target all",
       link: "https://github.com/sagarithm/sagarithm-kit#universal-agent-adapters",
       desc: "Compiler & zero drift",

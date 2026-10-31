@@ -59,6 +59,20 @@ export function Benchmark() {
       sagarithm: "Senior truth-teller: Surfaces bottlenecks, non-goals, and invariants",
       status: [false, false, true],
     },
+    {
+      feature: "Autonomous Specialist Roster",
+      raw: "Single generalist prompt with hallucinated domain skill",
+      basic: "Static prompts with generic tone guidelines",
+      sagarithm: "116 Skills & 99 Specialist Personas auto-provisioned to .agents",
+      status: [false, false, true],
+    },
+    {
+      feature: "Composite Codebase Health Index",
+      raw: "No objective metric (vulnerable to regression)",
+      basic: "Basic linter count only",
+      sagarithm: "100/100 Health Index (Hygiene, Modularity, Dead Code, Secrets, Tests)",
+      status: [false, false, true],
+    },
   ];
 
   return (

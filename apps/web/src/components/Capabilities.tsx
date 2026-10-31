@@ -1,30 +1,40 @@
 import React from "react";
-import { Cpu, Lock, Network, RefreshCw, Radio, Sparkles, HeartPulse } from "lucide-react";
+import { Cpu, Lock, Network, RefreshCw, Radio, Sparkles, HeartPulse, Users } from "lucide-react";
 
 export function Capabilities() {
   const capabilities = [
     {
       id: "01",
-      filename: "engine.ts",
-      title: "Autonomous Workflow Orchestration",
+      filename: "agents.ts",
+      title: "Autonomous Specialist Agent OS",
       description:
-        "Deterministic multi-stage workflow runner executing feature development, bug fixes, refactoring, and release prep with strict gate enforcement.",
-      icon: Cpu,
-      command: "sagarithm run feature-development",
-      highlight: "State Machine Automation",
+        "Full roster of 99 production-tested specialist personas (Backend Architect, Frontend Lead, SRE, QA Lead, DBA) auto-configured into .agents, .copilot, and Cursor.",
+      icon: Users,
+      command: "sagarithm init",
+      highlight: "99 Autonomous Personas",
     },
     {
       id: "02",
+      filename: "health.ts",
+      title: "100/100 Codebase Health Radar",
+      description:
+        "Comprehensive 100-point repository health score across structural hygiene, modularity, orphan dead code, secrets, and test density for automated CI/CD gating.",
+      icon: HeartPulse,
+      command: "sagarithm health",
+      highlight: "Flawless Quality Score",
+    },
+    {
+      id: "03",
       filename: "server.ts",
       title: "Native Model Context Protocol (MCP)",
       description:
-        "Zero-dependency JSON-RPC 2.0 stdio server exposing 6 architectural tools directly to Antigravity, Claude Code, and Cursor for live verification.",
+        "Zero-dependency JSON-RPC 2.0 stdio server exposing 6 architectural tools directly to Antigravity, Claude Code, and Cursor for live verification and ideation.",
       icon: Radio,
       command: "sagarithm mcp",
       highlight: "JSON-RPC 2.0 Protocol",
     },
     {
-      id: "03",
+      id: "04",
       filename: "validate.ts",
       title: "Truth-Driven Idea Validation",
       description:
@@ -34,7 +44,7 @@ export function Capabilities() {
       highlight: "No Blind Compliance",
     },
     {
-      id: "04",
+      id: "05",
       filename: "secrets.ts",
       title: "Algorithmic Shannon Entropy Scanner",
       description:
@@ -44,7 +54,7 @@ export function Capabilities() {
       highlight: "Information Entropy H >= 4.5",
     },
     {
-      id: "05",
+      id: "06",
       filename: "graph.ts",
       title: "Robert C. Martin Instability & Coupling",
       description:
@@ -52,16 +62,6 @@ export function Capabilities() {
       icon: Network,
       command: "sagarithm context stats",
       highlight: "Afferent/Efferent Metric Graph",
-    },
-    {
-      id: "06",
-      filename: "health.ts",
-      title: "Composite Codebase Health Index",
-      description:
-        "100-point repository health score across structural hygiene, modularity, dead code, secrets, and test density for automated CI/CD quality gating.",
-      icon: HeartPulse,
-      command: "sagarithm health",
-      highlight: "100-Point Quality Radar",
     },
   ];
 
@@ -72,7 +72,7 @@ export function Capabilities() {
           <span>
             [ <b>02</b> / 05 ]
           </span>
-          <span>Core Capabilities</span>
+          <span>Core Capabilities (v1.2.0)</span>
         </div>
 
         <div className="section-body pad">
@@ -84,8 +84,7 @@ export function Capabilities() {
             </div>
             <div>
               <p className="text-ink-64 text-base sm:text-lg leading-relaxed">
-                Embedding architectural governance, native MCP tools, entropy token defense, and topological graph analysis directly into
-                the agentic development loop.
+                Transforming AI coding models into a disciplined, self-verifying software engineering company. 116 specialized skills, 99 agent personas, native MCP tools, and 100/100 codebase verification gates.
               </p>
             </div>
           </div>
@@ -100,33 +99,30 @@ export function Capabilities() {
                   className="group relative flex flex-col justify-between rounded-xl border border-edge bg-canvas-surface p-7 transition-all duration-200 hover:border-ink-32 hover:shadow-lg"
                 >
                   <div>
-                    <div className="flex items-center justify-between pb-4 border-b border-edge font-mono text-xs text-ink-48">
-                      <div className="flex items-center gap-2">
-                        <span className="text-heat font-bold">{cap.id}</span>
-                        <span>/</span>
-                        <span className="text-ink font-medium">{cap.filename}</span>
-                      </div>
-                      <span className="rounded bg-canvas-base border border-edge px-2 py-0.5 text-[10px] text-ink-64 uppercase tracking-wider">
+                    {/* Header: ID & Highlight */}
+                    <div className="flex items-center justify-between pb-4 border-b border-edge font-mono text-xs">
+                      <span className="text-heat font-bold">CAP_{cap.id}</span>
+                      <span className="rounded bg-canvas-base px-2 py-0.5 text-[11px] text-ink-64 border border-edge">
                         {cap.highlight}
                       </span>
                     </div>
 
-                    <div className="mt-5 flex items-start gap-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-edge bg-canvas-base text-ink group-hover:border-heat group-hover:text-heat transition-colors">
-                        <Icon className="h-5 w-5" />
+                    {/* Icon & Title */}
+                    <div className="mt-6 flex items-center gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-edge bg-canvas-base text-ink shadow-xs">
+                        <Icon className="h-5 w-5 text-heat" />
                       </div>
-                      <div>
-                        <h3 className="text-lg font-semibold tracking-tight text-ink group-hover:text-heat-dark transition-colors">
-                          {cap.title}
-                        </h3>
-                        <p className="mt-2 text-sm text-ink-64 leading-relaxed">{cap.description}</p>
-                      </div>
+                      <h3 className="text-lg font-medium text-ink tracking-tight">{cap.title}</h3>
                     </div>
+
+                    {/* Description */}
+                    <p className="mt-4 text-sm text-ink-64 leading-relaxed">{cap.description}</p>
                   </div>
 
+                  {/* Command Footer */}
                   <div className="mt-6 pt-4 border-t border-edge flex items-center justify-between font-mono text-xs text-ink-48">
-                    <span>CLI Command:</span>
-                    <code className="rounded bg-code px-2 py-1 text-white text-[11px] font-mono">{cap.command}</code>
+                    <span className="truncate max-w-[220px]">{cap.command}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-heat font-semibold">Active</span>
                   </div>
                 </div>
               );
