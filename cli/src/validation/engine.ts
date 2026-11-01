@@ -173,7 +173,7 @@ export function runVerificationPipeline(rootDir: string, options: VerifyPipeline
   }
 
   const report: ValidationReport = {
-    version: '1.1.1',
+    version: '1.2.0',
     timestamp: new Date().toISOString(),
     state,
     summary: {

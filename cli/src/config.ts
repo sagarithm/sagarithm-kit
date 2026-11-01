@@ -3,23 +3,30 @@ import { resolve } from 'node:path';
 import type { SagarithmConfig } from './types.ts';
 
 export const DEFAULT_CONFIG: SagarithmConfig = {
-  version: '1.1.1',
+  version: '1.2.0',
   name: 'sagarithm-workspace',
-  targets: ['cursor', 'claude-code', 'copilot', 'antigravity', 'windsurf', 'codex'],
+  targets: ['antigravity', 'cursor', 'claude-code', 'copilot', 'windsurf', 'codex'],
   riskThreshold: 'high',
   enabledDomains: [
     'architecture',
     'quality',
     'testing',
     'security',
-    'documentation'
+    'documentation',
+    'frontend',
+    'backend',
+    'database',
+    'devops',
+    'ai',
+    'agents'
   ],
   paths: {
     constitution: './constitution',
     skills: './skills',
     policies: './policies',
     workflows: './workflows',
-    adapters: './adapters'
+    adapters: './adapters',
+    agents: './agents'
   }
 };
 

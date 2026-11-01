@@ -21,7 +21,7 @@ sagarithm --help
 
 ---
 
-## Complete Command Reference (v1.1.1)
+## Complete Command Reference (v1.2.0)
 
 ### 1. `sagarithm init`
 Initializes a repository for Sagarithm Kit governance:

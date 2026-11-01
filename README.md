@@ -24,7 +24,7 @@ AI coding agents should not enter a codebase with only a user prompt. They shoul
 - **Truth-Driven Ideation**: Stress-testing feasibility, non-goals, and operational bottlenecks before code generation begins.
 - **Project Context & Topology**: Understanding existing abstractions, modules, call topologies, and public APIs.
 - **Engineering Principles & Coding Standards**: Strict adherence to architectural invariants and clean code paradigms.
-- **10 Canonical Engineering Skills**: Modular, discipline-specific procedural knowledge with strict anti-rationalization defense.
+- **17 Core Engineering Skills & 99 Specialist Personas**: Modular, discipline-specific procedural knowledge and autonomous specialist agent roles.
 - **Behavioral Policies**: Non-negotiable constraints preventing redundant folder creation, unvetted dependencies, and architectural drift.
 - **Disciplined Workflows**: Phased lifecycles (Understand -> Plan -> Implement -> Verify -> Document) with hard verification gates.
 - **Native Protocol Interfaces (MCP)**: Providing runtime tools directly to LLMs for verification, entropy secret scanning, and AST queries.
@@ -37,7 +37,7 @@ AI coding agents should not enter a codebase with only a user prompt. They shoul
 Run directly without installation via `npx`:
 
 ```bash
-# Turnkey starter init: pre-installs all 10 canonical skills before prompting
+# Turnkey starter init: auto-provisions 116 skills & 99 specialist personas into .agents/
 npx sagarithm-kit init --starter
 
 # Run the native Model Context Protocol (MCP) server for Claude Desktop / Cursor
@@ -87,7 +87,7 @@ Sagarithm Kit maintains a single canonical source of truth that compiles down to
 ## The Seven Architectural Layers
 
 1. **Canonical Engineering Knowledge** - Architectural principles, domain models, coding standards.
-2. **Canonical Skills** - 10 modular capabilities answering *"How to perform an engineering discipline correctly"*.
+2. **Canonical Skills & Personas** - 17 core disciplines & 99 specialist personas (116 skills in `.agents/skills/`).
 3. **Canonical Policies** - Non-negotiable boundaries answering *"What must or must not be done"*.
 4. **Canonical Workflows** - Temporal lifecycles answering *"What sequence of steps and gates to follow"*.
 5. **Project Context** - Workspace manifests, dependency topologies, and AST coupling analytics.
@@ -112,22 +112,31 @@ The foundational laws governing all agent interactions are codified in the [Engi
 
 ---
 
-## Canonical Skills (v1.1.1)
+## Canonical Skills (v1.2.0)
 
-The complete suite of 10 canonical skills is cataloged in [skills/README.md](skills/README.md):
+The complete suite of 17 core canonical skills is cataloged in [skills/README.md](skills/README.md):
 
 | Domain | Skill | Identifier | Description |
 | :--- | :--- | :--- | :--- |
 | **Ideation** | [Idea Validation & Truth-Driven Engineering](skills/ideation/idea-validation/SKILL.md) | `ideation.idea-validation` | Stress-tests concepts; forbids blind AI compliance; demands truth on feasibility and non-goals. |
 | **Architecture** | [Specification-Driven Architecture](skills/architecture/spec-driven-development/SKILL.md) | `architecture.spec-driven-development` | Formal bounded contexts, contract interfaces, state machines, and acceptance criteria. |
 | **Architecture** | [System Design & Modularity](skills/architecture/system-design/SKILL.md) | `architecture.system-design` | Highly cohesive, loosely coupled modules with explicit public interfaces and acyclic graphs. |
+| **Frontend** | [Frontend Architecture & UI/UX Engineering](skills/frontend/ui-engineering/SKILL.md) | `frontend.ui-engineering` | Component architecture, state machines, accessibility (WCAG 2.2 AA), and Core Web Vitals optimization. |
+| **Backend** | [Backend Architecture & Distributed Systems](skills/backend/distributed-systems/SKILL.md) | `backend.distributed-systems` | Resilient backend architectures, strict API contracts, idempotent operations, and failure tolerance. |
+| **Database** | [Database Architecture & Data Modeling](skills/database/architecture-and-modeling/SKILL.md) | `database.architecture-and-modeling` | Relational & document schemas, zero-downtime migrations, B-Tree/GIN indexing, and ACID boundaries. |
+| **DevOps / SRE** | [DevOps, SRE & Cloud Deployment Governance](skills/devops/sre-observability/SKILL.md) | `devops.sre-observability` | Deployment lifecycles, hermetic containerization, CI/CD verification gates, and OpenTelemetry observability. |
+| **AI / ML** | [Applied AI Systems & RAG Architecture](skills/ai/systems-and-rag/SKILL.md) | `ai.systems-and-rag` | Production AI architectures, deterministic tool calling, token conservation, and RAG pipelines. |
+| **Performance** | [Systems Performance & Profiling Engineering](skills/performance/profiling-and-optimization/SKILL.md) | `performance.profiling-and-optimization` | Performance bottlenecks, CPU hotspots, memory leaks, and algorithmic complexity optimization. |
 | **Lifecycle** | [Atomic Planning & Task Breakdown](skills/lifecycle/planning-and-task-breakdown/SKILL.md) | `lifecycle.planning-and-task-breakdown` | Hermetic, sequentially verifiable implementation slices with rollback checkpoints. |
 | **Quality** | [Clean Code & Quality Standards](skills/quality/coding-standards/SKILL.md) | `quality.coding-standards` | Expressive, type-safe code with strict error handling, discriminated unions, and concurrency safety. |
 | **Quality** | [Rigorous Code Review & Quality Defense](skills/quality/code-review-and-quality/SKILL.md) | `quality.code-review-and-quality` | Senior-engineer scrutiny, zero-leak defense, minimal blast radius, anti-rationalization pushback. |
 | **Security** | [Secure Development & Vulnerability Prevention](skills/security/secure-development/SKILL.md) | `security.secure-development` | Defense-in-depth, input sanitization, Shannon entropy secret isolation ($H \ge 4.5$), STRIDE mitigation. |
+| **Testing** | [STLC & Enterprise Quality Assurance](skills/testing/stlc-quality-assurance/SKILL.md) | `testing.stlc-quality-assurance` | Full Software Testing Life Cycle execution, test pyramid governance, mutation testing, regression gates. |
 | **Testing** | [Test-Driven Verification](skills/testing/test-driven-verification/SKILL.md) | `testing.test-driven-verification` | Deterministic automated test suites, property-based invariants, and mutation verification. |
 | **Documentation** | [Architectural Decision Records](skills/documentation/architectural-decision-records/SKILL.md) | `documentation.architectural-decision-records` | MADR 3.0 decision matrices capturing consequential choices, alternatives, and trade-offs. |
 | **Delivery** | [Production Shipping & Release Governance](skills/delivery/shipping-and-launch/SKILL.md) | `delivery.shipping-and-launch` | Verification gates, SemVer versioning, changelog synchronization, and CI/CD attestation. |
+
+> **Autonomous Specialist Roster**: In addition to the 17 core skills, Sagarithm Kit v1.2.0 includes 99 specialized agent personas (AI data remediation, API platform, firmware, security, identity, mobile, etc.) auto-provisioned to `.agents/skills/`, `.agents/agents/`, and `.copilot/agents/`.
 
 ---
 

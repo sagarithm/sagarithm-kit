@@ -21,7 +21,7 @@ test('MCP: initialize handshake conforms to 2024-11-05 protocol', () => {
   assert.strictEqual(res.id, 1);
   assert.strictEqual(res.result.protocolVersion, '2024-11-05');
   assert.strictEqual(res.result.serverInfo.name, 'sagarithm-kit-mcp');
-  assert.strictEqual(res.result.serverInfo.version, '1.1.1');
+  assert.strictEqual(res.result.serverInfo.version, '1.2.0');
   assert.ok(res.result.capabilities.tools);
 });
 

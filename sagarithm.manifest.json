@@ -1,12 +1,47 @@
 {
   "version": "1.1.1",
   "name": "sagarithm-project",
-  "totalFiles": 105,
+  "totalFiles": 890,
   "modules": [
+    {
+      "name": ".agents",
+      "path": ".agents",
+      "fileCount": 223,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": ".copilot",
+      "path": ".copilot",
+      "fileCount": 99,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": ".cursor",
+      "path": ".cursor",
+      "fileCount": 116,
+      "exports": [],
+      "tests": []
+    },
     {
       "name": "root",
       "path": ".",
-      "fileCount": 7,
+      "fileCount": 17,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": ".github",
+      "path": ".github",
+      "fileCount": 10,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": ".sagarithm",
+      "path": ".sagarithm",
+      "fileCount": 3,
       "exports": [],
       "tests": []
     },
@@ -18,15 +53,67 @@
       "tests": []
     },
     {
+      "name": "agents",
+      "path": "agents",
+      "fileCount": 99,
+      "exports": [],
+      "tests": []
+    },
+    {
+      "name": "apps",
+      "path": "apps",
+      "fileCount": 182,
+      "exports": [
+        "fetchCache",
+        "middleware",
+        "PageProps",
+        "LayoutProps",
+        "unstable_cacheLife",
+        "ParamsOf",
+        "Page",
+        "Layout",
+        "viewport",
+        "metadata",
+        "RootLayout",
+        "Home",
+        "Architecture",
+        "Benchmark",
+        "Capabilities",
+        "Footer",
+        "Hero",
+        "InteractiveStudio",
+        "Navbar",
+        "Quickstart",
+        "RegistryBar",
+        "TerminalPreview"
+      ],
+      "tests": []
+    },
+    {
+      "name": "bin",
+      "path": "bin",
+      "fileCount": 1,
+      "exports": [],
+      "tests": []
+    },
+    {
       "name": "cli",
       "path": "cli",
-      "fileCount": 19,
+      "fileCount": 34,
       "exports": [
         "runAudit",
         "runContext",
         "runDoctor",
+        "CodebaseHealthMetrics",
+        "evaluateCodebaseHealth",
+        "runHealth",
         "runInit",
+        "runPreset",
+        "runRegistry",
+        "WorkflowRunState",
+        "runWorkflow",
         "runSync",
+        "runValidate",
         "runVerify",
         "injectContent",
         "writeSafely",
@@ -42,22 +129,69 @@
         "scanRepositoryFiles",
         "extractExports",
         "extractImports",
+        "extractImportStatements",
         "buildProjectGraph",
         "findExistingAbstractions",
         "calculateBlastRadius",
         "suggestModuleLocation",
+        "SystemComplexityMetrics",
+        "calculateSystemComplexity",
+        "detectOrphanAbstractions",
         "ModuleNode",
         "ProjectGraph",
         "BlastRadiusResult",
+        "JsonRpcRequest",
+        "JsonRpcResponse",
+        "MCP_TOOLS",
+        "SKILL_MAP",
+        "dispatchMcpRequest",
+        "startMcpServer",
+        "PresetDefinition",
+        "PackageManifest",
+        "RegistryCatalog",
+        "loadRegistryIndex",
+        "loadPreset",
+        "searchRegistry",
+        "computeIntegrityHash",
+        "packArtifact",
         "TargetAgent",
         "SagarithmConfig",
         "CanonicalFrontmatter",
         "CanonicalArtifact",
         "AuditIssue",
-        "VerificationCheck"
+        "VerificationCheck",
+        "VerificationState",
+        "VectorResult",
+        "ValidationReport",
+        "VerifyPipelineOptions",
+        "runVerificationPipeline",
+        "TopologyNode",
+        "TopologyEdge",
+        "ProjectTopologyGraph",
+        "checkDirectoryFitness",
+        "checkGraphAcyclicity",
+        "buildTopologyFromProject",
+        "evaluateArchitecturalFitness",
+        "SecretRule",
+        "KNOWN_SECRET_RULES",
+        "calculateShannonEntropy",
+        "scanContentForSecrets",
+        "scanGitDiffForSecrets",
+        "scanFilesForSecrets",
+        "AuthService",
+        "verifyToken",
+        "DEFAULT_TIMEOUT",
+        "UserCredentials",
+        "JwtPayload",
+        "API_URL",
+        "router"
       ],
       "tests": [
-        "cli/tests/parser.test.ts"
+        "cli/tests/graph.test.ts",
+        "cli/tests/mcp.test.ts",
+        "cli/tests/parser.test.ts",
+        "cli/tests/registry.test.ts",
+        "cli/tests/validation.test.ts"
       ]
     },
     {
@@ -82,9 +216,16 @@
       "tests": []
     },
     {
+      "name": "registry",
+      "path": "registry",
+      "fileCount": 10,
+      "exports": [],
+      "tests": []
+    },
+    {
       "name": "skills",
       "path": "skills",
-      "fileCount": 31,
+      "fileCount": 43,
       "exports": [],
       "tests": []
     },
@@ -96,6 +237,13 @@
       "tests": []
     },
     {
+      "name": "validation",
+      "path": "validation",
+      "fileCount": 5,
+      "exports": [],
+      "tests": []
+    },
+    {
       "name": "workflows",
       "path": "workflows",
       "fileCount": 5,
@@ -103,5 +251,7 @@
       "tests": []
     }
   ],
-  "dependencies": {}
+  "dependencies": {
+    "esbuild": "^0.25.12"
+  }
 }

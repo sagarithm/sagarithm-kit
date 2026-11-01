@@ -114,7 +114,7 @@ Orphan Abstractions: 0 detected`,
         { flag: "--json", desc: "Emit machine-readable health metrics JSON" },
         { flag: "--threshold <score>", desc: "Fail CI if composite health falls below minimum (e.g. 80)" },
       ],
-      sampleOutput: `🏥 Codebase Health Evaluation (v1.1.1)
+      sampleOutput: `🏥 Codebase Health Evaluation (v1.2.0)
   Category                   Score    Weight
   Architectural Hygiene      100/100  25%
   Modularity & Cohesion       90/100  25%

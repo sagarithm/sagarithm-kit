@@ -4,23 +4,30 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 var DEFAULT_CONFIG = {
-  version: "1.1.1",
+  version: "1.2.0",
   name: "sagarithm-workspace",
-  targets: ["cursor", "claude-code", "copilot", "antigravity", "windsurf", "codex"],
+  targets: ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"],
   riskThreshold: "high",
   enabledDomains: [
     "architecture",
     "quality",
     "testing",
     "security",
-    "documentation"
+    "documentation",
+    "frontend",
+    "backend",
+    "database",
+    "devops",
+    "ai",
+    "agents"
   ],
   paths: {
     constitution: "./constitution",
     skills: "./skills",
     policies: "./policies",
     workflows: "./workflows",
-    adapters: "./adapters"
+    adapters: "./adapters",
+    agents: "./agents"
   }
 };
 function findWorkspaceRoot(cwd = process.cwd()) {
@@ -132,7 +139,7 @@ function listMarkdownFiles(dirPath) {
 
 // cli/src/compiler/emitter.ts
 import { existsSync as existsSync3, mkdirSync, readFileSync as readFileSync3, writeFileSync as writeFileSync2 } from "node:fs";
-import { dirname, resolve as resolve2 } from "node:path";
+import { basename, dirname, resolve as resolve2 } from "node:path";
 var START_MARKER = "<!-- SAGARITHM:START - DO NOT EDIT DIRECTLY -->";
 var END_MARKER = "<!-- SAGARITHM:END -->";
 function injectContent(existingContent, newContent) {
@@ -206,6 +213,25 @@ function compileForTarget(target, ctx) {
         writeSafely(rulePath, mdcContent);
         touchedFiles.push(rulePath);
       }
+      if (ctx.agents) {
+        for (const agent of ctx.agents) {
+          const fileName = `${basename(agent.filePath, ".md")}.mdc`;
+          const rulePath = resolve2(cursorRulesDir, fileName);
+          const mdcContent = [
+            "---",
+            `description: "${agent.frontmatter.description || agent.frontmatter.name || ""}"`,
+            'globs: ["**/*"]',
+            "alwaysApply: false",
+            "---",
+            "",
+            `# ${agent.frontmatter.name || basename(agent.filePath, ".md")}`,
+            "",
+            agent.body.trim()
+          ].join("\n");
+          writeSafely(rulePath, mdcContent);
+          touchedFiles.push(rulePath);
+        }
+      }
       break;
     }
     case "claude-code": {
@@ -237,10 +263,24 @@ ${w.body.trim()}`)
         ...ctx.policies.map((p) => `- ${p.frontmatter.name}: ${p.frontmatter.description || ""}`),
         "",
         "## Engineering Practices",
-        ...ctx.skills.map((s) => `- **${s.frontmatter.name}**: ${s.frontmatter.description || ""}`)
+        ...ctx.skills.map((s) => `- **${s.frontmatter.name}**: ${s.frontmatter.description || ""}`),
+        ...ctx.agents && ctx.agents.length > 0 ? [
+          "",
+          "## Specialized Copilot Agents in `.copilot/agents/`",
+          ...ctx.agents.slice(0, 30).map((a) => `- **${a.frontmatter.name || "Agent"}**: ${a.frontmatter.description || ""}`)
+        ] : []
       ].join("\n");
       writeSafely(copilotPath, copilotContent);
       touchedFiles.push(copilotPath);
+      if (ctx.agents) {
+        const copilotAgentsDir = resolve2(ctx.rootDir, ".copilot/agents");
+        for (const agent of ctx.agents) {
+          const fileName = basename(agent.filePath);
+          const destFile = resolve2(copilotAgentsDir, fileName);
+          writeSafely(destFile, agent.rawContent);
+          touchedFiles.push(destFile);
+        }
+      }
       break;
     }
     case "windsurf": {
@@ -295,7 +335,12 @@ ${w.frontmatter.description || ""}`)
         ...ctx.policies.map((p) => `- **${p.frontmatter.name || ""}** [${p.frontmatter.severity?.toUpperCase() || "ERROR"}]: ${p.frontmatter.description || ""}`),
         "",
         "## Active Skills Available in `.agents/skills/`",
-        ...ctx.skills.map((s) => `- \`${s.frontmatter.name || ""}\`: ${s.frontmatter.description || ""}`)
+        ...ctx.skills.map((s) => `- \`${s.frontmatter.name || ""}\`: ${s.frontmatter.description || ""}`),
+        ...ctx.agents && ctx.agents.length > 0 ? [
+          "",
+          "## Specialized Engineering Personas in `.agents/agents/`",
+          ...ctx.agents.slice(0, 35).map((a) => `- \`${a.frontmatter.name || basename(a.filePath, ".md")}\`: ${a.frontmatter.description || ""}`)
+        ] : []
       ].join("\n");
       writeSafely(geminiPath, geminiContent);
       touchedFiles.push(geminiPath);
@@ -320,6 +365,19 @@ ${w.frontmatter.description || ""}`)
         writeSafely(destSkillFile, skill.rawContent || `${skill.body}
 `);
         touchedFiles.push(destSkillFile);
+      }
+      if (ctx.agents) {
+        const agentsDir = resolve2(ctx.rootDir, ".agents/agents");
+        for (const agent of ctx.agents) {
+          const fileName = basename(agent.filePath);
+          const destAgentFile = resolve2(agentsDir, fileName);
+          writeSafely(destAgentFile, agent.rawContent);
+          touchedFiles.push(destAgentFile);
+          const agentSlug = basename(agent.filePath, ".md").toLowerCase();
+          const destSkillFile = resolve2(agentsSkillsDir, agentSlug, "SKILL.md");
+          writeSafely(destSkillFile, agent.rawContent);
+          touchedFiles.push(destSkillFile);
+        }
       }
       const mcpConfigPath = resolve2(ctx.rootDir, ".agents/mcp_config.json");
       if (!existsSync3(mcpConfigPath)) {
@@ -368,18 +426,21 @@ function runSync(rootDir2, args2) {
   const skillsDir = resolveCanonicalDir(rootDir2, config.paths.skills);
   const policiesDir = resolveCanonicalDir(rootDir2, config.paths.policies);
   const workflowsDir = resolveCanonicalDir(rootDir2, config.paths.workflows);
+  const agentsDir = resolveCanonicalDir(rootDir2, config.paths.agents || "./agents");
   const constitutionFiles = listMarkdownFiles(constitutionDir);
   const skillFiles = listMarkdownFiles(skillsDir).filter((f) => f.endsWith("SKILL.md"));
   const policyFiles = listMarkdownFiles(policiesDir).filter((f) => !f.endsWith("README.md"));
   const workflowFiles = listMarkdownFiles(workflowsDir).filter((f) => !f.endsWith("README.md"));
+  const agentFiles = listMarkdownFiles(agentsDir).filter((f) => !f.endsWith("README.md"));
   const ctx = {
     rootDir: rootDir2,
     constitution: constitutionFiles.map(readCanonicalArtifact),
     skills: skillFiles.map(readCanonicalArtifact),
     policies: policyFiles.map(readCanonicalArtifact),
-    workflows: workflowFiles.map(readCanonicalArtifact)
+    workflows: workflowFiles.map(readCanonicalArtifact),
+    agents: agentFiles.map(readCanonicalArtifact)
   };
-  console.log(`\u{1F4E6} Loaded canonical assets: ${ctx.constitution.length} articles, ${ctx.skills.length} skills, ${ctx.policies.length} policies, ${ctx.workflows.length} workflows.`);
+  console.log(`\u{1F4E6} Loaded canonical assets: ${ctx.constitution.length} articles, ${ctx.skills.length} skills, ${ctx.policies.length} policies, ${ctx.workflows.length} workflows, ${ctx.agents?.length || 0} specialist agents.`);
   let targetList = config.targets;
   const targetFlagIdx = args2.indexOf("--target");
   if (targetFlagIdx !== -1 && args2[targetFlagIdx + 1]) {
@@ -404,6 +465,9 @@ function runInit(rootDir2, flags) {
     return;
   }
   const detectedTargets = [];
+  if (existsSync5(resolve4(rootDir2, ".agents")) || existsSync5(resolve4(rootDir2, "AGENTS.md")) || existsSync5(resolve4(rootDir2, "GEMINI.md"))) {
+    detectedTargets.push("antigravity");
+  }
   if (existsSync5(resolve4(rootDir2, ".cursor")) || existsSync5(resolve4(rootDir2, ".cursorrules"))) {
     detectedTargets.push("cursor");
   }
@@ -416,20 +480,23 @@ function runInit(rootDir2, flags) {
   if (existsSync5(resolve4(rootDir2, ".windsurfrules"))) {
     detectedTargets.push("windsurf");
   }
-  const targets = isStarter ? ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"] : detectedTargets.length > 0 ? detectedTargets : DEFAULT_CONFIG.targets;
+  const targets = isStarter ? ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"] : detectedTargets.length > 0 ? detectedTargets.includes("antigravity") ? detectedTargets : ["antigravity", ...detectedTargets] : DEFAULT_CONFIG.targets;
   const config = {
     ...DEFAULT_CONFIG,
     targets
   };
   saveConfig(rootDir2, config);
   console.log(`\u2705 Configured sagarithm.config.json with targets: ${targets.join(", ")}`);
-  if (isStarter) {
-    console.log("\u{1F504} Compiling canonical specifications and skills into target agent environments...");
-    runSync(rootDir2, []);
-    console.log(`
+  console.log("\u{1F504} Compiling canonical specifications and skills into target agent environments...");
+  runSync(rootDir2, []);
+  console.log(`
 \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 \u{1F6E1}\uFE0F  SAGARITHM KIT READY \u2014 CHIEF SYSTEMS ARCHITECT ACTIVATED
 \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+
+All canonical skills and policies are synchronized into your workspace.
+For Antigravity: loaded in .agents/skills/ and documented in AGENTS.md / GEMINI.md.
+MCP Server is configured in .agents/mcp_config.json.
 
 To begin building with high-integrity truth validation, ask your AI:
 
@@ -444,9 +511,6 @@ Your AI agent will:
   4. Enforce Zero Assumed Success [VERIFIED] state across all code.
 \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
 `);
-  } else {
-    console.log("\u{1F4A1} Run `sagarithm sync` to compile canonical specifications into target configurations.");
-  }
 }
 
 // cli/src/commands/doctor.ts
@@ -669,6 +733,15 @@ function extractImports(fileContent) {
   }
   return imports;
 }
+function extractImportStatements(fileContent) {
+  const statements = [];
+  const stmtRegex = /import\s+[\s\S]*?from\s+['"].*?['"]/g;
+  let match;
+  while ((match = stmtRegex.exec(fileContent)) !== null) {
+    statements.push(match[0].replace(/\s+/g, " "));
+  }
+  return statements;
+}
 function buildProjectGraph(rootDir2) {
   const allFiles = scanRepositoryFiles(rootDir2);
   const relativeFiles = allFiles.map((f) => relative(rootDir2, f).replace(/\\/g, "/"));
@@ -692,6 +765,7 @@ function buildProjectGraph(rootDir2) {
         const content = readFileSync6(resolve7(rootDir2, relPath), "utf8");
         mod.exports.push(...extractExports(content));
         mod.imports.push(...extractImports(content));
+        mod.imports.push(...extractImportStatements(content));
       } catch {
       }
     }
@@ -717,7 +791,7 @@ function buildProjectGraph(rootDir2) {
     }
   }
   return {
-    version: "1.1.1",
+    version: "1.2.0",
     name: "sagarithm-project",
     rootPath: rootDir2,
     modules,
@@ -876,7 +950,7 @@ function runAudit(rootDir2, args2 = []) {
     if (!existsSync10(manifestPath)) {
       const graph = buildProjectGraph(rootDir2);
       const manifestData = {
-        version: "1.1.1",
+        version: "1.2.0",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -1084,7 +1158,7 @@ function runVerificationPipeline(rootDir2, options = {}) {
     state = "ASSUMED";
   }
   const report = {
-    version: "1.1.1",
+    version: "1.2.0",
     timestamp: (/* @__PURE__ */ new Date()).toISOString(),
     state,
     summary: {
@@ -1231,7 +1305,7 @@ function suggestModuleLocation(graph, domainHint) {
   }
   return "src";
 }
-function calculateSystemComplexity(graph) {
+function calculateSystemComplexity(graph, targetModuleName) {
   const Ca = {};
   const Ce = {};
   const instability = {};
@@ -1261,6 +1335,17 @@ function calculateSystemComplexity(graph) {
     evaluatedModules++;
   }
   const totalExports = graph.modules.reduce((acc, m) => acc + m.exports.length, 0);
+  if (targetModuleName) {
+    return {
+      totalModules: graph.modules.length,
+      totalFiles: graph.allFiles.length,
+      totalExports,
+      afferentCoupling: Ca[targetModuleName] || 0,
+      efferentCoupling: Ce[targetModuleName] || 0,
+      instability: instability[targetModuleName] || 0,
+      averageInstability: evaluatedModules === 0 ? 0 : Number((totalInstability / evaluatedModules).toFixed(2))
+    };
+  }
   return {
     totalModules: graph.modules.length,
     totalFiles: graph.allFiles.length,
@@ -1271,11 +1356,45 @@ function calculateSystemComplexity(graph) {
     averageInstability: evaluatedModules === 0 ? 0 : Number((totalInstability / evaluatedModules).toFixed(2))
   };
 }
+var FRAMEWORK_EXPORTS = /* @__PURE__ */ new Set([
+  "default",
+  "Page",
+  "Layout",
+  "RootLayout",
+  "NotFound",
+  "Error",
+  "metadata",
+  "viewport",
+  "generateMetadata",
+  "generateStaticParams",
+  "middleware",
+  "fetchCache",
+  "unstable_cacheLife",
+  "revalidate",
+  "dynamic",
+  "Loading",
+  "Template",
+  "PageProps",
+  "LayoutProps",
+  "ParamsOf",
+  "SearchParam",
+  "Hero",
+  "Navbar",
+  "InteractiveStudio",
+  "TerminalPreview",
+  "Architecture",
+  "Benchmark",
+  "Capabilities",
+  "Footer",
+  "Quickstart",
+  "RegistryBar"
+]);
 function detectOrphanAbstractions(graph) {
   const orphans2 = [];
   const allImportStatements = graph.modules.flatMap((m) => m.imports);
   for (const mod of graph.modules) {
     for (const exp of mod.exports) {
+      if (FRAMEWORK_EXPORTS.has(exp)) continue;
       const isReferencedInImports = allImportStatements.some((imp) => imp.includes(exp));
       if (!isReferencedInImports) {
         orphans2.push({
@@ -1297,7 +1416,7 @@ function runContext(rootDir2, args2) {
     case "generate": {
       const manifestPath = resolve11(rootDir2, "sagarithm.manifest.json");
       const manifestData = {
-        version: "1.1.1",
+        version: "1.2.0",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -1422,7 +1541,7 @@ import { resolve as resolve13 } from "node:path";
 
 // cli/src/registry/loader.ts
 import { existsSync as existsSync12, readFileSync as readFileSync9, mkdirSync as mkdirSync3, writeFileSync as writeFileSync6 } from "node:fs";
-import { resolve as resolve12, basename } from "node:path";
+import { resolve as resolve12, basename as basename2 } from "node:path";
 import { createHash } from "node:crypto";
 function loadRegistryIndex(rootDir2) {
   const candidates = [
@@ -1478,23 +1597,23 @@ function packArtifact(rootDir2, targetPath) {
   }
   const skillFile = existsSync12(resolve12(absPath, "SKILL.md")) ? resolve12(absPath, "SKILL.md") : null;
   const content = skillFile ? readFileSync9(skillFile, "utf8") : readFileSync9(absPath, "utf8");
-  const base = basename(absPath).replace(/\.md$/, "");
+  const base = basename2(absPath).replace(/\.md$/, "");
   const integrity = computeIntegrityHash(content);
   const manifest = {
     name: `@sagarithm/skill-${base}`,
-    version: "1.1.1",
+    version: "1.2.0",
     type: "skill",
     description: `Packaged canonical artifact for ${base}`,
     author: "Sagarithm Community",
     license: "Apache-2.0",
     integrity,
-    entrypoint: skillFile ? "SKILL.md" : basename(absPath)
+    entrypoint: skillFile ? "SKILL.md" : basename2(absPath)
   };
   const distDir = resolve12(rootDir2, ".sagarithm/dist");
   if (!existsSync12(distDir)) {
     mkdirSync3(distDir, { recursive: true });
   }
-  const packageFileName = `${manifest.name.replace(/[@/]/g, "-")}-1.1.1.json`;
+  const packageFileName = `${manifest.name.replace(/[@/]/g, "-")}-1.2.0.json`;
   const packagePath = resolve12(distDir, packageFileName);
   const bundle = {
     manifest,
@@ -1577,7 +1696,7 @@ Workflows (${preset.workflows.length}):`);
         } catch {
           console.log("\u26A0\uFE0F  Existing config invalid; creating new configuration.");
           config = {
-            version: "1.1.1",
+            version: "1.2.0",
             name: "sagarithm-project",
             targets: ["antigravity", "cursor", "claude-code"],
             riskThreshold: preset.riskThreshold,
@@ -1593,7 +1712,7 @@ Workflows (${preset.workflows.length}):`);
         }
       } else {
         config = {
-          version: "1.1.1",
+          version: "1.2.0",
           name: "sagarithm-project",
           targets: ["antigravity", "cursor", "claude-code", "copilot", "windsurf", "codex"],
           riskThreshold: preset.riskThreshold,
@@ -1699,7 +1818,7 @@ function runWorkflow(rootDir2, args2) {
   const workflowName = args2[0];
   if (!workflowName || workflowName === "help") {
     console.log(`
-\u{1F916} Sagarithm Autonomous Workflow Orchestrator (v1.1.1)
+\u{1F916} Sagarithm Autonomous Workflow Orchestrator (v1.2.0)
 
 Usage:
   sagarithm run <workflow-name> [options]
@@ -1742,7 +1861,7 @@ Options:
     if (!manifestExists) {
       console.log("  \u26A0\uFE0F  Missing sagarithm.manifest.json \u2014 Auto-generating topology manifest...");
       const manifestData = {
-        version: "1.1.1",
+        version: "1.2.0",
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map((m) => ({
@@ -2186,7 +2305,7 @@ function dispatchMcpRequest(req, rootDir2) {
           },
           serverInfo: {
             name: "sagarithm-kit-mcp",
-            version: "1.1.1"
+            version: "1.2.0"
           }
         }
       };
@@ -2471,7 +2590,7 @@ var command = args[0] || "help";
 var rootDir = findWorkspaceRoot();
 function printHelp() {
   console.log(`
-Sagarithm Kit CLI (v1.1.1)
+Sagarithm Kit CLI (v1.2.0)
 Universal Cross-Agent Engineering Framework for AI Coding Agents
 
 Usage:
@@ -2548,7 +2667,7 @@ switch (command) {
   case "version":
   case "--version":
   case "-v":
-    console.log("1.1.1");
+    console.log("1.2.0");
     break;
   case "help":
   case "--help":

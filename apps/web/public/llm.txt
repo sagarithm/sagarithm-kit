@@ -1,0 +1,148 @@
+# Sagarithm Kit — Machine-Readable LLM & Agent Specification
+
+> Universal cross-agent framework delivering architectural governance, empirical verification, living context graphs, and quality gates to Cursor, Antigravity, Claude Code, & Copilot.
+> Package: sagarithm-kit | Version: 1.2.0 | Engine: Node.js 22+ Native ESM | License: Apache-2.0
+> Canonical URL: https://kit.sagarithm.in | Repository: https://github.com/sagarithm/sagarithm-kit
+
+---
+
+## 1. Executive Summary & Identity
+
+Sagarithm Kit is an open-source, zero-dependency, universal cross-agent governance framework for AI coding agents. It transforms consumer AI coding assistants into high-integrity Chief Systems Architects who refuse blind compliance, validate ideas against hard physical constraints, eliminate architectural drift, and enforce empirical verification before claiming task completion.
+
+- **Primary Persona**: Chief Systems Architect & Quality Governor
+- **Core Stance**: Truth-Driven Engineering (Truth > Blind Compliance)
+- **Invariant**: Zero Assumed Success (ZAS) — Never claim completion without real terminal execution and empirical stdout proof.
+- **Security Boundary**: Fail-Closed Security — Shannon entropy H >= 4.5 triggers an immediate security abort.
+- **Topology**: Acyclic Modular Architecture — Strictly zero circular cycles; zero generic dumpsters (`utils/`, `helpers/`).
+
+---
+
+## 2. Supported AI Coding Agent Targets
+
+Sagarithm Kit natively targets and continuously synchronizes specifications across 6 major AI coding agent ecosystems:
+
+| Agent Target | Primary Configuration | Synchronized Specialist Skills | Custom Rules / Personas |
+| :--- | :--- | :--- | :--- |
+| **Google Antigravity** | `GEMINI.md` | `.agents/skills/*/SKILL.md` | `.agents/agents/*.md`, `.agents/mcp_config.json` |
+| **Cursor IDE** | `.cursorrules` | `.cursor/rules/*.mdc` | Semantic Rule Globbing |
+| **Anthropic Claude Code** | `CLAUDE.md` | Synchronized markdown context | System prompt constitution |
+| **GitHub Copilot** | `.github/copilot-instructions.md` | `.copilot/agents/*.agent.md` | Copilot Workspace Agent Personas |
+| **Windsurf IDE** | `.windsurfrules` | Cascade context memory | Architectural constraints |
+| **OpenAI Codex / Open Standards** | `AGENTS.md` | Linux Foundation AGENTS.md spec | Inter-agent standard protocol |
+
+---
+
+## 3. CLI Command Reference
+
+The Sagarithm CLI (`sagarithm-kit` or `@sagarithm/cli`) runs on native Node.js 22+ ESM with 0 external runtime dependencies.
+
+```bash
+# Initialize workspace with canonical specifications, 116 skills, and 99 agent personas
+npx sagarithm-kit init
+
+# Compile canonical specifications into all configured agent targets
+npx sagarithm-kit sync [--target all|cursor|antigravity|claude-code|copilot|windsurf|codex]
+
+# Execute Multi-Vector Verification Gate (Static, Security, Architecture, Behavioral, Docs)
+npx sagarithm-kit verify [--strict]
+
+# Compute Codebase Health Index (0-100, Grade A+ to F)
+npx sagarithm-kit health
+
+# Inspect project AST topological graph, coupling (Ca/Ce), and Martin Instability
+npx sagarithm-kit context stats
+
+# Detect dead-code and orphan abstractions
+npx sagarithm-kit context orphans
+
+# Audit workspace against active Sagarithm architectural policies
+npx sagarithm-kit audit
+
+# Start Native Model Context Protocol (MCP) Server on stdio
+npx sagarithm-kit mcp
+```
+
+---
+
+## 4. Model Context Protocol (MCP) Server Specification
+
+Sagarithm Kit implements a native, zero-dependency MCP server conforming to the 2024-11-05 JSON-RPC 2.0 protocol over `stdio`.
+
+- **Transport**: `stdio`
+- **Configuration**: Automatically declared in `.agents/mcp_config.json` and registered under Antigravity/Cursor MCP settings.
+
+### Available MCP Tools
+
+1. **`sagarithm_verify`**:
+   - Executes the 5-vector verification gate (Static syntax, Shannon entropy security scan, circular dependency check, test suite execution, and documentation manifest sync).
+   - Arguments: `{ "strict": boolean, "quick": boolean }`
+   - Output: `[VERIFIED]` or failure diagnosis with exact diffs.
+
+2. **`sagarithm_scan_secrets`**:
+   - Scans code or files for credential leaks and Shannon entropy violations ($H \ge 4.5$).
+   - Arguments: `{ "content": string, "filePath": string }`
+   - Output: Secret issue list or clean security pass.
+
+3. **`sagarithm_query_graph`**:
+   - Parses repository AST, evaluates Afferent Coupling ($C_a$), Efferent Coupling ($C_e$), Martin Instability Metric ($I = C_e / (C_a + C_e)$), and detects circular dependency cycles.
+   - Arguments: `{ "path": string, "detectCycles": boolean, "detectOrphans": boolean }`
+   - Output: Topological telemetry report.
+
+4. **`sagarithm_validate_idea`**:
+   - Stress-tests a proposed software concept or architecture before implementation. Surface trade-offs, identify operational bottlenecks, and generate formal non-goals.
+   - Arguments: `{ "idea": string, "domain": string, "constraints": string[] }`
+   - Output: Truth-driven feasibility assessment.
+
+5. **`sagarithm_health`**:
+   - Calculates the composite 0-100 Codebase Health Index across 5 dimensions: Structural Hygiene (25 pts), Modularity & Coupling (25 pts), Dead Code Ratio (20 pts), Secret Defense (20 pts), and Test Density (10 pts).
+   - Arguments: `{ "targetPath": string }`
+   - Output: Health scorecard and grade (A+ to F).
+
+6. **`sagarithm_get_skill`**:
+   - Retrieves canonical skill instructions, scripts, or examples from the Sagarithm registry.
+   - Arguments: `{ "name": string, "includeFull": boolean }`
+   - Output: Markdown skill body and YAML frontmatter.
+
+---
+
+## 5. Architectural Policies & Invariants
+
+All agent actions in a Sagarithm-governed workspace are bound by 7 non-negotiable architectural policies:
+
+1. **Change Scope & Blast Radius Containment [ERROR]**: Confines code modifications strictly to the files and functions directly required to fulfill the request. Refuse refactoring drive-bys.
+2. **Dependency Management & Supply Chain Control [ERROR]**: Restricts introducing third-party dependencies. Requires evaluation of native standard libraries.
+3. **Directory Creation & Structural Sprawl Prevention [ERROR]**: Strictly forbids unauthorized creation of arbitrary directories, generic utility folders (`utils/`, `helpers/`), or parallel folder hierarchies.
+4. **Documentation & ADR Synchronization [WARN]**: Requires synchronization of documentation, API specs, and ADRs whenever code architecture or interfaces change.
+5. **File Creation & Abstraction Deduplication [ERROR]**: Prevents creation of redundant files, duplicate helper abstractions, and mislocated source files.
+6. **Security Boundary & Secrets Containment [ERROR]**: Prohibits committing credentials, raw SQL concatenation, untrusted shell executions, and unvalidated perimeter inputs.
+7. **Testing Enforcement & Zero Assumed Success [ERROR]**: Mandates real terminal execution of automated tests, zero test failures, and regression tests for bug fixes.
+
+---
+
+## 6. Pre-Skilled Capabilities & Personas
+
+Sagarithm Kit v1.2.0 bundles **116 production-grade skills** and **99 specialized agent personas** across 6 core disciplines:
+
+- **AI Systems & RAG Architecture**: Deterministic tool calling, schema-constrained generation, token-budgeted indexing, RAG pipelines, and self-healing local SLM remediation.
+- **Architecture & System Design**: Spec-driven architecture, bounded contexts, acyclic modularity, and Architectural Decision Records (ADRs MADR 3.0).
+- **Backend & Distributed Systems**: Resilient microservices, idempotent APIs, zero-downtime migrations, and distributed failure tolerance.
+- **Database & Data Modeling**: Relational/document schemas, B-tree/GIN indexing, ACID boundaries, and query optimization.
+- **Quality, STLC & Verification**: Test-Driven Development (TDD), property-based invariants, mutation testing, and evidence-based QA certification.
+- **DevOps, SRE & Cloud Governance**: Containerization, OpenTelemetry observability, SLO/SLI tracking, and release governance.
+- **Frontend & UI/UX Engineering**: Accessible design systems, state machines, and optimal Core Web Vitals.
+- **Marketing, AEO & Growth**: AI Engine Optimization (llms.txt, robots.txt AI directives), AI citation strategy, and multi-platform publishing.
+
+---
+
+## 7. Key Resources & Endpoints
+
+- **Interactive Studio**: https://kit.sagarithm.in/#studio
+- **Architecture Specification**: https://kit.sagarithm.in/#architecture
+- **Capabilities Directory**: https://kit.sagarithm.in/#capabilities
+- **Benchmark & Health Metrics**: https://kit.sagarithm.in/#benchmark
+- **CLI Usage Guide**: https://kit.sagarithm.in/#cli
+- **npm Package**: https://www.npmjs.com/package/sagarithm-kit
+- **GitHub Repository**: https://github.com/sagarithm/sagarithm-kit
+- **LLM Context Endpoint**: https://kit.sagarithm.in/llms.txt
+

@@ -2,7 +2,7 @@
 ---
 id: "ideation.idea-validation"
 name: "Idea Validation & Truth-Driven Engineering"
-version: "1.1.1"
+version: "1.2.0"
 domain: "ideation"
 description: "Critically evaluates and stress-tests software ideas before building. Forbids blind AI compliance; demands truth-telling on technical feasibility, operational bottlenecks, architectural boundaries, and non-goals."
 triggers:

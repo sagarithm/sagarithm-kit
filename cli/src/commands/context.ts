@@ -13,7 +13,7 @@ export function runContext(rootDir: string, args: string[]): void {
     case 'generate': {
       const manifestPath = resolve(rootDir, 'sagarithm.manifest.json');
       const manifestData = {
-        version: '1.1.1',
+        version: '1.2.0',
         name: graph.name,
         totalFiles: graph.allFiles.length,
         modules: graph.modules.map(m => ({

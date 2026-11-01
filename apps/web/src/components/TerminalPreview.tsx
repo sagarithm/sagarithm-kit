@@ -21,29 +21,33 @@ export function TerminalPreview() {
 
   return (
     <div className="relative overflow-hidden rounded-xl border border-white/10 bg-[#161616] text-[#ededed] shadow-2xl">
-      {/* Terminal Title Bar */}
-      <div className="flex h-11 items-center justify-between border-b border-white/10 px-3.5 sm:px-4 font-mono text-[11px] bg-white/[0.02] gap-2 overflow-hidden">
+            {/* Terminal Title Bar */}
+      <div className="flex h-10 sm:h-11 items-center justify-between border-b border-white/10 px-3 sm:px-3.5 font-mono text-[11px] bg-white/[0.02]">
         {/* macOS Colored Window Controls & Title */}
-        <div className="flex items-center gap-3 shrink-0 min-w-0">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
           <div className="flex items-center gap-1.5 shrink-0">
-            <span className="h-3 w-3 rounded-full bg-[#ff5f56] border border-black/15 shadow-xs inline-block" />
-            <span className="h-3 w-3 rounded-full bg-[#ffbd2e] border border-black/15 shadow-xs inline-block" />
-            <span className="h-3 w-3 rounded-full bg-[#27c93f] border border-black/15 shadow-xs inline-block" />
+            <span className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-[#ff5f56] border border-black/15 shadow-xs inline-block" />
+            <span className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-[#ffbd2e] border border-black/15 shadow-xs inline-block" />
+            <span className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-[#27c93f] border border-black/15 shadow-xs inline-block" />
           </div>
-          <div className="flex items-center gap-2 whitespace-nowrap shrink-0">
-            <span className="text-white/90 font-medium text-xs">sagarithm-cli</span>
-            <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] text-white/40 font-mono">v1.1.1</span>
+          <div className="flex items-center gap-1.5 sm:gap-2 whitespace-nowrap shrink-0">
+            <span className="text-white/90 font-medium text-[11px] sm:text-xs">
+              <span className="hidden sm:inline">sagarithm-</span>cli
+            </span>
+            <span className="hidden sm:inline-flex rounded bg-white/10 px-1.5 py-0.5 text-[10px] text-white/40 font-mono shrink-0">
+              v1.2.0
+            </span>
           </div>
         </div>
 
         {/* Tab Switcher & Copy */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <div className="flex items-center rounded-md border border-white/10 bg-white/5 p-0.5">
+          <div className="flex items-center rounded-md border border-white/10 bg-white/5 p-0.5 shrink-0">
             {(["stats", "verify", "sync"] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-2 sm:px-2.5 py-1 rounded text-[11px] font-mono transition-all ${
+                className={`px-2 py-0.5 sm:py-1 rounded text-[10px] sm:text-[11px] font-mono transition-all shrink-0 ${
                   activeTab === tab
                     ? "bg-heat text-white font-medium shadow-xs"
                     : "text-white/60 hover:text-white"
@@ -56,11 +60,11 @@ export function TerminalPreview() {
 
           <button
             onClick={copyCommand}
-            className="flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 sm:px-2.5 py-1 text-[11px] text-white/70 hover:border-white/30 hover:text-white transition-all shrink-0"
+            className="flex items-center justify-center gap-1 sm:gap-1.5 rounded-md border border-white/10 bg-white/5 px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-[11px] text-white/70 hover:border-white/30 hover:text-white transition-all shrink-0"
             title="Copy command"
           >
-            {copied ? <Check className="h-3 w-3 text-green-400" /> : <Copy className="h-3 w-3" />}
-            <span className="font-mono hidden sm:inline">{copied ? "Copied" : "Copy"}</span>
+            {copied ? <Check className="h-3 w-3 text-green-400 shrink-0" /> : <Copy className="h-3 w-3 shrink-0" />}
+            <span className="font-mono">{copied ? "Copied" : "Copy"}</span>
           </button>
         </div>
       </div>
@@ -148,7 +152,7 @@ export function TerminalPreview() {
                   <span className="text-green-400">✔</span>
                   <span>Vector 4: Behavioral Test Gate</span>
                 </span>
-                <span className="text-white/40">17/17 tests passing</span>
+                <span className="text-white/40">29/29 tests passing</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2">
@@ -197,7 +201,7 @@ export function TerminalPreview() {
 
             <div className="mt-3 rounded-lg border border-white/8 bg-white/[0.025] p-2.5 flex items-center justify-between text-[11px] text-white/60">
               <span>Drift Status:</span>
-              <span className="text-white font-medium">0% Divergence Across 5 Agents</span>
+              <span className="text-white font-medium">0% Divergence Across All Targets</span>
             </div>
           </div>
         )}

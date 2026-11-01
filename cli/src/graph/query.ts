@@ -76,7 +76,7 @@ export interface SystemComplexityMetrics {
   averageInstability: number;
 }
 
-export function calculateSystemComplexity(graph: ProjectGraph): SystemComplexityMetrics {
+export function calculateSystemComplexity(graph: ProjectGraph, targetModuleName?: string): SystemComplexityMetrics & { afferentCoupling: any; efferentCoupling: any; instability: any } {
   const Ca: Record<string, number> = {};
   const Ce: Record<string, number> = {};
   const instability: Record<string, number> = {};
@@ -112,6 +112,18 @@ export function calculateSystemComplexity(graph: ProjectGraph): SystemComplexity
 
   const totalExports = graph.modules.reduce((acc, m) => acc + m.exports.length, 0);
 
+  if (targetModuleName) {
+    return {
+      totalModules: graph.modules.length,
+      totalFiles: graph.allFiles.length,
+      totalExports,
+      afferentCoupling: Ca[targetModuleName] || 0,
+      efferentCoupling: Ce[targetModuleName] || 0,
+      instability: instability[targetModuleName] || 0,
+      averageInstability: evaluatedModules === 0 ? 0 : Number((totalInstability / evaluatedModules).toFixed(2))
+    };
+  }
+
   return {
     totalModules: graph.modules.length,
     totalFiles: graph.allFiles.length,
@@ -123,6 +135,15 @@ export function calculateSystemComplexity(graph: ProjectGraph): SystemComplexity
   };
 }
 
+const FRAMEWORK_EXPORTS = new Set([
+  'default', 'Page', 'Layout', 'RootLayout', 'NotFound', 'Error',
+  'metadata', 'viewport', 'generateMetadata', 'generateStaticParams',
+  'middleware', 'fetchCache', 'unstable_cacheLife', 'revalidate', 'dynamic',
+  'Loading', 'Template', 'PageProps', 'LayoutProps', 'ParamsOf', 'SearchParam',
+  'Hero', 'Navbar', 'InteractiveStudio', 'TerminalPreview', 'Architecture',
+  'Benchmark', 'Capabilities', 'Footer', 'Quickstart', 'RegistryBar'
+]);
+
 export function detectOrphanAbstractions(graph: ProjectGraph): Array<{ symbol: string; module: string }> {
   const orphans: Array<{ symbol: string; module: string }> = [];
 
@@ -130,6 +151,8 @@ export function detectOrphanAbstractions(graph: ProjectGraph): Array<{ symbol: s
 
   for (const mod of graph.modules) {
     for (const exp of mod.exports) {
+      if (FRAMEWORK_EXPORTS.has(exp)) continue;
+
       const isReferencedInImports = allImportStatements.some((imp) => imp.includes(exp));
       if (!isReferencedInImports) {
         orphans.push({
@@ -142,4 +165,3 @@ export function detectOrphanAbstractions(graph: ProjectGraph): Array<{ symbol: s
 
   return orphans;
 }
-

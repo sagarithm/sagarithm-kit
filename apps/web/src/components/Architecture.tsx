@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { BookOpen, Box, Compass, GitMerge, Layers, ShieldCheck, Terminal } from "lucide-react";
+import { BookOpen, Box, Compass, GitMerge, Layers, ShieldCheck, Terminal, Users } from "lucide-react";
 
 export function Architecture() {
   const [activeLayer, setActiveLayer] = useState(0);
@@ -28,27 +28,57 @@ export function Architecture() {
     },
     {
       index: "02",
-      name: "Core Engineering Skills",
-      path: "skills/",
+      name: "Core Skills & Personas",
+      path: "skills/ & agents/",
       icon: Box,
-      summary: "10 Canonical Skills & Anti-Rationalization Tables",
+      summary: "17 Core Skills & 99 Autonomous Specialist Personas",
       details:
-        "Actionable skill bundles containing checklists, reference patterns, examples, and embedded anti-rationalization tables defeating AI shortcuts across the entire software development lifecycle.",
+        "Actionable skill bundles containing checklists, reference patterns, examples, and embedded anti-rationalization tables defeating AI shortcuts across all SDLC & STLC stages. Includes 99 specialist agent personas auto-provisioned to IDEs.",
       items: [
+        "frontend-ui-engineering (Atomic design, Web Vitals, a11y)",
+        "backend-distributed-systems (OpenAPI, idempotency, outbox)",
+        "database-architecture-and-modeling (3NF, Expand/Contract, indexes)",
+        "devops-sre-observability (Rootless Docker, OTel, canary)",
+        "testing-stlc-quality-assurance (All 6 STLC phases, BVA)",
+        "ai-systems-and-rag (Token saving, schema outputs, injection defense)",
+        "performance-profiling-and-optimization (O(1) maps, stream I/O)",
         "ideation-idea-validation (Truth-driven stress testing)",
-        "spec-driven-development (Contract interfaces & MADR)",
+        "architecture-spec-driven-development (Contract interfaces)",
         "architecture-system-design (Modularity, DAG acyclicity)",
-        "planning-and-task-breakdown (Atomic INVEST slices)",
-        "code-review-and-quality (Senior adversarial review)",
-        "coding-standards (Type safety & error handling)",
-        "secure-development (Threat modeling & entropy defense)",
-        "test-driven-verification (Hermetic TDD assertions)",
+        "lifecycle-planning-and-task-breakdown (Atomic slices)",
+        "quality-code-review-and-quality (Senior adversarial review)",
+        "quality-coding-standards (Type safety & error handling)",
+        "security-secure-development (Threat modeling & entropy defense)",
+        "testing-test-driven-verification (Hermetic TDD assertions)",
         "delivery-shipping-and-launch (4-gate release governance)",
-        "architectural-decision-records (MADR 3.0 records)",
+        "documentation-architectural-decision-records (MADR 3.0)",
       ],
     },
     {
       index: "03",
+      name: "Specialist Agent Personas",
+      path: "agents/",
+      icon: Users,
+      summary: "99 Production-Tested Engineering Specialists",
+      details:
+        "Pre-configured specialist identities covering Core Engineering (49), Testing & QA (9), Product & Strategy (5), and Market Operations (36). Automatically synchronized into .agents/agents/, .copilot/agents/, and Cursor rules.",
+      items: [
+        "engineering-backend-architect.md",
+        "engineering-frontend-developer.md",
+        "engineering-software-architect.md",
+        "engineering-data-engineer.md",
+        "engineering-database-optimizer.md",
+        "engineering-devops-automator.md",
+        "engineering-sre.md",
+        "engineering-api-platform-engineer.md",
+        "testing-test-automation-engineer.md",
+        "testing-api-tester.md",
+        "testing-performance-benchmarker.md",
+        "product-manager.md",
+      ],
+    },
+    {
+      index: "04",
       name: "Behavioral Policies",
       path: "policies/",
       icon: ShieldCheck,
@@ -56,14 +86,17 @@ export function Architecture() {
       details:
         "Deterministic guardrails evaluated by the validation engine during audits and PR gates. Forbids blind assumptions, anti-pattern directories, and unrestricted diff explosions.",
       items: [
-        "no-assumed-success.md (Empirical proof required)",
-        "structural-fitness.md (No utils/helpers junk drawers)",
-        "diff-discipline.md (Surgical blast-radius limit)",
-        "documentation-sync.md (Zero doc drift)",
+        "policy-change-scope.md (Blast-radius confinement)",
+        "policy-directory-creation.md (No utils/helpers junk drawers)",
+        "policy-dependency-management.md (Zero unvetted packages)",
+        "policy-security-boundary.md (Fail-closed secrets isolation)",
+        "policy-testing-enforcement.md (Zero Assumed Success)",
+        "policy-file-creation.md (Anti-duplication inspection)",
+        "policy-documentation-synchronization.md (Zero doc drift)",
       ],
     },
     {
-      index: "04",
+      index: "05",
       name: "Canonical Workflows",
       path: "workflows/",
       icon: Compass,
@@ -71,14 +104,14 @@ export function Architecture() {
       details:
         "Deterministic state machines for end-to-end development tasks. Guides agents stage-by-stage through discovery, interface definition, implementation, verification, and atomic commit.",
       items: [
-        "feature-development-workflow.md",
-        "bug-fix-workflow.md",
-        "refactoring-workflow.md",
-        "release-workflow.md",
+        "workflow.feature-development.md",
+        "workflow.bug-fix.md",
+        "workflow.refactoring.md",
+        "workflow.release.md",
       ],
     },
     {
-      index: "05",
+      index: "06",
       name: "Project Intelligence",
       path: "context/",
       icon: Layers,
@@ -93,42 +126,26 @@ export function Architecture() {
       ],
     },
     {
-      index: "06",
+      index: "07",
       name: "Universal Agent Adapters",
       path: "adapters/",
       icon: GitMerge,
       summary: "Deterministic Native Compilers",
       details:
-        "Translates canonical laws into native config formats for Cursor, Antigravity, Claude Code, GitHub Copilot, and Windsurf using non-destructive demarcated injection blocks.",
+        "Single-source-of-truth compiler emitting safe, non-destructive demarcated instructions to Google Antigravity (.agents/skills, .agents/agents), Cursor (.cursorrules, .cursor/rules), Claude Code (CLAUDE.md), GitHub Copilot (.github/copilot-instructions, .copilot/agents), Windsurf (.windsurfrules), and Codex.",
       items: [
-        "cursor (.cursorrules)",
-        "antigravity (.agents/rules/GEMINI.md)",
-        "claude-code (CLAUDE.md)",
-        "copilot (.github/copilot-instructions.md)",
-        "windsurf (.windsurfrules)",
-      ],
-    },
-    {
-      index: "07",
-      name: "Model Context Protocol (MCP)",
-      path: "cli/src/mcp/",
-      icon: Terminal,
-      summary: "JSON-RPC 2.0 Architectural Tool Server",
-      details:
-        "Native Model Context Protocol server exposing zero-dependency stdio tools for real-time verification, entropy credential scanning, graph topology inspection, idea validation, and codebase health telemetry directly into agent IDE runtimes.",
-      items: [
-        "sagarithm_verify (5-Vector verification gate)",
-        "sagarithm_scan_secrets (Entropy H >= 4.5 scanner)",
-        "sagarithm_query_graph (Coupling & abstractions)",
-        "sagarithm_validate_idea (Architectural truth-teller)",
-        "sagarithm_health (100-point composite health)",
-        "sagarithm_get_skill (Canonical guidelines fetch)",
+        "adapters/antigravity (Skills, Agents, MCP)",
+        "adapters/cursor (.cursorrules & .mdc)",
+        "adapters/claude-code (CLAUDE.md)",
+        "adapters/copilot (Custom agents & instructions)",
+        "adapters/windsurf (.windsurfrules)",
+        "adapters/codex (System prompts)",
       ],
     },
   ];
 
   const current = layers[activeLayer];
-  const CurrentIcon = current.icon;
+  const Icon = current.icon;
 
   return (
     <section id="architecture" className="full-rule">
@@ -137,86 +154,78 @@ export function Architecture() {
           <span>
             [ <b>03</b> / 05 ]
           </span>
-          <span>System Architecture</span>
+          <span>System Architecture (v1.2.0)</span>
         </div>
 
         <div className="section-body pad">
           <div className="grid grid-cols-1 lg:grid-cols-[0.8fr,1.2fr] gap-8 lg:gap-14 mb-12 items-start">
             <div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-ink leading-[1.06]">
-                Six decoupled layers. One source of truth.
+                The Decoupled Multi-Agent Engineering Stack
               </h2>
             </div>
             <div>
               <p className="text-ink-64 text-base sm:text-lg leading-relaxed">
-                Decoupled engineering principles, skills, and policies compiled deterministically into native agent
-                targets without configuration drift.
+                Separating canonical engineering knowledge, specialist agent personas, behavioral policies, and workflows from platform-specific adapters and protocol runtimes.
               </p>
             </div>
           </div>
 
           {/* Interactive Layer Explorer */}
-          <div className="grid grid-cols-1 lg:grid-cols-[380px,1fr] gap-6 items-stretch">
-            {/* Layer List Tabs */}
-            <div className="space-y-2 font-mono text-xs">
-              {layers.map((layer, idx) => (
-                <button
-                  key={layer.index}
-                  onClick={() => setActiveLayer(idx)}
-                  className={`w-full p-4 rounded-xl border text-left transition-all flex items-center justify-between ${
-                    activeLayer === idx
-                      ? "border-heat bg-heat/5 shadow-sm"
-                      : "border-edge bg-canvas-surface hover:border-ink-32 text-ink-64"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className={`font-bold ${activeLayer === idx ? "text-heat" : "text-ink-32"}`}>
-                      {layer.index}
-                    </span>
-                    <div>
-                      <div className={`font-sans font-semibold text-sm ${activeLayer === idx ? "text-ink" : "text-ink-88"}`}>
-                        {layer.name}
-                      </div>
-                      <div className="text-[11px] text-ink-48 mt-0.5">{layer.path}</div>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr,1.4fr] gap-8 rounded-xl border border-edge bg-canvas-surface p-6 sm:p-8">
+            {/* Left: Layer Selector Tabs */}
+            <div className="flex flex-col gap-2">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-ink-48 pb-2">
+                Architectural Layers
+              </span>
+              {layers.map((l, idx) => {
+                const LayerIcon = l.icon;
+                return (
+                  <button
+                    key={l.index}
+                    onClick={() => setActiveLayer(idx)}
+                    className={`flex items-center justify-between rounded-lg border p-3.5 text-left font-mono text-xs transition-all ${
+                      activeLayer === idx
+                        ? "border-heat bg-heat/5 text-ink font-semibold shadow-xs"
+                        : "border-edge bg-canvas-base/50 text-ink-64 hover:border-ink-32 hover:text-ink"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className={`text-[11px] ${activeLayer === idx ? "text-heat font-bold" : "text-ink-48"}`}>
+                        {l.index}
+                      </span>
+                      <LayerIcon className={`h-4 w-4 ${activeLayer === idx ? "text-heat" : "text-ink-48"}`} />
+                      <span>{l.name}</span>
                     </div>
-                  </div>
-                  <span className={`text-xs ${activeLayer === idx ? "text-heat" : "text-ink-32"}`}>→</span>
-                </button>
-              ))}
+                    <span className="text-[10px] text-ink-48 hidden sm:inline">{l.path}</span>
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Active Layer Details Card */}
-            <div className="rounded-xl border border-edge bg-canvas-surface p-7 flex flex-col justify-between shadow-md">
+            {/* Right: Layer Inspector Card */}
+            <div className="rounded-lg border border-edge bg-canvas-base p-6 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between pb-4 border-b border-edge">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-heat/10 text-heat-dark border border-heat/20">
-                      <CurrentIcon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <span className="font-mono text-xs font-bold text-heat uppercase">Layer {current.index}</span>
-                      <h3 className="text-xl font-semibold text-ink tracking-tight">{current.name}</h3>
-                    </div>
+                  <div className="flex items-center gap-2 font-mono text-xs text-heat font-bold">
+                    <Icon className="h-4 w-4" />
+                    <span>LAYER {current.index}</span>
                   </div>
-                  <code className="font-mono text-xs bg-canvas-base border border-edge px-2.5 py-1 rounded text-ink-64">
-                    {current.path}
-                  </code>
+                  <span className="font-mono text-xs text-ink-48">{current.path}</span>
                 </div>
 
-                <div className="mt-5">
-                  <h4 className="text-sm font-semibold text-ink uppercase tracking-wide font-mono">Role &amp; Purpose</h4>
-                  <p className="mt-2 text-ink-64 text-sm leading-relaxed">{current.details}</p>
-                </div>
+                <h3 className="mt-5 text-xl font-medium text-ink tracking-tight">{current.summary}</h3>
+                <p className="mt-3 text-sm text-ink-64 leading-relaxed">{current.details}</p>
 
-                <div className="mt-6 pt-5 border-t border-edge">
-                  <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-ink-48 mb-3">
-                    Codified Specifications in Layer {current.index}
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-xs text-ink-88">
-                    {current.items.map((item, idx) => (
+                <div className="mt-6">
+                  <span className="font-mono text-[11px] uppercase tracking-wider text-ink-48 block mb-2.5">
+                    Constituent Artifacts &amp; Directives
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {current.items.map((item, i) => (
                       <div
-                        key={idx}
-                        className="flex items-center gap-2 rounded border border-edge bg-canvas-base p-2 text-[11px]"
+                        key={i}
+                        className="flex items-center gap-2 rounded border border-edge bg-canvas-surface px-2.5 py-1.5 font-mono text-xs text-ink-64 truncate"
                       >
                         <span className="h-1.5 w-1.5 rounded-full bg-heat shrink-0" />
                         <span className="truncate">{item}</span>
@@ -227,8 +236,8 @@ export function Architecture() {
               </div>
 
               <div className="mt-8 pt-4 border-t border-edge flex items-center justify-between font-mono text-xs text-ink-48">
-                <span>Decoupled Design:</span>
-                <span className="text-ink font-medium">100% Target Agent Agnostic</span>
+                <span>Verification State: [VERIFIED]</span>
+                <span className="text-heat font-semibold">100% Deterministic</span>
               </div>
             </div>
           </div>

@@ -55,6 +55,17 @@ export function extractImports(fileContent: string): string[] {
   return imports;
 }
 
+export function extractImportStatements(fileContent: string): string[] {
+  const statements: string[] = [];
+  // Match full import statements including imported symbols and clauses
+  const stmtRegex = /import\s+[\s\S]*?from\s+['"].*?['"]/g;
+  let match: RegExpExecArray | null;
+  while ((match = stmtRegex.exec(fileContent)) !== null) {
+    statements.push(match[0].replace(/\s+/g, ' '));
+  }
+  return statements;
+}
+
 export function buildProjectGraph(rootDir: string): ProjectGraph {
   const allFiles = scanRepositoryFiles(rootDir);
   const relativeFiles = allFiles.map(f => relative(rootDir, f).replace(/\\/g, '/'));
@@ -86,6 +97,7 @@ export function buildProjectGraph(rootDir: string): ProjectGraph {
         const content = readFileSync(resolve(rootDir, relPath), 'utf8');
         mod.exports.push(...extractExports(content));
         mod.imports.push(...extractImports(content));
+        mod.imports.push(...extractImportStatements(content));
       } catch {
         // Ignore unreadable files
       }
@@ -117,7 +129,7 @@ export function buildProjectGraph(rootDir: string): ProjectGraph {
   }
 
   return {
-    version: '1.1.1',
+    version: '1.2.0',
     name: 'sagarithm-project',
     rootPath: rootDir,
     modules,
